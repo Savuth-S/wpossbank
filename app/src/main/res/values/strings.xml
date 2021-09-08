@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Wpossbank</string>
+
+    <!--Botones generales-->
+    <string name="enter_button">Entrar</string>
+    <string name="go_back_button">Regresar</string>
+    <string name="confirm_button">Confirmar</string>
+
+    <string name="new_user_button">Registrarse</string>
+    <string name="name_input">Nombre</string>
+    <string name="lastname_input">Apellido</string>
+    <string name="cc_input">Numero de Cedula Ciudadana</string>
+    <string name="pin_input">PIN</string>
+    <string name="pin_input_confirm">Confirmar PIN</string>
+    <string name="balance_input">Saldo Inicial</string>
+
+    <string name="card_payments_button">Pagos con Tarjeta</string>
+    <string name="card_number_input">Número de Tarjeta de Credito</string>
+    <string name="exp_date_input">Fecha de Expiración de la Tarjeta</string>
+    <string name="ccv_input">CCV</string>
+    <string name="payment_amount_input">Valor a Pagar</string>
+    <string name="dues_input">Número de Cuotas</string>
+
+    <string name="withdrawals_button">Retirar Dinero</string>
+    <string name="deposits_button">Depositar Dinero</string>
+    <string name="transfers_button">Transferir A Una Cuenta</string>
+    <string name="balance_button">Saldo</string>
+    <string name="history_button">Historial de Transacciones</string>
+    <string name="log_out_button">Cerrar Sesion</string>
+</resources>
