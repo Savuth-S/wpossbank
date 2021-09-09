@@ -2,6 +2,7 @@ package com.example.wpossbank.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -13,9 +14,11 @@ import androidx.annotation.Nullable;
 
 import com.example.wpossbank.Modelos.Admin;
 import com.example.wpossbank.Modelos.User;
+import com.example.wpossbank.R;
 
 public class Database extends SQLiteOpenHelper {
     private final Context context;
+    private Resources res;
 
     private static final String NAME = "wpossbank.db";
     private static final int VERSION = 1;
@@ -44,8 +47,9 @@ public class Database extends SQLiteOpenHelper {
     private static final String COLUMN_COST = "tran_monto";
     private static final String COLUMN_SOURCE = "tran_origen";
 
-    public Database(@Nullable Context context){
+    public Database(@NonNull Context context){
         super(context, NAME, null, VERSION);
+        res = context.getResources();
         this.context = context;
     }
 
@@ -152,7 +156,7 @@ public class Database extends SQLiteOpenHelper {
             long result = db.insert(TABLE_ADMIN, null, cv);
             if (result == -1){
                 Log.e("MAKE","Failed to add default admin to database, database="+db.toString() +" result="+result +" admin="+admin.toString());
-                Toast.makeText(context, "Se produjo un error al crear la cuenta por defecto de admin.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, res.getString(R.string.default_admin_error), Toast.LENGTH_LONG).show();
             }else{
                 Log.d("MAKE","Default admin made successfully");
             }
@@ -174,10 +178,10 @@ public class Database extends SQLiteOpenHelper {
                 long result = db.update(TABLE_ADMIN, cv, "_id=?", new String[]{admin.getId()});
                 if (result == -1){
                     Log.e("UPDATE","Failed to updated admin data, database="+db.toString() +" result="+result +" admin="+admin.toString());
-                    Toast.makeText(context, "Se produjo un error al actualizar la información del corresponsal.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, res.getString(R.string.update_admin_error), Toast.LENGTH_LONG).show();
                 }else{
                     Log.d("UPDATE","Admin data updated successfully");
-                    Toast.makeText(context, "Se procesó la petición con exito.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, res.getString(R.string.update_admin_success), Toast.LENGTH_SHORT).show();
                 }
             }else{
                 Log.e("UPDATE","Couldn't find admin data, making default admin instead, adminData="+adminData.toString());
@@ -198,9 +202,9 @@ public class Database extends SQLiteOpenHelper {
 
             long result = db.insert(TABLE_USER,null,cv);
             if (result == -1) {
-                Toast.makeText(context, "Se produjo un error al crear la cuenta.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, res.getString(R.string.make_user_error), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, "¡Cuenta creada con exito!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, res.getString(R.string.make_user_success), Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -28,17 +28,30 @@
     <string name="history_button">Historial de Transacciones</string>
     <string name="log_out_button">Cerrar Sesion</string>
 
+    <!--Alertas-->
+        <!--Alertas de base de datos-->
+    <string name="update_admin_success">¡La petición ha sido procesada con exito!</string>
+    <string name="make_user_success">"¡Se ha creada la cuenta con exito!"</string>
+
+
     <!--Mensajes de error-->
+    <!--Errores generales-->
     <string name="invalid_error">Invalido.</string>
     <string name="wrong_error">No es correcto.</string>
 
+    <!--Errores de la base de datos-->
     <string name="already_registered_error">Ya se encuentra registrado.</string>
     <string name="not_registered_error">No se encuentra registrado.</string>
+    <string name="default_admin_error">Se produjo un error al crear la informacion por defecto del corresponsal.</string>
+    <string name="update_admin_error">Se produjo un error al actualizar la información del corresponsal.</string>
+    <string name="make_user_error">Se produjo un error al crear la cuenta.</string>
 
+    <!---Errores de campos de input-->
     <string name="empty_error">No puede estar vacio.</string>
     <string name="spaces_error">No puede contener espacios.</string>
     <string name="only_caps_error">Solo puede contener letras mayusculas.</string>
     <string name="only_numbers_error">Solo puede contener numeros.</string>
     <string name="atleast_8_error">Al menos ocho caracteres.</string>
     <string name="between_15and16_error">Debe contener entre quince y dieciseis caracteres.</string>
+
 </resources>
