@@ -8,17 +8,18 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.wpossbank.Modelos.Admin;
 import com.example.wpossbank.Modelos.SharedPreference;
 import com.example.wpossbank.Modelos.User;
 import com.example.wpossbank.Modelos.Validate;
 import com.example.wpossbank.database.Database;
-import com.example.wpossbank.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
     Context context = this;
-    Validate validate;
-    User user;
     SharedPreference sp;
+    Validate validate;
+    Admin admin;
+    User user;
 
     EditText ccInput, pinInput;
     Button loginButton, newUserButton;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         sp = new SharedPreference(context);
         validate = new Validate(context);
+        admin = new Admin();
         user = new User();
         makeDefaultAdmin();
 
@@ -48,15 +50,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        newUserButton.setOnClickListener( verNewUser ->{
-            startActivity(new Intent(context, NewUserActivity.class));
-        });
+        newUserButton.setOnClickListener( verNewUser ->
+                startActivity(new Intent(context, NewUserActivity.class)));
     }
 
     protected void makeDefaultAdmin(){
-        Database db = new Database();
-        if (db.fetchData("1", db.getTableAdmin(), db.getColumnId()) < 0) {
-            db.makeDefaultAdmin();
+        Database db = new Database(context);
+        if (db.fetchData("1", db.getTableAdmin(), db.getColumnId()).getCount() < 0) {
+            db.makeDefaultAdmin(admin);
         }
     }
 

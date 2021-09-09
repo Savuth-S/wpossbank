@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.wpossbank.Modelos.Admin;
 import com.example.wpossbank.Modelos.User;
 
 public class Database extends SQLiteOpenHelper {
@@ -111,7 +112,20 @@ public class Database extends SQLiteOpenHelper {
                         null, null, null, "1");
     }
 
-    public void makeDefaultAdmin()
+    public void makeDefaultAdmin(@NonNull Admin admin){
+        try(SQLiteDatabase db = getWritableDatabase()){
+            ContentValues cv = new ContentValues();
+
+            cv.put(COLUMN_EMAIL, admin.getEmail());
+            cv.put(COLUMN_PASSWORD, admin.getPassword());
+            cv.put(COLUMN_PASSWORD, admin.getBalance());
+
+            long result = db.insert(TABLE_ADMIN, null, cv);
+            if (result == -1){
+                Toast.makeText(context, "Se produjo un error al crear la cuenta por defecto de admin.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     public void addUser(@NonNull User user){
         try(SQLiteDatabase db = getWritableDatabase()){
