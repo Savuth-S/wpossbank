@@ -1,10 +1,12 @@
 package com.example.wpossbank.Modelos;
 
+import com.example.wpossbank.database.Database;
+
 public class Admin {
-    private String id = "0";
+    private String id = "1";
     private String email = "carlos@wposs.com";
     private String password = "123456";
-    private String balance = "0";
+    private int balance = 0;
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
@@ -15,6 +17,7 @@ public class Admin {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getBalance() { return balance; }
-    public void setBalance(String balance) { this.balance = balance; }
+    public int getBalance() { return balance; }
+    public void setBalance(int balance) { this.balance = balance; }
+
 }
