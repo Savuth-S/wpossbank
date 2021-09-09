@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CardPaymentActivity">
+    tools:context=".WithdrawalsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="30dp">
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="0dp"
@@ -23,10 +24,10 @@
             app:layout_constraintVertical_bias="0.0">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/cardNumberInput"
+                android:id="@+id/ccInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_card_number"
+                android:hint="@string/input_cc"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,13 +39,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/expDateInput"
+                android:id="@+id/pinInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_exp_date"
-                android:inputType="datetime"
-                android:focusableInTouchMode="false"/>
+                android:hint="@string/input_pin"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -55,11 +56,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ccvInput"
+                android:id="@+id/pinConfirmInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_ccv"
+                android:hint="@string/input_pin_confirm"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,72 +70,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="180dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameInput"
+                android:id="@+id/withdrawalInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_name"
-                android:inputType="textCapCharacters" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textInputLayout4"
-            app:layout_constraintTop_toTopOf="@+id/textInputLayout4">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/lastnameInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/input_lastname"
-                android:inputType="textCapCharacters" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/paymentAmountInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/input_payment_amount"
+                android:hint="@string/input_withdrawal_amount"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/duesInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/input_dues"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/goBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:paddingHorizontal="35sp"
@@ -143,8 +95,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
-            app:layout_constraintVertical_bias="0.22000003" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+            app:layout_constraintVertical_bias="0.88" />
+
         <Button
             android:id="@+id/confirmButton"
             android:layout_width="wrap_content"

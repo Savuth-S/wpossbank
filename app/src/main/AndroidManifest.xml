@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wpossbank">
         <activity
+            android:name=".WithdrawalsActivity"
+            android:exported="true" />
+        <activity
             android:name=".CardPaymentActivity"
             android:exported="true" />
         <activity

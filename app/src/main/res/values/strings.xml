@@ -12,10 +12,10 @@
     <string name="button_go_back">Regresar</string>
     <string name="button_confirm">Confirmar</string>
 
-        <!--Botones del menu de logeo-->
+        <!--Menú de logeo-->
     <string name="button_new_user">Registrarse</string>
 
-        <!--Botones del menu general-->
+        <!--Menú general-->
     <string name="button_card_payments">Pagos con Tarjeta</string>
     <string name="button_withdrawals">Retirar Dinero</string>
     <string name="button_deposits">Depositar Dinero</string>
@@ -25,7 +25,7 @@
     <string name="button_log_out">Cerrar Sesion</string>
 
     <!--Campos de texto-->
-        <!--Campos de logeo y registrarse-->
+        <!--Logeo y registrarse-->
     <string name="input_cc">Numero de Cedula Ciudadana</string>
     <string name="input_pin">PIN</string>
     <string name="input_pin_confirm">Confirmar PIN</string>
@@ -33,13 +33,15 @@
     <string name="input_lastname">Apellido</string>
     <string name="input_balance">Saldo Inicial</string>
 
-        <!--Campos de pago con tarjeta-->
+        <!--Pago con tarjeta-->
     <string name="input_card_number">Número de Tarjeta de Credito</string>
     <string name="input_exp_date">Fecha de Expiración de la Tarjeta</string>
     <string name="input_ccv">CCV</string>
     <string name="input_payment_amount">Valor a Pagar</string>
     <string name="input_dues">Número de Cuotas</string>
 
+        <!--Retiro de dinero-->
+    <string name="input_withdrawal_amount">Monto a Retirar</string>
 
 
     <!--Dialogos-->
@@ -47,25 +49,25 @@
     <string name="dialog_succes">TRANSACCIÓN EXITOSA</string>
     <string name="dialog_fail">TRANSACCIÓN RECHAZADA</string>
 
-    <!--Pago con tarjeta-->
+        <!--Pago con tarjeta-->
     <string name="dialog_confirm_payment">Estimado: /¿Desea realizar el pago a WPOSS por un valor de /$ a / cuotas?/Número de tarjeta: </string>
 
     <!--Toasts-->
-    <!--Toasts de base de datos-->
+        <!--Toasts de base de datos-->
     <string name="toast_make_user_success">"¡Se ha creada la cuenta con exito!"</string>
 
     <!--Mensajes de error-->
-    <!--Errores generales-->
+        <!--Errores generales-->
     <string name="error_invalid">Invalido.</string>
     <string name="error_wrong">No es correcto.</string>
 
-    <!--Errores de la base de datos-->
+        <!--Base de datos-->
     <string name="error_already_registered">Ya se encuentra registrado.</string>
     <string name="error_not_registered">No se encuentra registrado.</string>
     <string name="error_default_admin">Se produjo un error al crear la informacion por defecto del corresponsal.</string>
     <string name="error_make_user">Se produjo un error al crear la cuenta.</string>
 
-    <!---Errores de campos de input-->
+        <!---Campos de input-->
     <string name="error_empty">No puede estar vacio.</string>
     <string name="error_spaces">No puede contener espacios.</string>
     <string name="error_only_caps">Solo puede contener letras mayusculas.</string>

@@ -16,8 +16,6 @@ import com.example.wpossbank.R;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.CreditCard;
 
-import java.util.Objects;
-
 public class Dialogs {
 
     public static class ConfirmTransaction extends DialogFragment {
