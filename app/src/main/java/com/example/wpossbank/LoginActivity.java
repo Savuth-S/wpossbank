@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void makeDefaultAdmin(){
         Database db = new Database(context);
-        if (db.fetchData("1", db.getTableAdmin(), db.getColumnId()).getCount() < 0) {
+        if (db.fetchData("1", db.getTable("admin"), db.getColumn("id")).getCount() < 0) {
             db.makeDefaultAdmin(admin);
         }
     }

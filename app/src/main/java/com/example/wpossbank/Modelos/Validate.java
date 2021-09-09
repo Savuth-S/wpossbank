@@ -44,7 +44,7 @@ public class Validate {
         String cc = ccInput.getText().toString();
         if (isEmpty(ccInput)) {
             return false;
-        } else if (db.fetchData(cc, db.getTableUser(), db.getColumnCc()).getCount() > 0){
+        } else if (db.fetchData(cc, db.getTable("user"), db.getColumn("cc")).getCount() > 0){
             ccInput.setError("El documento de identidad ya esta registrada.");
             return false;
         } else if (cc.matches("(.*\\s.*)")) {
@@ -218,7 +218,7 @@ public class Validate {
         if (isEmpty(ccInput) || isEmpty(pinInput)) {
             return false;
         }else{
-            Cursor fetch = db.fetchData(cc, db.getTableUser(), db.getColumnCc());
+            Cursor fetch = db.fetchData(cc, db.getTable("user"), db.getColumn("cc"));
             String registeredPin = "empty";
 
             while (fetch.moveToNext()) {
