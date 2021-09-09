@@ -1,4 +1,4 @@
-package com.example.wpossbank.Modelos;
+package com.example.wpossbank.modelos;
 
 public class User {
     private String id = "0";

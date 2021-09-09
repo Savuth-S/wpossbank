@@ -27,7 +27,7 @@
                 android:id="@+id/nameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name_input"
+                android:hint="@string/input_name"
                 android:inputType="textCapCharacters" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,7 +45,7 @@
                 android:id="@+id/lastnameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/lastname_input"
+                android:hint="@string/input_lastname"
                 android:inputType="textCapCharacters" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +63,7 @@
                 android:id="@+id/ccInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/cc_input"
+                android:hint="@string/input_cc"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +81,7 @@
                 android:id="@+id/pinInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/pin_input"
+                android:hint="@string/input_pin"
                 android:inputType="numberPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +98,7 @@
                 android:id="@+id/pinConfirmInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/pin_input_confirm"
+                android:hint="@string/input_pin_confirm"
                 android:inputType="numberPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,7 +115,7 @@
                 android:id="@+id/balanceInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/balance_input"
+                android:hint="@string/input_balance"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:paddingVertical="15sp"
-            android:text="@string/enter_button"
+            android:text="@string/button_enter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

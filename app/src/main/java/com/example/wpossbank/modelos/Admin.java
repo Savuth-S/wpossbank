@@ -1,8 +1,13 @@
-package com.example.wpossbank.Modelos;
+package com.example.wpossbank.modelos;
+
+import android.content.Context;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wpossbank.database.Database;
+import com.example.wpossbank.fragments.Dialogs;
 
-public class Admin {
+public class Admin extends AppCompatActivity {
     private String id = "1";
     private String email = "carlos@wposs.com";
     private String password = "123456";
@@ -20,4 +25,8 @@ public class Admin {
     public int getBalance() { return balance; }
     public void setBalance(int balance) { this.balance = balance; }
 
+    public void update(Context context, Admin admin){
+        Database db = new Database(context);
+        db.updateAdmin(admin);
+    }
 }

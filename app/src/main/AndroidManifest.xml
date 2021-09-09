@@ -27,7 +27,7 @@
             android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

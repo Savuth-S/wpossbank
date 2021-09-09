@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="@string/cc_input" />
+            android:hint="@string/input_cc" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -54,7 +54,7 @@
             android:id="@+id/pinInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/pin_input"
+            android:hint="@string/input_pin"
             android:inputType="numberPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingVertical="15sp"
-        android:text="@string/enter_button"
+        android:text="@string/button_enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -77,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:paddingVertical="10sp"
-        android:text="@string/new_user_button"
+        android:text="@string/button_new_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

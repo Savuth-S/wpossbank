@@ -1,5 +1,6 @@
 package com.example.wpossbank;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,10 +10,10 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.wpossbank.Modelos.Admin;
-import com.example.wpossbank.Modelos.SharedPreference;
-import com.example.wpossbank.Modelos.User;
-import com.example.wpossbank.Modelos.Validate;
+import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.SharedPreference;
+import com.example.wpossbank.modelos.User;
+import com.example.wpossbank.modelos.Validate;
 import com.example.wpossbank.database.Database;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,9 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
-
-        newUserButton.setOnClickListener( verNewUser ->
-                startActivity(new Intent(context, NewUserActivity.class)));
+        Admin admin = new Admin();
+        newUserButton.setOnClickListener( verNewUser -> startActivity(new Intent(context, NewUserActivity.class)));
     }
 
     protected void makeDefaultAdmin(){
@@ -62,5 +62,4 @@ public class LoginActivity extends AppCompatActivity {
             db.makeDefaultAdmin(admin);
         }
     }
-
 }

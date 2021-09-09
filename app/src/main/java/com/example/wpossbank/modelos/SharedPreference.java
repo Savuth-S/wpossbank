@@ -1,4 +1,4 @@
-package com.example.wpossbank.Modelos;
+package com.example.wpossbank.modelos;
 
 import android.content.Context;
 import android.content.SharedPreferences;

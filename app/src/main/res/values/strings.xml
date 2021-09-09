@@ -1,57 +1,76 @@
 <resources>
     <string name="app_name">Wpossbank</string>
 
-    <!--Botones generales-->
-    <string name="enter_button">Entrar</string>
-    <string name="go_back_button">Regresar</string>
-    <string name="confirm_button">Confirmar</string>
+    <!--Generales-->
+    <string name="confirm">Confirmar</string>
 
-    <string name="new_user_button">Registrarse</string>
-    <string name="name_input">Nombre</string>
-    <string name="lastname_input">Apellido</string>
-    <string name="cc_input">Numero de Cedula Ciudadana</string>
-    <string name="pin_input">PIN</string>
-    <string name="pin_input_confirm">Confirmar PIN</string>
-    <string name="balance_input">Saldo Inicial</string>
+    <!--Botones-->
+        <!--Botones generales-->
+    <string name="button_enter">Entrar</string>
+    <string name="button_accept">Aceptar</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="button_go_back">Regresar</string>
+    <string name="button_confirm">Confirmar</string>
 
-    <string name="card_payments_button">Pagos con Tarjeta</string>
-    <string name="card_number_input">Número de Tarjeta de Credito</string>
-    <string name="exp_date_input">Fecha de Expiración de la Tarjeta</string>
-    <string name="ccv_input">CCV</string>
-    <string name="payment_amount_input">Valor a Pagar</string>
-    <string name="dues_input">Número de Cuotas</string>
+        <!--Botones del menu de logeo-->
+    <string name="button_new_user">Registrarse</string>
 
-    <string name="withdrawals_button">Retirar Dinero</string>
-    <string name="deposits_button">Depositar Dinero</string>
-    <string name="transfers_button">Transferir A Una Cuenta</string>
-    <string name="balance_button">Saldo</string>
-    <string name="history_button">Historial de Transacciones</string>
-    <string name="log_out_button">Cerrar Sesion</string>
+        <!--Botones del menu general-->
+    <string name="button_card_payments">Pagos con Tarjeta</string>
+    <string name="button_withdrawals">Retirar Dinero</string>
+    <string name="button_deposits">Depositar Dinero</string>
+    <string name="button_transfers">Transferir A Una Cuenta</string>
+    <string name="button_balance">Saldo</string>
+    <string name="button_history">Historial de Transacciones</string>
+    <string name="button_log_out">Cerrar Sesion</string>
 
-    <!--Alertas-->
-        <!--Alertas de base de datos-->
-    <string name="update_admin_success">¡La petición ha sido procesada con exito!</string>
-    <string name="make_user_success">"¡Se ha creada la cuenta con exito!"</string>
+    <!--Campos de texto-->
+        <!--Campos de logeo y registrarse-->
+    <string name="input_cc">Numero de Cedula Ciudadana</string>
+    <string name="input_pin">PIN</string>
+    <string name="input_pin_confirm">Confirmar PIN</string>
+    <string name="input_name">Nombre</string>
+    <string name="input_lastname">Apellido</string>
+    <string name="input_balance">Saldo Inicial</string>
 
+        <!--Campos de pago con tarjeta-->
+    <string name="input_card_number">Número de Tarjeta de Credito</string>
+    <string name="input_exp_date">Fecha de Expiración de la Tarjeta</string>
+    <string name="input_ccv">CCV</string>
+    <string name="input_payment_amount">Valor a Pagar</string>
+    <string name="input_dues">Número de Cuotas</string>
+
+
+
+    <!--Dialogos-->
+        <!--Dialogos generales-->
+    <string name="dialog_succes">TRANSACCIÓN EXITOSA</string>
+    <string name="dialog_fail">TRANSACCIÓN RECHAZADA</string>
+
+    <!--Pago con tarjeta-->
+    <string name="dialog_confirm_payment">Estimado: /¿Desea realizar el pago a WPOSS por un valor de /$ a / cuotas?/Número de tarjeta: </string>
+
+    <!--Toasts-->
+    <!--Toasts de base de datos-->
+    <string name="toast_make_user_success">"¡Se ha creada la cuenta con exito!"</string>
 
     <!--Mensajes de error-->
     <!--Errores generales-->
-    <string name="invalid_error">Invalido.</string>
-    <string name="wrong_error">No es correcto.</string>
+    <string name="error_invalid">Invalido.</string>
+    <string name="error_wrong">No es correcto.</string>
 
     <!--Errores de la base de datos-->
-    <string name="already_registered_error">Ya se encuentra registrado.</string>
-    <string name="not_registered_error">No se encuentra registrado.</string>
-    <string name="default_admin_error">Se produjo un error al crear la informacion por defecto del corresponsal.</string>
-    <string name="update_admin_error">Se produjo un error al actualizar la información del corresponsal.</string>
-    <string name="make_user_error">Se produjo un error al crear la cuenta.</string>
+    <string name="error_already_registered">Ya se encuentra registrado.</string>
+    <string name="error_not_registered">No se encuentra registrado.</string>
+    <string name="error_default_admin">Se produjo un error al crear la informacion por defecto del corresponsal.</string>
+    <string name="error_make_user">Se produjo un error al crear la cuenta.</string>
 
     <!---Errores de campos de input-->
-    <string name="empty_error">No puede estar vacio.</string>
-    <string name="spaces_error">No puede contener espacios.</string>
-    <string name="only_caps_error">Solo puede contener letras mayusculas.</string>
-    <string name="only_numbers_error">Solo puede contener numeros.</string>
-    <string name="atleast_8_error">Al menos ocho caracteres.</string>
-    <string name="between_15and16_error">Debe contener entre quince y dieciseis caracteres.</string>
+    <string name="error_empty">No puede estar vacio.</string>
+    <string name="error_spaces">No puede contener espacios.</string>
+    <string name="error_only_caps">Solo puede contener letras mayusculas.</string>
+    <string name="error_only_numbers">Solo puede contener numeros.</string>
+    <string name="error_atleast_8">Al menos ocho caracteres.</string>
+    <string name="error_between_15and16">Debe contener entre quince y dieciseis caracteres.</string>
 
 </resources>

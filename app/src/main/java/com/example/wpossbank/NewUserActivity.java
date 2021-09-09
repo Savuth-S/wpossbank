@@ -9,8 +9,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.wpossbank.Modelos.User;
-import com.example.wpossbank.Modelos.Validate;
+import com.example.wpossbank.modelos.User;
+import com.example.wpossbank.modelos.Validate;
 import com.example.wpossbank.database.Database;
 
 public class NewUserActivity extends AppCompatActivity {
