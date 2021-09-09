@@ -9,14 +9,18 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.wpossbank.Modelos.Admin;
 import com.example.wpossbank.Modelos.Validate;
+import com.example.wpossbank.database.Database;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
 public class CardPaymentActivity extends AppCompatActivity {
     Context context;
+    Database db;
     Validate validate;
+    Admin admin;
 
     TextInputLayout textInputLayout;
     EditText cardNumberInput, expDateInput, ccvInput, nameInput, paymentAmountInput, duesInput;
@@ -27,7 +31,9 @@ public class CardPaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_payment);
         context = this;
+        db = new Database(context);
         validate = new Validate(context);
+        admin = new Admin();
 
         textInputLayout = findViewById(R.id.textInputLayout);
 
@@ -79,7 +85,8 @@ public class CardPaymentActivity extends AppCompatActivity {
                     duesValidate = validate.dues(duesInput);
 
             if (cardNumberValidate && expDateValidate && ccvValidate && nameValidate && paymentValidate && duesValidate){
-
+                admin.setBalance(Integer.parseInt(paymentAmountInput.getText().toString()));
+                db.updateAdmin(admin);
             }
         });
     }
