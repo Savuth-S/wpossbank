@@ -46,7 +46,7 @@ public class NewUserActivity extends AppCompatActivity {
             user.setName(nameInput.getText().toString() + " " + lastnameInput.getText().toString());
             user.setCc(ccInput.getText().toString());
             user.setPin(pinInput.getText().toString());
-            user.setBalance(balanceInput.getText().toString());
+            user.setBalance(Integer.parseInt(balanceInput.getText().toString()));
 
             boolean ccValidate = validate.cc((ccInput)),
                     nameValidate = validate.name(nameInput),
