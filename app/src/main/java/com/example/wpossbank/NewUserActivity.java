@@ -1,13 +1,11 @@
 package com.example.wpossbank;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -43,20 +41,23 @@ public class NewUserActivity extends AppCompatActivity {
 
         enterButton.setOnClickListener( addNewUser -> {
             db = new Database(context);
-            user.setName(nameInput.getText().toString() + " " + lastnameInput.getText().toString());
-            user.setCc(ccInput.getText().toString());
-            user.setPin(pinInput.getText().toString());
-            user.setBalance(Integer.parseInt(balanceInput.getText().toString()));
-
             boolean ccValidate = validate.cc((ccInput)),
                     nameValidate = validate.name(nameInput),
                     lastnameValidate = validate.name(lastnameInput),
                     pinValidate = validate.pin(pinInput),
-                    balanceValidate = validate.balance((balanceInput));
+                    balanceValidate = validate.balance(balanceInput);
 
-            if (!validate.isEmpty(pinCofirmInput) && !user.getPin().equals(pinCofirmInput.getText().toString())) {
+            if (!validate.isEmpty(pinCofirmInput) &&
+                    !pinInput.getText().toString().equals(pinCofirmInput.getText().toString())) {
+                Log.d("NEW USER", "The pins do not match, " +
+                        "pin="+pinInput.getText().toString() +" confirm="+pinCofirmInput.getText().toString());
                 pinCofirmInput.setError("Los PINs no son iguales");
             }else if (!validate.isEmpty(pinCofirmInput) && nameValidate && lastnameValidate && ccValidate && pinValidate && balanceValidate){
+                user.setName(nameInput.getText().toString() + " " + lastnameInput.getText().toString());
+                user.setCc(ccInput.getText().toString());
+                user.setPin(pinInput.getText().toString());
+                user.setBalance(Integer.parseInt(balanceInput.getText().toString()));
+
                 db.addUser(user);
                 startActivity(new Intent(context, LoginActivity.class));
             }

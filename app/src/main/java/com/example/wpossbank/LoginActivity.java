@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -56,7 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void makeDefaultAdmin(){
         Database db = new Database(context);
-        if (db.fetchData("1", db.getTable("admin"), db.getColumn("id")).getCount() < 0) {
+        if (db.fetchData("1", db.getTable("admin"), db.getColumn("id")).getCount() < 1) {
+            Log.e("LOGIN","Couldn't find admin data, making default admin instead");
             db.makeDefaultAdmin(admin);
         }
     }

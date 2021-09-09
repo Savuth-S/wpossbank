@@ -151,7 +151,10 @@ public class Database extends SQLiteOpenHelper {
 
             long result = db.insert(TABLE_ADMIN, null, cv);
             if (result == -1){
+                Log.e("MAKE","Failed to add default admin to database, database="+db.toString() +" result="+result +" admin="+admin.toString());
                 Toast.makeText(context, "Se produjo un error al crear la cuenta por defecto de admin.", Toast.LENGTH_SHORT).show();
+            }else{
+                Log.d("MAKE","Default admin made successfully");
             }
         }
     }
@@ -162,19 +165,24 @@ public class Database extends SQLiteOpenHelper {
             Cursor adminData = fetchData("1", TABLE_ADMIN, COLUMN_ID);
 
             if (adminData.getCount() > 0){
+                adminData.moveToFirst();
+
                 cv.put(COLUMN_EMAIL, admin.getEmail());
                 cv.put(COLUMN_PASSWORD, admin.getPassword());
-                Log.i("TAG",adminData.getString(2)+ admin.getBalance());
-                cv.put(COLUMN_BALANCE, adminData.getInt(2)+admin.getBalance());
+                cv.put(COLUMN_BALANCE, adminData.getInt(3)+admin.getBalance());
 
                 long result = db.update(TABLE_ADMIN, cv, "_id=?", new String[]{admin.getId()});
                 if (result == -1){
+                    Log.e("UPDATE","Failed to updated admin data, database="+db.toString() +" result="+result +" admin="+admin.toString());
                     Toast.makeText(context, "Se produjo un error al actualizar la información del corresponsal.", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(context, "Se proceso la petición con exito.", Toast.LENGTH_SHORT).show();
+                    Log.d("UPDATE","Admin data updated successfully");
+                    Toast.makeText(context, "Se procesó la petición con exito.", Toast.LENGTH_SHORT).show();
                 }
             }else{
+                Log.e("UPDATE","Couldn't find admin data, making default admin instead, adminData="+adminData.toString());
                 makeDefaultAdmin(new Admin());
+                updateAdmin(admin);
             }
         }
     }
