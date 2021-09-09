@@ -75,7 +75,12 @@ public class CardPaymentActivity extends AppCompatActivity {
                     expDateValidate = validate.expDate(expDateInput),
                     ccvValidate = validate.ccv(ccvInput),
                     nameValidate = validate.name(nameInput),
-                    paymentValidate = validate.payment(paymentAmountInput);
+                    paymentValidate = validate.payment(paymentAmountInput),
+                    duesValidate = validate.dues(duesInput);
+
+            if (cardNumberValidate && expDateValidate && ccvValidate && nameValidate && paymentValidate && duesValidate){
+
+            }
         });
     }
 }

@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         sp = new SharedPreference(context);
         validate = new Validate(context);
         user = new User();
+        makeDefaultAdmin();
 
         ccInput= findViewById(R.id.ccInput);
         pinInput = findViewById(R.id.pinInput);
@@ -50,6 +51,13 @@ public class LoginActivity extends AppCompatActivity {
         newUserButton.setOnClickListener( verNewUser ->{
             startActivity(new Intent(context, NewUserActivity.class));
         });
+    }
+
+    protected void makeDefaultAdmin(){
+        Database db = new Database();
+        if (db.fetchData("1", db.getTableAdmin(), db.getColumnId()) < 0) {
+            db.makeDefaultAdmin();
+        }
     }
 
 }

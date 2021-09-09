@@ -8,12 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.wpossbank.Modelos.User;
-
-import java.net.IDN;
-import java.util.ArrayList;
 
 public class Database extends SQLiteOpenHelper {
     private final Context context;
@@ -69,11 +67,10 @@ public class Database extends SQLiteOpenHelper {
     public String getColumnOrigin() { return COLUMN_ORIGIN; }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public void onCreate(@NonNull SQLiteDatabase sqLiteDatabase) {
         String adminQuery =
             "CREATE TABLE "+ TABLE_ADMIN +
                     "(" + COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                    COLUMN_ACTIVEUSER +" TEXT, "+
                     COLUMN_EMAIL +" TEXT, "+
                     COLUMN_PASSWORD +" TEXT, "+
                     COLUMN_BALANCE +" TEXT);";
@@ -101,7 +98,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(@NonNull SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_ADMIN);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_USER);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_LOG);
@@ -114,7 +111,9 @@ public class Database extends SQLiteOpenHelper {
                         null, null, null, "1");
     }
 
-    public void addUser(User user){
+    public void makeDefaultAdmin()
+
+    public void addUser(@NonNull User user){
         try(SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
 

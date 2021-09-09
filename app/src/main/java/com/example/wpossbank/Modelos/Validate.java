@@ -187,6 +187,30 @@ public class Validate {
         }
     }
 
+    public boolean payment(@NonNull EditText paymentInput){
+        int payment = Integer.parseInt(paymentInput.getText().toString());
+
+        if (isEmpty(paymentInput)) {
+            return false;
+        }else if (payment > 10000 && payment < 1000000){
+            return true;
+        }else{
+            paymentInput.setError("Valor a pagar invalido.");
+            return false;
+        }
+    }
+
+    public boolean dues(@NonNull EditText duesInput){
+        int dues = Integer.parseInt(duesInput.getText().toString());
+
+        if (dues > 0 && dues < 13){
+            return true;
+        }else{
+            duesInput.setError("Numero de cuotas invalido.");
+            return false;
+        }
+    }
+
     public boolean login(@NonNull EditText ccInput, @NonNull EditText pinInput) {
         String cc = ccInput.getText().toString();
         String pin = pinInput.getText().toString();
