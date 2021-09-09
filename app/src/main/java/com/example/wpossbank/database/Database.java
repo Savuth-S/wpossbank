@@ -21,51 +21,79 @@ public class Database extends SQLiteOpenHelper {
     private static final int VERSION = 1;
 
     //Campos comunes
-    private final String COLUMN_ID = "_id";
-    private final String COLUMN_ACTIVEUSER = "usuario_activo";
-    private final String COLUMN_BALANCE = "cuenta_balance";
+    private static final String COLUMN_ID = "_id";
+    private static final String COLUMN_ACTIVEUSER = "usuario_activo";
+    private static final String COLUMN_BALANCE = "cuenta_balance";
 
     //Tabla de cuentas de administrador
-    private final String TABLE_ADMIN = "administradores";
-    private final String COLUMN_EMAIL = "cuenta_email";
-    private final String COLUMN_PASSWORD = "cuenta_contraseña";
+    private static final String TABLE_ADMIN = "administradores";
+    private static final String COLUMN_EMAIL = "cuenta_email";
+    private static final String COLUMN_PASSWORD = "cuenta_contraseña";
 
     //Tabla de cuentas de usuario
-    private final String TABLE_USER = "usuarios";
-    private final String COLUMN_CC = "usuario_cedula";
-    private final String COLUMN_PIN = "usuario_pin";
-    private final String COLUMN_NAME = "usuario_nombre";
+    private static final String TABLE_USER = "usuarios";
+    private static final String COLUMN_CC = "usuario_cedula";
+    private static final String COLUMN_PIN = "usuario_pin";
+    private static final String COLUMN_NAME = "usuario_nombre";
 
     //Tabla de transacciones
-    private final String TABLE_LOG = "transacciones";
-    private final String COLUMN_DATE = "tran_fecha";
-    private final String COLUMN_TIME = "tran_hora";
-    private final String COLUMN_TYPE = "tran_tipo";
-    private final String COLUMN_COST = "tran_monto";
-    private final String COLUMN_ORIGIN = "tran_origen";
+    private static final String TABLE_LOG = "transacciones";
+    private static final String COLUMN_DATE = "tran_fecha";
+    private static final String COLUMN_TIME = "tran_hora";
+    private static final String COLUMN_TYPE = "tran_tipo";
+    private static final String COLUMN_COST = "tran_monto";
+    private static final String COLUMN_SOURCE = "tran_origen";
 
     public Database(@Nullable Context context){
         super(context, NAME, null, VERSION);
         this.context = context;
     }
 
-    public String getTableAdmin() { return TABLE_ADMIN; }
-    public String getTableUser() { return TABLE_USER; }
-    public String getTableLog() { return TABLE_LOG; }
+    public String getTable(String tableName){
+        switch (tableName){
+            case "admin":
+                return TABLE_ADMIN;
+            case "user":
+                return TABLE_USER;
+            case "log":
+                return TABLE_LOG;
+            default:
+                return "No table by that name";
+        }
+    }
 
-    public String getColumnId() { return COLUMN_ID; }
-    public String getColumnActiveUser() { return COLUMN_ACTIVEUSER; }
-    public String getColumnEmail() { return COLUMN_EMAIL; }
-    public String getColumnPassword() { return COLUMN_PASSWORD; }
-    public String getColumnBalance() { return COLUMN_BALANCE; }
-    public String getColumnPin() { return COLUMN_PIN; }
-    public String getColumnCc() { return COLUMN_CC; }
-    public String getColumnName() { return COLUMN_NAME; }
-    public String getColumnDate() { return COLUMN_DATE; }
-    public String getColumnTime() { return COLUMN_TIME; }
-    public String getColumnType() { return COLUMN_TYPE; }
-    public String getColumnCost() { return COLUMN_COST; }
-    public String getColumnOrigin() { return COLUMN_ORIGIN; }
+    public String getColumn(String columnName){
+        switch (columnName){
+            case "id":
+                return COLUMN_ID;
+            case "active user":
+                return COLUMN_ACTIVEUSER;
+            case "email":
+                return COLUMN_EMAIL;
+            case "password":
+                return COLUMN_PASSWORD;
+            case "balance":
+                return COLUMN_BALANCE;
+            case "pin":
+                return COLUMN_PIN;
+            case "cc":
+                return COLUMN_CC;
+            case "name":
+                return COLUMN_NAME;
+            case "date":
+                return COLUMN_DATE;
+            case "time":
+                return COLUMN_TIME;
+            case "type":
+                return COLUMN_TYPE;
+            case "cost":
+                return COLUMN_COST;
+            case "source":
+                return COLUMN_SOURCE;
+            default:
+                return "No column by that name";
+        }
+    }
 
     @Override
     public void onCreate(@NonNull SQLiteDatabase sqLiteDatabase) {
@@ -74,13 +102,13 @@ public class Database extends SQLiteOpenHelper {
                     "(" + COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     COLUMN_EMAIL +" TEXT, "+
                     COLUMN_PASSWORD +" TEXT, "+
-                    COLUMN_BALANCE +" TEXT);";
+                    COLUMN_BALANCE +" INTEGER);";
         String userQuery =
             "CREATE TABLE "+ TABLE_USER +
                     "("+COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     COLUMN_CC +" TEXT, "+
                     COLUMN_PIN +" TEXT, "+
-                    COLUMN_BALANCE +" TEXT, "+
+                    COLUMN_BALANCE +" INTEGER, "+
                     COLUMN_NAME +" TEXT);";
         String logQuery =
             "CREATE TABLE "+ TABLE_LOG +
@@ -90,7 +118,7 @@ public class Database extends SQLiteOpenHelper {
                     COLUMN_TIME +" TEXT, "+
                     COLUMN_TYPE +" TEXT, "+
                     COLUMN_COST +" TEXT, "+
-                    COLUMN_ORIGIN +" TEXT);";
+                    COLUMN_SOURCE +" TEXT);";
 
 
         sqLiteDatabase.execSQL(adminQuery);
@@ -116,6 +144,7 @@ public class Database extends SQLiteOpenHelper {
         try(SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
 
+            cv.put(COLUMN_ID, admin.getId());
             cv.put(COLUMN_EMAIL, admin.getEmail());
             cv.put(COLUMN_PASSWORD, admin.getPassword());
             cv.put(COLUMN_PASSWORD, admin.getBalance());
@@ -123,6 +152,29 @@ public class Database extends SQLiteOpenHelper {
             long result = db.insert(TABLE_ADMIN, null, cv);
             if (result == -1){
                 Toast.makeText(context, "Se produjo un error al crear la cuenta por defecto de admin.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void updateAdmin(@NonNull Admin admin){
+        try (SQLiteDatabase db = getWritableDatabase()){
+            ContentValues cv = new ContentValues();
+            Cursor adminData = fetchData("1", TABLE_ADMIN, COLUMN_ID);
+
+            if (adminData.getCount() > 0){
+                cv.put(COLUMN_EMAIL, admin.getEmail());
+                cv.put(COLUMN_PASSWORD, admin.getPassword());
+                Log.i("TAG",adminData.getString(2)+ admin.getBalance());
+                cv.put(COLUMN_BALANCE, adminData.getInt(2)+admin.getBalance());
+
+                long result = db.update(TABLE_ADMIN, cv, "_id=?", new String[]{admin.getId()});
+                if (result == -1){
+                    Toast.makeText(context, "Se produjo un error al actualizar la información del corresponsal.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context, "Se proceso la petición con exito.", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                makeDefaultAdmin(new Admin());
             }
         }
     }
