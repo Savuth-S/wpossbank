@@ -373,4 +373,18 @@ public class Validate {
             return false;
         }
     }
+
+    public boolean notMatchUserData(@NonNull EditText textInput, String parameter){
+        if(!isEmpty(textInput)){
+            if (matchUserData(textInput, parameter)){
+                textInput.setError(res.getString(R.string.error_wrong));
+                return false;
+            }else{
+                return  true;
+            }
+
+        }else{
+            return false;
+        }
+    }
 }

@@ -48,7 +48,7 @@ public class TransfersActivity extends AppCompatActivity {
                     pinValidate = validate.pin(pinInput) && validate.matchUserData(pinInput, "pin"),
                     ccTransferValidate = validate.isInRange(ccTransferInput,9,13) &&
                             validate.isInDatabase(ccTransferInput, "user", "cc") &&
-                            !validate.matchUserData(ccInput, "cc"),
+                            validate.notMatchUserData(ccInput, "cc"),
                     transferValidate = validate.useBalance(transferInput);
 
             if (!validate.isEmpty(pinConfirmInput) &&
