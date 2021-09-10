@@ -18,8 +18,8 @@ public class SharedPreference {
         return sharedPreferences.getString("usuario", "no encontrado");
     }
 
-    public void setActiveUser(String user){
-        editor.putString("usuario", user);
+    public void setActiveUser(String userObjectId){
+        editor.putString("usuario", userObjectId);
         editor.apply();
     }
 }

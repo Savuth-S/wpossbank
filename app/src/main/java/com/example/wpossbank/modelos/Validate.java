@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,16 @@ import com.example.wpossbank.database.Database;
 import java.util.Calendar;
 
 public class Validate {
+    Context context;
     Database db;
     Resources res;
+    SharedPreference sp;
 
     public Validate(Context context) {
+        this.context = context;
         db = new Database(context);
         res = context.getResources();
+        sp = new SharedPreference(context);
     }
 
     public boolean isEmpty(@NonNull EditText editText){
@@ -66,7 +71,7 @@ public class Validate {
         String pin = pinInput.getText().toString();
         if (isEmpty(pinInput)) {
             return false;
-        } else if (pin.length() < 8){
+        } else if (pin.matches("(.{4})")){
             pinInput.setError(res.getString(R.string.error_atleast_8));
             return false;
         } else if (pin.matches("(.*\\s.*)")) {
@@ -80,17 +85,17 @@ public class Validate {
         }
     }
 
-    public boolean balance(@NonNull EditText balanceInput) {
+    public boolean initialBalance(@NonNull EditText balanceInput) {
         String balance = balanceInput.getText().toString();
         if (isEmpty(balanceInput)) {
             return false;
         } else if (balance.matches("(.*\\s.*)")) {
             balanceInput.setError(res.getString(R.string.error_spaces));
             return false;
-        } else if (balance.matches("^[0-9]+$")) {
+        } else if (balance.matches("^[0-9]+$") && Integer.parseInt(balance) >= 10_000) {
             return true;
         }else{
-            balanceInput.setError(res.getString(R.string.error_only_numbers));
+            balanceInput.setError(res.getString(R.string.error_invalid));
             return false;
         }
     }
@@ -161,20 +166,23 @@ public class Validate {
     }
 
     public boolean expDate(@NonNull EditText expDateInput){
-        Calendar currentDate = Calendar.getInstance();
-        Calendar expDate = Calendar.getInstance();
+        if (!isEmpty(expDateInput)) {
+            Calendar currentDate = Calendar.getInstance();
+            Calendar expDate = Calendar.getInstance();
 
-        int year = Integer.parseInt(expDateInput.getText().toString().split("/")[0]),
-                month = Integer.parseInt(expDateInput.getText().toString().split("/")[1]),
-                day = Integer.parseInt(expDateInput.getText().toString().split("/")[2]);
-        expDate.set(year, month, day);
+            int year = Integer.parseInt(expDateInput.getText().toString().split("/")[0]),
+                    month = Integer.parseInt(expDateInput.getText().toString().split("/")[1]),
+                    day = Integer.parseInt(expDateInput.getText().toString().split("/")[2]);
+            expDate.set(year, month, day);
 
-        if (isEmpty(expDateInput)){
-            return false;
-        }else if (expDate.after(currentDate)){
-            return true;
+            if (expDate.after(currentDate)){
+                expDateInput.setError(null);
+                return true;
+            }else{
+                expDateInput.setError(res.getString(R.string.error_invalid));
+                return false;
+            }
         }else{
-            expDateInput.setError(res.getString(R.string.error_invalid));
             return false;
         }
     }
@@ -220,6 +228,37 @@ public class Validate {
         }
     }
 
+    public boolean withdrawal(@NonNull EditText withdrawalInput){
+        if(!isEmpty(withdrawalInput)) {
+            try (Cursor fetch = db.fetchData(sp.getActiveUser(),
+                    db.getTable("user"),
+                    db.getColumn("user id"))) {
+                fetch.moveToNext();
+
+                if (fetch.getCount() > 0) {
+                    if (withdrawalInput.getText().toString().matches("(.{2,7})")){
+                        int withdrawal = Integer.parseInt(withdrawalInput.getText().toString());
+
+                        if (withdrawal + 2_000 <= Integer.parseInt(fetch.getString(4))) {
+                            return true;
+                        } else {
+                            withdrawalInput.setError(res.getString(R.string.error_enough_funds));
+                            return false;
+                        }
+                    }else {
+                        withdrawalInput.setError(res.getString(R.string.error_between_2and7));
+                        return false;
+                    }
+                } else {
+                    Log.e("VALIDATE", "Failed to load cursor data from database, " +
+                            "database=" + db.toString() + "fetch=" + fetch.toString());
+                    withdrawalInput.setError(res.getString(R.string.error_fetch_data));
+                    return false;
+                }
+            }
+        }else{ return false;}
+    }
+
     public boolean login(@NonNull EditText ccInput, @NonNull EditText pinInput) {
         String cc = ccInput.getText().toString();
         String pin = pinInput.getText().toString();
@@ -231,7 +270,7 @@ public class Validate {
             String registeredPin = "empty";
 
             while (fetch.moveToNext()) {
-                registeredPin = fetch.getString(2);// TABLE_USERS - COLUMN_PIN
+                registeredPin = fetch.getString(3);// TABLE_USERS - COLUMN_PIN
             }
 
             if (fetch.getCount() > 0) {
@@ -245,6 +284,50 @@ public class Validate {
                 ccInput.setError(res.getString(R.string.error_not_registered));
                 return false;
             }
+        }
+    }
+
+    public boolean matchUserData(@NonNull EditText textInput, String parameter){
+        if(!isEmpty(textInput)){
+            String text = textInput.getText().toString();
+            User user = new User(context);
+            user.loadData(user);
+
+            switch (parameter){
+                case "pin":
+                    if (text.equals(user.getPin())){
+                        return true;
+                    }else{
+                        textInput.setError(res.getString(R.string.error_wrong));
+                        return false;
+                    }
+                case "cc":
+                    if (text.equals(user.getCc())){
+                        return true;
+                    }else{
+                        textInput.setError(res.getString(R.string.error_wrong));
+                        return false;
+                    }
+                case "balance":
+                    if (text.equals(String.valueOf(user.getBalance()))){
+                        return true;
+                    }else{
+                        textInput.setError(res.getString(R.string.error_wrong));
+                        return false;
+                    }
+                case "name":
+                    if (text.equals(user.getName())){
+                        return true;
+                    }else{
+                        textInput.setError(res.getString(R.string.error_wrong));
+                        return false;
+                    }
+                default:
+                    textInput.setError(res.getString(R.string.error_wrong));
+                    return false;
+                }
+        }else{
+            return false;
         }
     }
 }

@@ -12,6 +12,7 @@ public class Admin extends AppCompatActivity {
     private String email = "carlos@wposs.com";
     private String password = "123456";
     private int balance = 0;
+    private int cost = 2_000;
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
@@ -24,6 +25,9 @@ public class Admin extends AppCompatActivity {
 
     public int getBalance() { return balance; }
     public void setBalance(int balance) { this.balance = balance; }
+
+    public int getCost() { return cost; }
+    public void setCost(int cost) { this.cost = cost; }
 
     public void update(Context context, Admin admin){
         Database db = new Database(context);

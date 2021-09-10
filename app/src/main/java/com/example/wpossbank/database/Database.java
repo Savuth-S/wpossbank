@@ -19,12 +19,14 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.R;
 
 public class Database extends SQLiteOpenHelper {
     private final Context context;
     private final Resources res;
+    private final SharedPreference sp;
 
     private static final String NAME = "wpossbank.db";
     private static final int VERSION = 1;
@@ -41,6 +43,7 @@ public class Database extends SQLiteOpenHelper {
 
     //Tabla de cuentas de usuario
     private static final String TABLE_USER = "usuarios";
+    private static final String COLUMN_USERID = "object_id";
     private static final String COLUMN_CC = "usuario_cedula";
     private static final String COLUMN_PIN = "usuario_pin";
     private static final String COLUMN_NAME = "usuario_nombre";
@@ -56,6 +59,7 @@ public class Database extends SQLiteOpenHelper {
     public Database(@NonNull Context context){
         super(context, NAME, null, VERSION);
         res = context.getResources();
+        sp = new SharedPreference(context);
         this.context = context;
     }
 
@@ -76,6 +80,8 @@ public class Database extends SQLiteOpenHelper {
         switch (columnName){
             case "id":
                 return COLUMN_ID;
+            case "user id":
+                return COLUMN_USERID;
             case "active user":
                 return COLUMN_ACTIVEUSER;
             case "email":
@@ -112,13 +118,14 @@ public class Database extends SQLiteOpenHelper {
                     "(" + COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     COLUMN_EMAIL +" TEXT, "+
                     COLUMN_PASSWORD +" TEXT, "+
-                    COLUMN_BALANCE +" INTEGER);";
+                    COLUMN_BALANCE +" TEXT);";
         String userQuery =
             "CREATE TABLE "+ TABLE_USER +
                     "("+COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    COLUMN_USERID +" TEXT, "+
                     COLUMN_CC +" TEXT, "+
                     COLUMN_PIN +" TEXT, "+
-                    COLUMN_BALANCE +" INTEGER, "+
+                    COLUMN_BALANCE +" TEXT, "+
                     COLUMN_NAME +" TEXT);";
         String logQuery =
             "CREATE TABLE "+ TABLE_LOG +
@@ -199,6 +206,7 @@ public class Database extends SQLiteOpenHelper {
         try(SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
 
+            cv.put(COLUMN_USERID, user.toString().split("@")[1]);
             cv.put(COLUMN_CC, user.getCc());
             cv.put(COLUMN_PIN, user.getPin());
             cv.put(COLUMN_BALANCE, user.getBalance());
@@ -209,6 +217,32 @@ public class Database extends SQLiteOpenHelper {
                 Toast.makeText(context, res.getString(R.string.error_make_user), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, res.getString(R.string.toast_make_user_success), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void updateUser(@NonNull User user){
+        try (SQLiteDatabase db = getWritableDatabase()){
+            ContentValues cv = new ContentValues();
+            Cursor userData = fetchData(sp.getActiveUser(), TABLE_USER, COLUMN_USERID);
+
+            if (userData.getCount() > 0){
+                userData.moveToFirst();
+
+                cv.put(COLUMN_CC, user.getCc());
+                cv.put(COLUMN_PIN, user.getPin());
+                cv.put(COLUMN_BALANCE, userData.getInt(4)+user.getBalance());
+                cv.put(COLUMN_NAME, user.getName());
+
+                long result = db.update(TABLE_USER, cv, "object_id=?", new String[]{user.getUserId()});
+                if (result == -1){
+                    Log.e("UPDATE","Failed to updated user data, database="+db.toString() +" result="+result +" admin="+user.toString());
+                }else{
+                    Log.d("UPDATE","Admin data updated successfully");
+                }
+            }else{
+                Log.e("UPDATE","Couldn't find user data, userData="+userData.toString());
+                Toast.makeText(context,res.getString(R.string.error_fetch_data),Toast.LENGTH_LONG).show();
             }
         }
     }

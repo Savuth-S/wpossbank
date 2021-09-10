@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
@@ -15,16 +16,76 @@ import com.example.wpossbank.MainActivity;
 import com.example.wpossbank.R;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.CreditCard;
+import com.example.wpossbank.modelos.SharedPreference;
+import com.example.wpossbank.modelos.User;
 
 public class Dialogs {
+    public static class ConfirmWithdrawal extends DialogFragment {
+        Context context;
+        Resources res;
+        Admin admin;
+        User user;
+        SharedPreference sp;
+        int withdrawAmount;
 
-    public static class ConfirmTransaction extends DialogFragment {
+        public ConfirmWithdrawal(Context context, Admin admin, int withdrawAmount) {
+            this.context = context;
+            this.admin = admin;
+            sp = new SharedPreference(context);
+            user = new User(context);
+            user.loadData(user);
+            this.withdrawAmount = withdrawAmount;
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            res = getResources();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(res.getString(R.string.confirm)).setMessage(makeMessage(withdrawAmount))
+                    .setPositiveButton(res.getString(R.string.button_confirm),
+                            (dialogInterface, i) -> {
+                                admin.update(context, admin);
+                                user.setBalance(withdrawAmount-(withdrawAmount*2+admin.getCost()));
+                                Log.d("TAG",Integer.toString(user.getBalance()));
+                                user.update(context, user);
+                                new Dialogs.TransactionSucces().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
+                                dismiss();
+                            })
+                    .setNegativeButton(res.getString(R.string.button_cancel),
+                            (dialogInterface, i) -> {
+                                new Dialogs.TransactionFailed().show(requireActivity().getSupportFragmentManager(), "FAIL");
+                                dismiss();
+                            });
+
+            return builder.create();
+        }
+
+        public String makeMessage(int amount) {
+            String message;
+            String[] template = res.getString(R.string.dialog_confirm_withdrawal).split("/");
+
+            User user = new User(context);
+            user.loadData(user);
+
+            //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
+            message = template[0] + user.getName() + System.getProperty("line.separator") +         //Estimado: USER
+                    template[1] + (amount) + template[2];                                   //¿Desea retirar 12456$
+                                                                                                    //con con un valor de comisión
+            return message;                                                                         //de 2000$?
+        }
+    }
+
+
+
+    public static class ConfirmCardPayment extends DialogFragment {
         Context context;
         Resources res;
         Admin admin;
         CreditCard card;
 
-        public ConfirmTransaction(Context context, Admin admin, CreditCard card) {
+        public ConfirmCardPayment(Context context, Admin admin, CreditCard card) {
             this.context = context;
             this.admin = admin;
             this.card = card;
@@ -54,7 +115,7 @@ public class Dialogs {
 
         public String makeMessage(@NonNull CreditCard card) {
             String message;
-            String[] template = res.getString(R.string.dialog_confirm_payment).split("/");
+            String[] template = res.getString(R.string.dialog_confirm_cardpayment).split("/");
 
             //Reemplaza cada numero excepto los cuatro ultimos por *
             int cardLength = card.getNumber().length();
@@ -99,6 +160,8 @@ public class Dialogs {
         }
     }
 
+
+
     public static class TransactionSucces extends DialogFragment {
         @NonNull
         @Override
@@ -114,6 +177,8 @@ public class Dialogs {
             return builder.create();
         }
     }
+
+
 
     public static class TransactionFailed extends DialogFragment {
         @NonNull

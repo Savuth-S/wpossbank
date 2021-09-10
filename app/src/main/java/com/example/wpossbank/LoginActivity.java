@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         sp = new SharedPreference(context);
         validate = new Validate(context);
         admin = new Admin();
-        user = new User();
+        user = new User(context);
         makeDefaultAdmin();
 
         ccInput= findViewById(R.id.ccInput);
@@ -47,11 +47,12 @@ public class LoginActivity extends AppCompatActivity {
                 user.setCc(ccInput.getText().toString());
                 user.setPin(pinInput.getText().toString());
 
-                sp.setActiveUser(user.getCc());
+                Log.d("LOGIN","user="+user.getUserId());
+                sp.setActiveUser(user.getUserId());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
-        Admin admin = new Admin();
+
         newUserButton.setOnClickListener( verNewUser -> startActivity(new Intent(context, NewUserActivity.class)));
     }
 

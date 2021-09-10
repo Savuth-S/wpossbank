@@ -19,7 +19,7 @@ public class NewUserActivity extends AppCompatActivity {
     Validate validate;
     User user;
 
-    EditText nameInput, lastnameInput, ccInput, pinInput, pinCofirmInput, balanceInput;
+    EditText nameInput, lastnameInput, ccInput, pinInput, pinConfirmInput, balanceInput;
     Button enterButton;
 
     @Override
@@ -28,14 +28,14 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
 
         context = this;
-        user = new User();
+        user = new User(context);
         validate = new Validate(context);
 
         nameInput = findViewById(R.id.nameInput);
         lastnameInput = findViewById(R.id.lastnameInput);
         ccInput = findViewById(R.id.ccInput);
         pinInput = findViewById(R.id.pinInput);
-        pinCofirmInput = findViewById(R.id.pinConfirmInput);
+        pinConfirmInput = findViewById(R.id.pinConfirmInput);
         balanceInput = findViewById(R.id.balanceInput);
         enterButton = findViewById(R.id.enterButton);
 
@@ -45,19 +45,20 @@ public class NewUserActivity extends AppCompatActivity {
                     nameValidate = validate.name(nameInput),
                     lastnameValidate = validate.name(lastnameInput),
                     pinValidate = validate.pin(pinInput),
-                    balanceValidate = validate.balance(balanceInput);
+                    balanceValidate = validate.initialBalance(balanceInput);
 
-            if (!validate.isEmpty(pinCofirmInput) &&
-                    !pinInput.getText().toString().equals(pinCofirmInput.getText().toString())) {
+            if (!validate.isEmpty(pinConfirmInput) &&
+                    !pinInput.getText().toString().equals(pinConfirmInput.getText().toString())) {
                 Log.d("NEW USER", "The pins do not match, " +
-                        "pin="+pinInput.getText().toString() +" confirm="+pinCofirmInput.getText().toString());
-                pinCofirmInput.setError("Los PINs no son iguales");
-            }else if (!validate.isEmpty(pinCofirmInput) && nameValidate && lastnameValidate && ccValidate && pinValidate && balanceValidate){
+                        "pin="+pinInput.getText().toString() +" confirm="+pinConfirmInput.getText().toString());
+                pinConfirmInput.setError(getResources().getString(R.string.error_wrong));
+            }else if (!validate.isEmpty(pinConfirmInput) && nameValidate && lastnameValidate && ccValidate && pinValidate && balanceValidate){
                 user.setName(nameInput.getText().toString() + " " + lastnameInput.getText().toString());
                 user.setCc(ccInput.getText().toString());
                 user.setPin(pinInput.getText().toString());
                 user.setBalance(Integer.parseInt(balanceInput.getText().toString()));
 
+                Log.d("NEW USER","user="+user.toString().split("@")[1]);
                 db.addUser(user);
                 startActivity(new Intent(context, LoginActivity.class));
             }

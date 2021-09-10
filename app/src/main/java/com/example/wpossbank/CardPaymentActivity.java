@@ -71,6 +71,7 @@ public class CardPaymentActivity extends AppCompatActivity {
                                 datePicker.getMonth() + "/" +
                                 datePicker.getDayOfMonth();
                         expDateInput.setText(string);
+                        validate.expDate(expDateInput);
                     }, calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
             dpd.show();
@@ -109,7 +110,7 @@ public class CardPaymentActivity extends AppCompatActivity {
 
             if (cardNumberValidate && expDateValidate && ccvValidate && nameValidate && lastnameValidate && paymentValidate && duesValidate){
                 admin.setBalance(Integer.parseInt(card.getPaymentAmmount()));
-                new Dialogs.ConfirmTransaction(this ,admin, card)
+                new Dialogs.ConfirmCardPayment(this ,admin, card)
                         .show(getSupportFragmentManager(),"Confirm");
             }
         });
