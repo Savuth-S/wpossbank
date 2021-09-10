@@ -36,6 +36,33 @@ public class Validate {
         }
     }
 
+    public boolean isNumber(@NonNull EditText editText){
+        String text = editText.getText().toString();
+
+        if (isEmpty(editText)) {
+            return false;
+        }else if (text.matches("^[0-9]+$")) {
+            return true;
+        }else{
+            editText.setError(res.getString(R.string.error_only_numbers));
+            return false;
+        }
+    }
+
+    public boolean isInRange(@NonNull EditText editText, int min, int max){
+        String text = editText.getText().toString();
+        String regex = "(.{"+min+","+ max +"})";
+
+        if (isEmpty(editText)) {
+            return false;
+        }else if (text.matches(regex)) {
+            return true;
+        }else{
+            editText.setError(res.getString(R.string.error_invalid));
+            return false;
+        }
+    }
+
     public boolean name(@NonNull EditText nameInput){
         String name = nameInput.getText().toString();
 
@@ -53,7 +80,9 @@ public class Validate {
         String cc = ccInput.getText().toString();
         if (isEmpty(ccInput)) {
             return false;
-        } else if (db.fetchData(cc, db.getTable("user"), db.getColumn("cc")).getCount() > 0){
+        }else if (!isInRange(ccInput, 10,13)){
+            return  false;
+        }else if (db.fetchData(cc, db.getTable("user"), db.getColumn("cc")).getCount() > 0){
             ccInput.setError(res.getString(R.string.error_already_registered));
             return false;
         } else if (cc.matches("(.*\\s.*)")) {
@@ -202,7 +231,7 @@ public class Validate {
     public boolean payment(@NonNull EditText paymentInput){
         if (!isEmpty(paymentInput)) {
             int payment = Integer.parseInt(paymentInput.getText().toString());
-            if (payment > 10000 && payment < 1000000) {
+            if (payment >= 10000 && payment <= 1000000) {
                 return true;
             } else {
                 paymentInput.setError(res.getString(R.string.error_invalid));
@@ -228,7 +257,7 @@ public class Validate {
         }
     }
 
-    public boolean withdrawal(@NonNull EditText withdrawalInput){
+    public boolean useBalance(@NonNull EditText withdrawalInput){
         if(!isEmpty(withdrawalInput)) {
             try (Cursor fetch = db.fetchData(sp.getActiveUser(),
                     db.getTable("user"),

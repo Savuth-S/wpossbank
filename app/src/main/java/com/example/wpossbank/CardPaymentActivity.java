@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.CreditCard;
+import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.Validate;
 import com.example.wpossbank.database.Database;
 import com.google.android.material.textfield.TextInputLayout;
@@ -24,6 +25,7 @@ public class CardPaymentActivity extends AppCompatActivity {
 
     Database db;
     Validate validate;
+    MakeMessages messages;
 
     Admin admin;
     CreditCard card;
@@ -44,6 +46,7 @@ public class CardPaymentActivity extends AppCompatActivity {
 
         //Declaracion de objetos
         db = new Database(context);
+        messages = new MakeMessages(context);
         admin = new Admin();
         card = new CreditCard();
 
@@ -58,8 +61,8 @@ public class CardPaymentActivity extends AppCompatActivity {
         paymentAmountInput = findViewById(R.id.paymentAmountInput);
         duesInput = findViewById(R.id.duesInput);
 
-        goBackButton = findViewById(R.id.goBackButton);
-        confirmButton = findViewById(R.id.confirmButton);
+        goBackButton = findViewById(R.id.goBackButton2);
+        confirmButton = findViewById(R.id.confirmButton2);
 
         //Abre el calendario para seleccionar la fecha al tocar el campo de texto
         expDateInput.setOnClickListener( openDatePicker-> {
@@ -110,9 +113,12 @@ public class CardPaymentActivity extends AppCompatActivity {
 
             if (cardNumberValidate && expDateValidate && ccvValidate && nameValidate && lastnameValidate && paymentValidate && duesValidate){
                 admin.setBalance(Integer.parseInt(card.getPaymentAmmount()));
-                new Dialogs.ConfirmCardPayment(this ,admin, card)
+
+                new Dialogs.ConfirmAdminAddBalance(context, admin, messages.cardPayment(card))
                         .show(getSupportFragmentManager(),"Confirm");
             }
         });
+
+        goBackButton.setOnClickListener( goBack -> finish());
     }
 }

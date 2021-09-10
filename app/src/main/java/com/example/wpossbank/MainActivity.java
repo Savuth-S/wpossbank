@@ -33,5 +33,9 @@ public class MainActivity extends AppCompatActivity{
         withdrawalsButton.setOnClickListener(verCardPayment -> {
             startActivity(new Intent(context, WithdrawalsActivity.class));
         });
+
+        depositsButton.setOnClickListener(verCardPayment -> {
+            startActivity(new Intent(context, DepositsActivity.class));
+        });
     }
 }
