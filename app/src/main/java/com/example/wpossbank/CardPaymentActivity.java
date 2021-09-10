@@ -61,8 +61,8 @@ public class CardPaymentActivity extends AppCompatActivity {
         paymentAmountInput = findViewById(R.id.paymentAmountInput);
         duesInput = findViewById(R.id.duesInput);
 
-        goBackButton = findViewById(R.id.goBackButton2);
-        confirmButton = findViewById(R.id.confirmButton2);
+        goBackButton = findViewById(R.id.goBackButton);
+        confirmButton = findViewById(R.id.confirmButton);
 
         //Abre el calendario para seleccionar la fecha al tocar el campo de texto
         expDateInput.setOnClickListener( openDatePicker-> {

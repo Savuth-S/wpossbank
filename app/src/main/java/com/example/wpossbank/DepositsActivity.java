@@ -40,8 +40,8 @@ public class DepositsActivity extends AppCompatActivity {
         ccDepositInput = findViewById(R.id.ccDepositInput);
         depositInput = findViewById(R.id.depositInput);
 
-        goBackButton = findViewById(R.id.goBackButton4);
-        confirmButton = findViewById(R.id.confirmButton4);
+        goBackButton = findViewById(R.id.goBackButton);
+        confirmButton = findViewById(R.id.confirmButton);
 
         user.loadData(user);//Carga la información del usuario desde la base de datos
 

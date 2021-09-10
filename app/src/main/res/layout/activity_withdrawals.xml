@@ -83,7 +83,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/goBackButton3"
+            android:id="@+id/goBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:insetTop="0dp"
@@ -99,17 +99,17 @@
             app:layout_constraintVertical_bias="0.88" />
 
         <Button
-            android:id="@+id/confirmButton3"
+            android:id="@+id/confirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:paddingHorizontal="35sp"
             android:paddingVertical="15sp"
             android:text="@string/button_confirm"
-            app:layout_constraintBottom_toBottomOf="@+id/goBackButton3"
+            app:layout_constraintBottom_toBottomOf="@+id/goBackButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/goBackButton3"
-            app:layout_constraintTop_toTopOf="@+id/goBackButton3" />
+            app:layout_constraintStart_toEndOf="@+id/goBackButton"
+            app:layout_constraintTop_toTopOf="@+id/goBackButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

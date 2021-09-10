@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.example.wpossbank.database.Database;
 
 public class User {
+    private final Context context;
     private final SharedPreference sp;
     private final Database db;
 
@@ -16,10 +17,10 @@ public class User {
     private String name = "Usuario Usuario";
 
     public User(Context context){
+        this.context = context;
         sp = new SharedPreference(context);
         db = new Database(context);
     }
-
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
@@ -62,6 +63,24 @@ public class User {
             user.setPin(fetch.getString(3));
             user.setBalance(Integer.parseInt(fetch.getString(4)));
             user.setName(fetch.getString(5));
+        }
+    }
+
+    public User loadUser(String cc){
+        try (Cursor fetch = db.fetchData(
+                cc,
+                db.getTable("user"),
+                db.getColumn("cc"))){
+            User user = new User(context);
+
+            fetch.moveToFirst();
+            user.setId(fetch.getString(0));
+            user.setCc(fetch.getString(2));
+            user.setPin(fetch.getString(3));
+            user.setBalance(Integer.parseInt(fetch.getString(4)));
+            user.setName(fetch.getString(5));
+
+            return user;
         }
     }
 

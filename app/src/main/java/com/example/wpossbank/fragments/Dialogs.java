@@ -27,6 +27,61 @@ import com.example.wpossbank.modelos.User;
 import java.util.Objects;
 
 public class Dialogs {
+    public static class ConfirmUserTransferBalance extends DialogFragment {
+        Context context;
+        Resources res;
+        SharedPreference sp;
+
+        Admin admin;
+        User user;
+        User transferUser;
+
+        String message;
+        int addAmount;
+
+        public ConfirmUserTransferBalance(Context context, Admin admin, String ccTransfer, String message, int addAmount) {
+            this.context = context;
+            sp = new SharedPreference(context);
+
+            this.admin = admin;
+            user = new User(context);
+            this.transferUser = transferUser.loadUser(ccTransfer);
+
+            this.message = message;
+            this.addAmount = addAmount;
+
+            user.loadData(user);
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            res = getResources();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
+                    .setPositiveButton(res.getString(R.string.button_confirm),
+                            (dialogInterface, i) -> {
+                                admin.update(context, admin);
+
+                                user.setBalance(addAmount);
+                                user.update(context, user);
+
+                                new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
+                                dismiss();
+                            })
+                    .setNegativeButton(res.getString(R.string.button_cancel),
+                            (dialogInterface, i) -> {
+                                new Dialogs.TransactionFailed().show(requireActivity().getSupportFragmentManager(), "FAIL");
+                                dismiss();
+                            });
+
+            return builder.create();
+        }
+    }
+
+
+
     public static class ConfirmUserAddBalance extends DialogFragment {
         Context context;
         Resources res;

@@ -30,12 +30,16 @@ public class MainActivity extends AppCompatActivity{
             startActivity(new Intent(context, CardPaymentActivity.class));
         });
 
-        withdrawalsButton.setOnClickListener(verCardPayment -> {
+        withdrawalsButton.setOnClickListener(verWithdraws -> {
             startActivity(new Intent(context, WithdrawalsActivity.class));
         });
 
-        depositsButton.setOnClickListener(verCardPayment -> {
+        depositsButton.setOnClickListener(verDeposits -> {
             startActivity(new Intent(context, DepositsActivity.class));
+        });
+
+        transfersButton.setOnClickListener(verTransfers -> {
+            startActivity(new Intent(context, TransfersActivity.class));
         });
     }
 }

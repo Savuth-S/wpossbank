@@ -99,4 +99,26 @@ public class MakeMessages extends AppCompatActivity {
 
         return message;
     }
+
+    public String transfer(Context context, EditText transferInput, EditText ccTransferInput) {
+        String message;
+        String[] template = res.getString(R.string.dialog_confirm_withdrawal).split("/");
+
+        User user = new User(context);
+        user.loadData(user);
+
+        Database db = new Database(context);
+        Cursor fetch = db.fetchData(ccTransferInput.getText().toString(),
+                db.getTable("user"),
+                db.getColumn("cc"));
+
+        fetch.moveToFirst();
+
+        //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
+        message = template[0] + user.getName() + System.getProperty("line.separator") +
+                template[1] + transferInput.getText() + template[2] + fetch.getString(5) +
+                template[3];
+
+        return message;
+    }
 }

@@ -37,43 +37,58 @@ public class Validate {
     }
 
     public boolean isNumber(@NonNull EditText editText){
-        String text = editText.getText().toString();
+        if (!isEmpty(editText)) {
 
-        if (isEmpty(editText)) {
-            return false;
-        }else if (text.matches("^[0-9]+$")) {
-            return true;
-        }else{
-            editText.setError(res.getString(R.string.error_only_numbers));
-            return false;
-        }
+            String text = editText.getText().toString();
+
+            if (text.matches("^[0-9]+$")) {
+                return true;
+            } else {
+                editText.setError(res.getString(R.string.error_only_numbers));
+                return false;
+            }
+        }else{ return false;}
     }
 
     public boolean isInRange(@NonNull EditText editText, int min, int max){
-        String text = editText.getText().toString();
-        String regex = "(.{"+min+","+ max +"})";
+        if (!isEmpty(editText)) {
+            String text = editText.getText().toString();
+            String regex = "(.{" + min + "," + max + "})";
+            if (text.matches(regex)) {
+                return true;
+            } else {
+                editText.setError(res.getString(R.string.error_invalid));
+                return false;
+            }
+        }else{ return false;}
+    }
 
-        if (isEmpty(editText)) {
-            return false;
-        }else if (text.matches(regex)) {
-            return true;
-        }else{
-            editText.setError(res.getString(R.string.error_invalid));
-            return false;
-        }
+    public boolean isInDatabase(@NonNull EditText editText, String table, String column){
+        if (!isEmpty(editText)) {
+            String text = editText.getText().toString();
+            Cursor fetch = db.fetchData(text, db.getTable(table), db.getColumn(column));
+            fetch.moveToFirst();
+
+            if (fetch.getCount() > 0){
+                return true;
+            }else {
+                editText.setError(res.getString(R.string.error_not_registered));
+                return false;
+            }
+        }else{ return false;}
     }
 
     public boolean name(@NonNull EditText nameInput){
-        String name = nameInput.getText().toString();
+        if (!isEmpty(nameInput)) {
 
-        if (isEmpty(nameInput)){
-            return false;
-        }else if (name.matches("^[A-ZÁ-Ú\\s]+$")){
-            return true;
-        }else{
-            nameInput.setError(res.getString(R.string.error_only_caps));
-            return false;
-        }
+            String name = nameInput.getText().toString();
+            if (name.matches("^[A-ZÁ-Ú\\s]+$")) {
+                return true;
+            } else {
+                nameInput.setError(res.getString(R.string.error_only_caps));
+                return false;
+            }
+        }else{ return false; }
     }
 
     public boolean cc(@NonNull EditText ccInput) {
@@ -82,8 +97,7 @@ public class Validate {
             return false;
         }else if (!isInRange(ccInput, 10,13)){
             return  false;
-        }else if (db.fetchData(cc, db.getTable("user"), db.getColumn("cc")).getCount() > 0){
-            ccInput.setError(res.getString(R.string.error_already_registered));
+        }else if (isInDatabase(ccInput,"user","cc")){
             return false;
         } else if (cc.matches("(.*\\s.*)")) {
             ccInput.setError(res.getString(R.string.error_spaces));
@@ -100,8 +114,8 @@ public class Validate {
         String pin = pinInput.getText().toString();
         if (isEmpty(pinInput)) {
             return false;
-        } else if (pin.matches("(.{4})")){
-            pinInput.setError(res.getString(R.string.error_atleast_8));
+        } else if (!pin.matches("(.{4})")){
+            pinInput.setError(res.getString(R.string.error_mustbe_4));
             return false;
         } else if (pin.matches("(.*\\s.*)")) {
             pinInput.setError(res.getString(R.string.error_spaces));

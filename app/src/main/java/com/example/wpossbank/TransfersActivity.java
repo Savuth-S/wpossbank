@@ -11,60 +11,60 @@ import android.widget.EditText;
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.MakeMessages;
-import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
 
-public class WithdrawalsActivity extends AppCompatActivity {
+public class TransfersActivity extends AppCompatActivity {
     Context context;
     Validate validate;
-    MakeMessages messages;
 
     Admin admin;
-    User user;
+    MakeMessages messages;
 
-    EditText ccInput, pinInput, pinConfirmInput, withdrawalInput;
+    EditText ccInput, pinInput, pinConfirmInput, ccTransferInput, transferInput;
     Button goBackButton, confirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_withdrawals);
+        setContentView(R.layout.activity_transfers);
         context = this;
         validate = new Validate(context);
-        messages = new MakeMessages(context);
 
         admin = new Admin();
-        user = new User(context);
+        messages = new MakeMessages(context);
 
         ccInput = findViewById(R.id.ccInput);
         pinInput = findViewById(R.id.pinInput);
         pinConfirmInput = findViewById(R.id.pinConfirmInput);
-        withdrawalInput = findViewById(R.id.withdrawalInput);
+        ccTransferInput = findViewById(R.id.ccTransferInput);
+        transferInput = findViewById(R.id.transferInput);
 
         goBackButton = findViewById(R.id.goBackButton);
         confirmButton = findViewById(R.id.confirmButton);
 
-        user.loadData(user);//Carga la información del usuario desde la base de datos
-
-        confirmButton.setOnClickListener(confirmPayment -> {
+        confirmButton.setOnClickListener(confirmDeposit -> {
             //Deckara y verifica si los campos tienen la información correcta
             boolean ccValidate = validate.isNumber(ccInput) && validate.matchUserData(ccInput, "cc"),
                     pinValidate = validate.pin(pinInput) && validate.matchUserData(pinInput, "pin"),
-                    withdrawalValidate = validate.useBalance(withdrawalInput);
+                    ccTransferValidate = validate.isInRange(ccTransferInput,9,13) &&
+                            validate.isInDatabase(ccTransferInput, "user", "cc") &&
+                            !validate.matchUserData(ccInput, "cc"),
+                    transferValidate = validate.useBalance(transferInput);
 
             if (!validate.isEmpty(pinConfirmInput) &&
                     !pinInput.getText().toString().equals(pinConfirmInput.getText().toString())) {
-                Log.d("WITHDRAW", "The pins do not match, " +
-                        "pin=" + pinInput.getText().toString() + " confirm=" + pinConfirmInput.getText().toString());
-                pinConfirmInput.setError(getResources().getString(R.string.error_wrong));
-            }else if (!validate.isEmpty(pinConfirmInput) && ccValidate && pinValidate && withdrawalValidate){
-                int withdrawValue = Integer.parseInt(withdrawalInput.getText().toString());
+                Log.d("TRANSFER", "The pins do not match, " +
+                        "pin="+pinInput.getText().toString() +" confirm="+pinConfirmInput.getText().toString());
 
-                admin.setBalance(admin.getCost());
-                new Dialogs.ConfirmUserAddBalance(context , admin,
-                        messages.withdraw(context,withdrawalInput),
-                        withdrawValue-(withdrawValue*2+admin.getCost()))
-                        .show(getSupportFragmentManager(),"CONFIRM2");
+                pinConfirmInput.setError(getResources().getString(R.string.error_wrong));
+            }else if (ccValidate && pinValidate && ccTransferValidate && transferValidate){
+                int transferValue = Integer.parseInt(transferInput.getText().toString());
+
+                admin.setBalance(admin.getCost()/2);
+                new Dialogs.ConfirmUserTransferBalance(context , admin,
+                        ccTransferInput.getText().toString(),
+                        messages.transfer(context, transferInput, ccTransferInput), transferValue)
+                        .show(getSupportFragmentManager(),"CONFIRM3");
             }
         });
 

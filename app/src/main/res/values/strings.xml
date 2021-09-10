@@ -47,6 +47,10 @@
     <!--Depositar dinero-->
     <string name="input_deposit_amount">Monto a Depositar</string>
 
+    <!--Transferir dinero-->
+    <string name="input_transfer_account">Número de la Cuenta de Transferencia</string>
+    <string name="input_transfer_amount">Monto a Transferir</string>
+
 
     <!--Dialogos-->
     <!--Dialogos generales-->
@@ -61,6 +65,9 @@
 
     <!--Depositos-->
     <string name="dialog_confirm_deposit">Estimado: /¿Desea depositar /$ en la cuenta de / con un coste de uso de 1000$?</string>
+
+    <!--Transferencias-->
+    <string name="dialog_confirm_transfer">Estimado: /¿Desea transferir /$ a la cuenta de / con un coste de uso de 1000$?</string>
 
     <!--Toasts-->
     <!--Toasts de base de datos-->
@@ -84,7 +91,7 @@
     <string name="error_only_caps">Solo puede contener letras mayusculas.</string>
     <string name="error_only_numbers">Solo puede contener numeros.</string>
     <string name="error_enough_funds">Fondos insuficientes.</string>
-    <string name="error_atleast_8">Al menos ocho caracteres.</string>
+    <string name="error_mustbe_4">Debe ser de cuatro caracteres.</string>
     <string name="error_between_15and16">Debe contener entre quince y dieciseis caracteres.</string>
     <string name="error_between_2and7">Debe contener entre dos y siete caracteres.</string>
 
