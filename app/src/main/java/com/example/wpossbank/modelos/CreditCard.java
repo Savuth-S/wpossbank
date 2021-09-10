@@ -37,11 +37,11 @@ public class CreditCard extends AppCompatActivity {
             case '4':
                 return "VISA";
             case '5':
-                return  "MasterCard";
+                return "MasterCard";
             case '6':
                 return "UnionPay";
             default:
-                return getResources().getString(R.string.error_invalid);
+                return "Número de Tarjeta de Credito";
         }
     }
 }
