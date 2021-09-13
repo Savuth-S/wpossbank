@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
 import com.example.wpossbank.database.Database;
@@ -17,6 +18,8 @@ public class NewUserActivity extends AppCompatActivity {
     Context context;
     Database db;
     Validate validate;
+
+    Admin admin;
     User user;
 
     EditText nameInput, lastnameInput, ccInput, pinInput, pinConfirmInput, balanceInput;
@@ -28,8 +31,10 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
 
         context = this;
-        user = new User(context);
         validate = new Validate(context);
+
+        admin = new Admin();
+        user = new User(context);
 
         nameInput = findViewById(R.id.nameInput);
         lastnameInput = findViewById(R.id.lastnameInput);
@@ -59,8 +64,13 @@ public class NewUserActivity extends AppCompatActivity {
                 user.setBalance(Integer.parseInt(balanceInput.getText().toString()));
 
                 Log.d("NEW USER","user="+user.toString().split("@")[1]);
+                admin.setBalance(admin.getCost()*5);
+                admin.update(context, admin);
+
                 db.addUser(user);
-                startActivity(new Intent(context, LoginActivity.class));
+                db.newLogEntry("new user", "0", user.getCc());
+
+                finish();
             }
         });
 

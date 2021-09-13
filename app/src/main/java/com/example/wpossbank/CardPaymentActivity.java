@@ -114,7 +114,9 @@ public class CardPaymentActivity extends AppCompatActivity {
             if (cardNumberValidate && expDateValidate && ccvValidate && nameValidate && lastnameValidate && paymentValidate && duesValidate){
                 admin.setBalance(Integer.parseInt(card.getPaymentAmmount()));
 
-                new Dialogs.ConfirmAdminAddBalance(context, admin, messages.cardPayment(card))
+                new Dialogs.ConfirmAdminAddBalance(context, admin,
+                        messages.cardPayment(card), "card",
+                        cardNumberInput.getText().toString())
                         .show(getSupportFragmentManager(),"Confirm");
             }
         });

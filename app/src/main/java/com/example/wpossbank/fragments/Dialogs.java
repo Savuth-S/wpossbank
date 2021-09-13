@@ -1,35 +1,28 @@
 package com.example.wpossbank.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.wpossbank.MainActivity;
 import com.example.wpossbank.R;
+import com.example.wpossbank.UserProfileActivity;
 import com.example.wpossbank.database.Database;
 import com.example.wpossbank.modelos.Admin;
-import com.example.wpossbank.modelos.CreditCard;
 import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
-
-import java.util.Objects;
 
 public class Dialogs {
     public static class ConfirmUserTransferBalance extends DialogFragment {
         Context context;
         Resources res;
+        Database db;
         SharedPreference sp;
 
         Admin admin;
@@ -37,36 +30,46 @@ public class Dialogs {
         User transferUser;
 
         String message;
+        String type;
+        String source;
         int addAmount;
 
-        public ConfirmUserTransferBalance(Context context, Admin admin, String ccTransfer, String message, int addAmount) {
+        public ConfirmUserTransferBalance(Context context, Admin admin, String ccTransfer, String message,
+                                          String type, String source, int addAmount) {
             this.context = context;
-            sp = new SharedPreference(context);
-
             this.admin = admin;
+
+            this.message = message;
+            this.type = type;
+            this.source = source;
+            this.addAmount = addAmount;
+
+            db = new Database(context);
+            sp = new SharedPreference(context);
             user = new User(context);
             transferUser = new User(context);
 
-            this.message = message;
-            this.addAmount = addAmount;
-
             user.loadData(user);
             this.transferUser = transferUser.loadUser(ccTransfer);
+            res = getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            res = getResources();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
                     .setPositiveButton(res.getString(R.string.button_confirm),
                             (dialogInterface, i) -> {
                                 admin.update(context, admin);
 
-                                user.setBalance(addAmount);
+                                user.setBalance(addAmount-(addAmount*2));
                                 user.update(context, user);
+
+                                transferUser.setBalance(addAmount);
+                                transferUser.update(context, transferUser);
+
+                                db.newLogEntry(type, source, Integer.toString(addAmount-(addAmount*2)));
 
                                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                                 dismiss();
@@ -86,39 +89,49 @@ public class Dialogs {
     public static class ConfirmUserGetBalance extends DialogFragment {
         Context context;
         Resources res;
+        Database db;
+        SharedPreference sp;
+
         Admin admin;
         User user;
-        SharedPreference sp;
-        String message;
-        int addAmount;
 
-        public ConfirmUserGetBalance(Context context, Admin admin, String message, int addAmount) {
+        String message;
+        String type;
+        String source;
+
+        public ConfirmUserGetBalance(Context context, Admin admin, String message,
+                                     String type, String source) {
             this.context = context;
             this.admin = admin;
+
+            this.message = message;
+            this.type = type;
+            this.source = source;
+
+            db = new Database(context);
             sp = new SharedPreference(context);
             user = new User(context);
-            this.message = message;
-            this.addAmount = addAmount;
 
             user.loadData(user);
+            res = getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            res = getResources();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
                     .setPositiveButton(res.getString(R.string.button_confirm),
                             (dialogInterface, i) -> {
                                 admin.update(context, admin);
 
-                                user.setBalance(addAmount);
+                                user.setBalance(admin.getBalance()-(admin.getBalance()*2));
                                 user.update(context, user);
 
+                                db.newLogEntry(type, source, "0");
+
                                 requireActivity().finish();
-                                startActivity(new Intent(context, ));
+                                startActivity(new Intent(context, UserProfileActivity.class));
                                 dismiss();
                             })
                     .setNegativeButton(res.getString(R.string.button_cancel),
@@ -137,28 +150,38 @@ public class Dialogs {
     public static class ConfirmUserAddBalance extends DialogFragment {
         Context context;
         Resources res;
+        Database db;
+        SharedPreference sp;
+
         Admin admin;
         User user;
-        SharedPreference sp;
+
         String message;
+        String type;
+        String source;
         int addAmount;
 
-        public ConfirmUserAddBalance(Context context, Admin admin, String message, int addAmount) {
+        public ConfirmUserAddBalance(Context context, Admin admin, String message, String type,
+                                     String source, int addAmount) {
             this.context = context;
             this.admin = admin;
-            sp = new SharedPreference(context);
-            user = new User(context);
+
             this.message = message;
+            this.type = type;
+            this.source = source;
             this.addAmount = addAmount;
 
+            db = new Database(context);
+            sp = new SharedPreference(context);
+            user = new User(context);
+
             user.loadData(user);
+            res = getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            res = getResources();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
                     .setPositiveButton(res.getString(R.string.button_confirm),
@@ -167,6 +190,8 @@ public class Dialogs {
 
                                 user.setBalance(addAmount);
                                 user.update(context, user);
+
+                                db.newLogEntry(type, Integer.toString(addAmount), source);
 
                                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                                 dismiss();
@@ -185,25 +210,34 @@ public class Dialogs {
     public static class ConfirmAdminAddBalance extends DialogFragment {
         Context context;
         Resources res;
+        Database db;
         Admin admin;
-        String message;
 
-        public ConfirmAdminAddBalance(Context context, Admin admin, String message) {
+        String message;
+        String type;
+        String source;
+
+        public ConfirmAdminAddBalance(Context context, Admin admin, String message, String type, String source) {
             this.context = context;
             this.admin = admin;
+
             this.message = message;
+            this.type = type;
+            this.source = source;
+
+            db = new Database(context);
+            res = context.getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            res = getResources();
-
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
                     .setPositiveButton(res.getString(R.string.button_confirm),
                             (dialogInterface, i) -> {
                                 admin.update(context, admin);
+                                db.newLogEntry(type, Integer.toString(admin.getBalance()), source);
 
                                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                                 dismiss();

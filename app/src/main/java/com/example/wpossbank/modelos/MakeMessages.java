@@ -165,10 +165,9 @@ public class MakeMessages extends AppCompatActivity {
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + user.getName() + System.getProperty("line.separator") +
-                    template[1];
+                    template[1]  + System.getProperty("line.separator") + template[2];
 
         return message;
-
     }
 
 }

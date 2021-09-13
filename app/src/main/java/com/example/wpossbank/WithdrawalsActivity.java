@@ -62,7 +62,7 @@ public class WithdrawalsActivity extends AppCompatActivity {
 
                 admin.setBalance(admin.getCost());
                 new Dialogs.ConfirmUserAddBalance(context , admin,
-                        messages.withdraw(context,withdrawalInput),
+                        messages.withdraw(context,withdrawalInput), "withdraw", user.getCc(),
                         withdrawValue-(withdrawValue*2+admin.getCost()))
                         .show(getSupportFragmentManager(),"CONFIRM2");
             }

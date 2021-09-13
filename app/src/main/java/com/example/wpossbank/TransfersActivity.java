@@ -61,9 +61,9 @@ public class TransfersActivity extends AppCompatActivity {
                 int transferValue = Integer.parseInt(transferInput.getText().toString());
 
                 admin.setBalance(admin.getCost()/2);
-                new Dialogs.ConfirmUserTransferBalance(context , admin,
-                        ccTransferInput.getText().toString(),
-                        messages.transfer(context, transferInput, ccTransferInput), transferValue)
+                new Dialogs.ConfirmUserTransferBalance(context , admin, ccTransferInput.getText().toString(),
+                        messages.transfer(context, transferInput, ccTransferInput),
+                        "transfer", ccInput.getText().toString(), transferValue)
                         .show(getSupportFragmentManager(),"CONFIRM");
             }
         });

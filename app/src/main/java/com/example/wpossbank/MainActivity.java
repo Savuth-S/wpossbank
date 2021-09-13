@@ -45,5 +45,9 @@ public class MainActivity extends AppCompatActivity{
         balanceButton.setOnClickListener(showBalance -> {
             startActivity(new Intent(context, GetBalanceActivity.class));
         });
+
+        historyButton.setOnClickListener(showHistory -> {
+            startActivity(new Intent(context, UserProfileActivity.class));
+        });
     }
 }

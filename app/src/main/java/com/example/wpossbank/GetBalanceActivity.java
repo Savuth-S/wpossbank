@@ -58,9 +58,8 @@ public class GetBalanceActivity extends AppCompatActivity {
             } else if (!validate.isEmpty(pinConfirmInput) && ccValidate && pinValidate) {
 
                 admin.setBalance(admin.getCost() / 2);
-                new Dialogs.ConfirmUserAddBalance(context, admin,
-                        messages.getBalance(context),
-                        admin.getBalance() - (admin.getBalance() * 2))
+                new Dialogs.ConfirmUserGetBalance(context, admin,
+                        messages.getBalance(context), "balance", user.getCc())
                         .show(getSupportFragmentManager(), "CONFIRM");
             }
         });
