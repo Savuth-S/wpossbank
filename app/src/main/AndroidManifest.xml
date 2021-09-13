@@ -10,17 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wpossbank">
         <activity
-            android:name=".TransfersActivity"
+            android:name=".UserProfileActivity"
             android:exported="true" />
+        <activity
+            android:name=".GetBalanceActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TransfersActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DepositsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".WithdrawalsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".CardPaymentActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

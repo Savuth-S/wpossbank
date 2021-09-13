@@ -26,20 +26,24 @@ public class MainActivity extends AppCompatActivity{
         balanceButton = findViewById(R.id.balanceButton);
         historyButton = findViewById(R.id.historyButton);
 
-        cardPaymentsButton.setOnClickListener(verCardPayment -> {
+        cardPaymentsButton.setOnClickListener(showCardPayment -> {
             startActivity(new Intent(context, CardPaymentActivity.class));
         });
 
-        withdrawalsButton.setOnClickListener(verWithdraws -> {
+        withdrawalsButton.setOnClickListener(showWithdraws -> {
             startActivity(new Intent(context, WithdrawalsActivity.class));
         });
 
-        depositsButton.setOnClickListener(verDeposits -> {
+        depositsButton.setOnClickListener(showDeposits -> {
             startActivity(new Intent(context, DepositsActivity.class));
         });
 
-        transfersButton.setOnClickListener(verTransfers -> {
+        transfersButton.setOnClickListener(showTransfers -> {
             startActivity(new Intent(context, TransfersActivity.class));
+        });
+
+        balanceButton.setOnClickListener(showBalance -> {
+            startActivity(new Intent(context, GetBalanceActivity.class));
         });
     }
 }

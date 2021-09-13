@@ -83,6 +83,57 @@ public class Dialogs {
 
 
 
+    public static class ConfirmUserGetBalance extends DialogFragment {
+        Context context;
+        Resources res;
+        Admin admin;
+        User user;
+        SharedPreference sp;
+        String message;
+        int addAmount;
+
+        public ConfirmUserGetBalance(Context context, Admin admin, String message, int addAmount) {
+            this.context = context;
+            this.admin = admin;
+            sp = new SharedPreference(context);
+            user = new User(context);
+            this.message = message;
+            this.addAmount = addAmount;
+
+            user.loadData(user);
+        }
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            res = getResources();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
+                    .setPositiveButton(res.getString(R.string.button_confirm),
+                            (dialogInterface, i) -> {
+                                admin.update(context, admin);
+
+                                user.setBalance(addAmount);
+                                user.update(context, user);
+
+                                requireActivity().finish();
+                                startActivity(new Intent(context, ));
+                                dismiss();
+                            })
+                    .setNegativeButton(res.getString(R.string.button_cancel),
+                            (dialogInterface, i) -> {
+                                new Dialogs.TransactionFailed().show(requireActivity().getSupportFragmentManager(), "FAIL");
+                                dismiss();
+                            });
+
+            return builder.create();
+        }
+    }
+
+
+
+
     public static class ConfirmUserAddBalance extends DialogFragment {
         Context context;
         Resources res;
@@ -195,9 +246,7 @@ public class Dialogs {
             LayoutInflater inflater = requireActivity().getLayoutInflater();
 
             builder.setView(inflater.inflate(R.layout.dialog_fail, null))
-                    .setNeutralButton(R.string.button_accept,
-                            (dialogInterface, id) ->
-                                    requireActivity().finish());
+                    .setNeutralButton(R.string.button_accept, (dialogInterface, id) -> requireActivity().finish());
 
             return builder.create();
         }

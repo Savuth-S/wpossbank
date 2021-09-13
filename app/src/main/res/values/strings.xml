@@ -69,6 +69,10 @@
     <!--Transferencias-->
     <string name="dialog_confirm_transfer">Estimado: /¿Desea transferir /$ a la cuenta de / con un coste de uso de 1.000$?</string>
 
+    <!--Consultar Saldo-->
+    <string name="dialog_confirm_get_balance">Estimado: /Esta accion tendra un coste de 1.000$?</string>
+
+
     <!--Toasts-->
     <!--Toasts de base de datos-->
     <string name="toast_make_user_success">"¡Se ha creada la cuenta con exito!"</string>

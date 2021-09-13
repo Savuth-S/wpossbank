@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_card_payment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_deposit.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_get_balance.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_new_user.xml" value="0.25" />

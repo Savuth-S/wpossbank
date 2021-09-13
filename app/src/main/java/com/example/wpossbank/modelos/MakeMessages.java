@@ -130,7 +130,7 @@ public class MakeMessages extends AppCompatActivity {
         return message;
     }
 
-    public String transfer(Context context, EditText transferInput, EditText ccTransferInput) {
+    public String transfer(Context context, EditText transferInput, @NonNull EditText ccTransferInput) {
         String message;
         String[] template = res.getString(R.string.dialog_confirm_transfer).split("/");
 
@@ -154,6 +154,21 @@ public class MakeMessages extends AppCompatActivity {
         }else{
             return res.getString(R.string.error_fetch_data);
         }
+    }
+
+    public String getBalance(Context context) {
+        String message;
+        String[] template = res.getString(R.string.dialog_confirm_get_balance).split("/");
+
+        User user = new User(context);
+        user.loadData(user);
+
+        //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
+        message = template[0] + user.getName() + System.getProperty("line.separator") +
+                    template[1];
+
+        return message;
+
     }
 
 }
