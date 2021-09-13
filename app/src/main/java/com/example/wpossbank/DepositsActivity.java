@@ -56,7 +56,7 @@ public class DepositsActivity extends AppCompatActivity {
 
                 admin.setBalance(admin.getCost()/2);
                 new Dialogs.ConfirmUserAddBalance(context ,admin,
-                            messages.deposit(context, depositInput, ccDepositInput), depositValue)
+                            messages.deposit(context, depositInput), depositValue)
                         .show(getSupportFragmentManager(),"CONFIRM3");
             }
         });

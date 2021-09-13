@@ -28,7 +28,7 @@ public class Validate {
     }
 
     public boolean isEmpty(@NonNull EditText editText){
-        if (TextUtils.isEmpty(editText.getText().toString())) {
+        if (editText.getText().toString().isEmpty()) {
             editText.setError(res.getString(R.string.error_empty));
             return true;
         }else{
@@ -271,35 +271,35 @@ public class Validate {
         }
     }
 
-    public boolean useBalance(@NonNull EditText withdrawalInput){
-        if(!isEmpty(withdrawalInput)) {
+    public boolean useBalance(@NonNull EditText moneyInput){
+        if(!isEmpty(moneyInput)) {
             try (Cursor fetch = db.fetchData(sp.getActiveUser(),
                     db.getTable("user"),
                     db.getColumn("user id"))) {
                 fetch.moveToNext();
 
                 if (fetch.getCount() > 0) {
-                    if (withdrawalInput.getText().toString().matches("(.{2,7})")){
-                        int withdrawal = Integer.parseInt(withdrawalInput.getText().toString());
+                    if (moneyInput.getText().toString().matches("(.{2,7})")){
+                        int withdrawal = Integer.parseInt(moneyInput.getText().toString());
 
                         if (withdrawal + 2_000 <= Integer.parseInt(fetch.getString(4))) {
                             return true;
                         } else {
-                            withdrawalInput.setError(res.getString(R.string.error_enough_funds));
+                            moneyInput.setError(res.getString(R.string.error_enough_funds));
                             return false;
                         }
                     }else {
-                        withdrawalInput.setError(res.getString(R.string.error_between_2and7));
+                        moneyInput.setError(res.getString(R.string.error_between_2and7));
                         return false;
                     }
                 } else {
                     Log.e("VALIDATE", "Failed to load cursor data from database, " +
                             "database=" + db.toString() + "fetch=" + fetch.toString());
-                    withdrawalInput.setError(res.getString(R.string.error_fetch_data));
+                    moneyInput.setError(res.getString(R.string.error_fetch_data));
                     return false;
                 }
             }
-        }else{ return false;}
+        }else{ return false; }
     }
 
     public boolean login(@NonNull EditText ccInput, @NonNull EditText pinInput) {
@@ -369,9 +369,7 @@ public class Validate {
                     textInput.setError(res.getString(R.string.error_wrong));
                     return false;
                 }
-        }else{
-            return false;
-        }
+        }else{ return false; }
     }
 
     public boolean notMatchUserData(@NonNull EditText textInput, String parameter){
@@ -380,11 +378,10 @@ public class Validate {
                 textInput.setError(res.getString(R.string.error_wrong));
                 return false;
             }else{
+                textInput.setError(null);
                 return  true;
             }
 
-        }else{
-            return false;
-        }
+        }else{ return false; }
     }
 }

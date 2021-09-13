@@ -64,10 +64,10 @@
     <string name="dialog_confirm_withdrawal">Estimado: /¿Desea retirar /$ con un coste de uso de 2000$?</string>
 
     <!--Depositos-->
-    <string name="dialog_confirm_deposit">Estimado: /¿Desea depositar /$ en la cuenta de / con un coste de uso de 1000$?</string>
+    <string name="dialog_confirm_deposit">Estimado Usuario /¿Desea depositar /$ en la cuenta de / con un coste de uso de 1.000$?</string>
 
     <!--Transferencias-->
-    <string name="dialog_confirm_transfer">Estimado: /¿Desea transferir /$ a la cuenta de / con un coste de uso de 1000$?</string>
+    <string name="dialog_confirm_transfer">Estimado: /¿Desea transferir /$ a la cuenta de / con un coste de uso de 1.000$?</string>
 
     <!--Toasts-->
     <!--Toasts de base de datos-->

@@ -45,12 +45,13 @@ public class Dialogs {
 
             this.admin = admin;
             user = new User(context);
-            this.transferUser = transferUser.loadUser(ccTransfer);
+            transferUser = new User(context);
 
             this.message = message;
             this.addAmount = addAmount;
 
             user.loadData(user);
+            this.transferUser = transferUser.loadUser(ccTransfer);
         }
 
         @NonNull

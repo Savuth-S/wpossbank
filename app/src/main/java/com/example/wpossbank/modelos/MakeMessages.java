@@ -14,8 +14,46 @@ import com.example.wpossbank.database.Database;
 public class MakeMessages extends AppCompatActivity {
     Resources res;
 
-    public MakeMessages(Context context){
+    public MakeMessages(@NonNull Context context){
         res = context.getResources();
+    }
+
+    public String separateNumberRight(String number, String character, int everyNCharacters){
+
+        if (number.length() > 0) {
+            String newNumber = "";
+
+            for (int i = 1; i < number.length()+1; i++){
+                newNumber = newNumber.concat(Character.toString(number.charAt(i-1)));
+
+                if ((number.length()-i) % everyNCharacters == 0 && number.length()-i != 0){
+                    newNumber = newNumber.concat(character);
+                }
+            }
+
+            return newNumber;
+        }else{
+            return "";
+        }
+    }
+
+    public String separateNumberLeft(String number, String character, int everyNCharacters){
+
+        if (number.length() > 0) {
+            String newNumber = "";
+
+            for (int i = 1; i < number.length()+1; i++){
+                newNumber = newNumber.concat(Character.toString(number.charAt(i-1)));
+
+                if (i % everyNCharacters == 0){
+                    newNumber = newNumber.concat(character);
+                }
+            }
+
+            return newNumber;
+        }else{
+            return "";
+        }
     }
 
     public String cardPayment(@NonNull CreditCard card) {
@@ -51,13 +89,12 @@ public class MakeMessages extends AppCompatActivity {
                 }
             }
 
-
         }
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + card.getOwnerName() + System.getProperty("line.separator") +
-                template[1] + card.getPaymentAmmount() + template[2] +
-                card.getDuesNumber() + template[3] + System.getProperty("line.separator") +
+                template[1] + separateNumberRight(card.getPaymentAmmount(),".", 3)
+                + template[2] + card.getDuesNumber() + template[3] + System.getProperty("line.separator") +
                 System.getProperty("line.separator") + template[4] +
                 System.getProperty("line.separator") + cardEnds + " - " + card.getType();
 
@@ -73,36 +110,29 @@ public class MakeMessages extends AppCompatActivity {
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + user.getName() + System.getProperty("line.separator") +
-                template[1] + withdrawInput.getText() + template[2];
+                template[1] + separateNumberRight(withdrawInput.getText().toString(),".",3)
+                + template[2];
 
         return message;
     }
 
-    public String deposit(Context context, EditText depositInput, EditText ccInput) {
+    public String deposit(Context context, @NonNull EditText depositInput) {
         String message;
-        String[] template = res.getString(R.string.dialog_confirm_withdrawal).split("/");
+        String[] template = res.getString(R.string.dialog_confirm_deposit).split("/");
 
         User user = new User(context);
         user.loadData(user);
 
-        Database db = new Database(context);
-        Cursor fetch = db.fetchData(ccInput.getText().toString(),
-                db.getTable("user"),
-                db.getColumn("cc"));
-
-        fetch.moveToFirst();
-
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
-        message = template[0] + user.getName() + System.getProperty("line.separator") +
-                template[1] + depositInput.getText() + template[2] + fetch.getString(5) +
-                template[3];
-
+        message = template[0] + System.getProperty("line.separator") +
+                template[1] + separateNumberRight(depositInput.getText().toString(),".",3)
+                + template[2] + user.getName() + template[3];
         return message;
     }
 
     public String transfer(Context context, EditText transferInput, EditText ccTransferInput) {
         String message;
-        String[] template = res.getString(R.string.dialog_confirm_withdrawal).split("/");
+        String[] template = res.getString(R.string.dialog_confirm_transfer).split("/");
 
         User user = new User(context);
         user.loadData(user);
@@ -112,13 +142,18 @@ public class MakeMessages extends AppCompatActivity {
                 db.getTable("user"),
                 db.getColumn("cc"));
 
-        fetch.moveToFirst();
+        if (fetch.getCount() > 0) {
+            fetch.moveToFirst();
 
-        //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
-        message = template[0] + user.getName() + System.getProperty("line.separator") +
-                template[1] + transferInput.getText() + template[2] + fetch.getString(5) +
-                template[3];
+            //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
+            message = template[0] + user.getName() + System.getProperty("line.separator") +
+                    template[1] + separateNumberRight(transferInput.getText().toString(), ".", 3)
+                    + template[2] + fetch.getString(5) + template[3];
 
-        return message;
+            return message;
+        }else{
+            return res.getString(R.string.error_fetch_data);
+        }
     }
+
 }

@@ -46,9 +46,9 @@ public class TransfersActivity extends AppCompatActivity {
             //Deckara y verifica si los campos tienen la información correcta
             boolean ccValidate = validate.isNumber(ccInput) && validate.matchUserData(ccInput, "cc"),
                     pinValidate = validate.pin(pinInput) && validate.matchUserData(pinInput, "pin"),
-                    ccTransferValidate = validate.isInRange(ccTransferInput,9,13) &&
+                    ccTransferValidate = validate.isInRange(ccTransferInput,10,13) &&
                             validate.isInDatabase(ccTransferInput, "user", "cc") &&
-                            validate.notMatchUserData(ccInput, "cc"),
+                            validate.notMatchUserData(ccTransferInput, "cc"),
                     transferValidate = validate.useBalance(transferInput);
 
             if (!validate.isEmpty(pinConfirmInput) &&
@@ -64,7 +64,7 @@ public class TransfersActivity extends AppCompatActivity {
                 new Dialogs.ConfirmUserTransferBalance(context , admin,
                         ccTransferInput.getText().toString(),
                         messages.transfer(context, transferInput, ccTransferInput), transferValue)
-                        .show(getSupportFragmentManager(),"CONFIRM3");
+                        .show(getSupportFragmentManager(),"CONFIRM");
             }
         });
 
