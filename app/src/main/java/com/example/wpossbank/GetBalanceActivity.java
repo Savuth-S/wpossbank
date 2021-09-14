@@ -59,7 +59,7 @@ public class GetBalanceActivity extends AppCompatActivity {
 
                 admin.setBalance(admin.getCost() / 2);
                 new Dialogs.ConfirmUserGetBalance(context, admin,
-                        messages.getBalance(context), "balance", user.getCc())
+                        messages.getBalance(context), "show balance", user.getCc())
                         .show(getSupportFragmentManager(), "CONFIRM");
             }
         });

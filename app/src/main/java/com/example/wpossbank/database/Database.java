@@ -19,10 +19,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Database extends SQLiteOpenHelper {
@@ -50,10 +53,9 @@ public class Database extends SQLiteOpenHelper {
     private static final String COLUMN_NAME = "usuario_nombre";
 
     //Tabla de transacciones
-    private static final String COLUMN_ACTIVEUSER = "usuario_activo";
     private static final String TABLE_LOG = "transacciones";
+    private static final String COLUMN_ACTIVEUSER = "usuario_activo";
     private static final String COLUMN_DATE = "tran_fecha";
-    private static final String COLUMN_TIME = "tran_hora";
     private static final String COLUMN_TYPE = "tran_tipo";
     private static final String COLUMN_AMMOUNT = "tran_monto";
     private static final String COLUMN_SOURCE = "tran_origen";
@@ -100,8 +102,6 @@ public class Database extends SQLiteOpenHelper {
                 return COLUMN_NAME;
             case "date":
                 return COLUMN_DATE;
-            case "time":
-                return COLUMN_TIME;
             case "type":
                 return COLUMN_TYPE;
             case "amount":
@@ -134,7 +134,6 @@ public class Database extends SQLiteOpenHelper {
                     "("+COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                     COLUMN_ACTIVEUSER +" TEXT, "+
                     COLUMN_DATE+" TEXT, "+
-                    COLUMN_TIME +" TEXT, "+
                     COLUMN_TYPE +" TEXT, "+
                     COLUMN_AMMOUNT +" TEXT, "+
                     COLUMN_SOURCE +" TEXT);";
@@ -156,7 +155,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         return db.query(table, new String[]{"*"},
                          column+"=?", new String[]{entry},
-                        null, null, null, "1");
+                        null, null, null);
     }
 
     public void makeDefaultAdmin(@NonNull Admin admin){
@@ -250,47 +249,29 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public void newLogEntry(String type, String amount, String source){
+        newLogEntry(type, amount, source, sp.getActiveUser());
+    }
+
+    public void newLogEntry(String type, String amount, String source, String activeUser){
         try(SQLiteDatabase db = getWritableDatabase()) {
             ContentValues cv = new ContentValues();
             Calendar calendar = Calendar.getInstance();
+            MakeMessages messages = new MakeMessages(context);
 
-            String currentDate = calendar.get(Calendar.YEAR) + "/" +
-                    calendar.get(Calendar.MONTH) + "/" +
-                    calendar.get(Calendar.DAY_OF_MONTH);
-            String currentTime = calendar.getTime().toString();
-            Log.d("TAG", currentTime);
+            String[] dateArray = calendar.getTime().toString().split(" ");
+            String[] timeArray = dateArray[3].split(":");
+            String currentDate = dateArray[1]+" "+dateArray[2]+" "+dateArray[5]+" "+timeArray[0]+":"+timeArray[1];
+
+            Log.d("TAG",currentDate);
 
             String actionType;
 
-            switch(type){
-                case "card":
-                    actionType = res.getString(R.string.credit_card_sell);
-                    break;
-                case "withdraw":
-                    actionType = res.getString(R.string.money_withdrawal);
-                    break;
-                case "deposit":
-                    actionType = res.getString(R.string.money_deposit);
-                    break;
-                case "transfer":
-                    actionType = res.getString(R.string.money_transfer);
-                    break;
-                case "show balance":
-                    actionType = res.getString(R.string.show_account_balance);
-                    break;
-                case "new user":
-                    actionType = res.getString(R.string.make_new_account);
-                    break;
-                default:
-                    actionType = res.getString(R.string.error_invalid);
-                    break;
-            }
+            actionType = getLogEntryType(type);
 
-            cv.put(COLUMN_ACTIVEUSER, sp.getActiveUser());
+            cv.put(COLUMN_ACTIVEUSER, activeUser);
             cv.put(COLUMN_DATE, currentDate);
-            cv.put(COLUMN_TIME, currentTime);
             cv.put(COLUMN_TYPE, actionType);
-            cv.put(COLUMN_AMMOUNT, amount);
+            cv.put(COLUMN_AMMOUNT, "$"+messages.separateNumberRight(amount, ".", 3));
             cv.put(COLUMN_SOURCE, source);
 
             long result = db.insert(TABLE_LOG,null,cv);
@@ -298,5 +279,34 @@ public class Database extends SQLiteOpenHelper {
                 Toast.makeText(context, res.getString(R.string.error_write_data), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public String getLogEntryType(String type){
+        String actionType;
+
+        switch(type){
+            case "card":
+                actionType = res.getString(R.string.credit_card_sell);
+                break;
+            case "withdraw":
+                actionType = res.getString(R.string.money_withdrawal);
+                break;
+            case "deposit":
+                actionType = res.getString(R.string.money_deposit);
+                break;
+            case "transfer":
+                actionType = res.getString(R.string.money_transfer);
+                break;
+            case "show balance":
+                actionType = res.getString(R.string.show_account_balance);
+                break;
+            case "new user":
+                actionType = res.getString(R.string.make_new_account);
+                break;
+            default:
+                actionType = res.getString(R.string.error_invalid);
+                break;
+        }
+        return actionType;
     }
 }

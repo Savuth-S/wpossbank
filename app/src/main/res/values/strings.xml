@@ -11,17 +11,17 @@
     <string name="make_new_account">Creacion de cuenta</string>
 
     <!--Botones-->
-        <!--Botones generales-->
+    <!--Botones generales-->
     <string name="button_enter">Entrar</string>
     <string name="button_accept">Aceptar</string>
     <string name="button_cancel">Cancelar</string>
     <string name="button_go_back">Regresar</string>
     <string name="button_confirm">Confirmar</string>
 
-        <!--Menú de logeo-->
+    <!--Menú de logeo-->
     <string name="button_new_user">Registrarse</string>
 
-        <!--Menú general-->
+    <!--Menú general-->
     <string name="button_card_payments">Pagos con Tarjeta</string>
     <string name="button_withdrawals">Retirar Dinero</string>
     <string name="button_deposits">Depositar Dinero</string>
@@ -31,7 +31,7 @@
     <string name="button_log_out">Cerrar Sesion</string>
 
     <!--Campos de texto-->
-        <!--Logeo y registrarse-->
+    <!--Logeo y registrarse-->
     <string name="input_account">Número de la Cuenta</string>
     <string name="input_cc">Número de Cedula Ciudadana</string>
     <string name="input_pin">PIN</string>
@@ -40,55 +40,55 @@
     <string name="input_lastname">Apellido</string>
     <string name="input_balance">Saldo Inicial</string>
 
-        <!--Pago con tarjeta-->
+    <!--Pago con tarjeta-->
     <string name="input_card_number">Número de Tarjeta de Credito</string>
     <string name="input_exp_date">Fecha de Expiración de la Tarjeta</string>
     <string name="input_ccv">CCV</string>
     <string name="input_payment_amount">Valor a Pagar</string>
     <string name="input_dues">Número de Cuotas</string>
 
-        <!--Retiro de dinero-->
+    <!--Retiro de dinero-->
     <string name="input_withdrawal_amount">Monto a Retirar</string>
 
-        <!--Depositar dinero-->
+    <!--Depositar dinero-->
     <string name="input_deposit_amount">Monto a Depositar</string>
 
-        <!--Transferir dinero-->
+    <!--Transferir dinero-->
     <string name="input_transfer_account">Número de la Cuenta de Transferencia</string>
     <string name="input_transfer_amount">Monto a Transferir</string>
 
 
     <!--Dialogos-->
-        <!--Dialogos generales-->
+    <!--Dialogos generales-->
     <string name="dialog_success">TRANSACCIÓN EXITOSA</string>
     <string name="dialog_fail">TRANSACCIÓN RECHAZADA</string>
 
-        <!--Pago con tarjeta-->
-    <string name="dialog_confirm_cardpayment">Estimado: /¿Desea realizar el pago a WPOSS por un valor de /$ a / cuotas?/Número de tarjeta: </string>
+    <!--Pago con tarjeta-->
+    <string name="dialog_confirm_cardpayment">Estimado: /¿Desea realizar el pago a WPOSS por un valor de $/ a / cuotas?/Número de tarjeta: </string>
 
-        <!--Retiros-->
-    <string name="dialog_confirm_withdrawal">Estimado: /¿Desea retirar /$ con un coste de uso de 2000$?</string>
+    <!--Retiros-->
+    <string name="dialog_confirm_withdrawal">Estimado: /¿Desea retirar $/ con un coste de uso de $2.000?</string>
 
-        <!--Depositos-->
-    <string name="dialog_confirm_deposit">Estimado Usuario /¿Desea depositar /$ en la cuenta de / con un coste de uso de 1.000$?</string>
+    <!--Depositos-->
+    <string name="dialog_confirm_deposit">Estimado Usuario /¿Desea depositar $/ en la cuenta de / con un coste de uso de $1.000?</string>
 
-        <!--Transferencias-->
-    <string name="dialog_confirm_transfer">Estimado: /¿Desea transferir /$ a la cuenta de / con un coste de uso de 1.000$?</string>
+    <!--Transferencias-->
+    <string name="dialog_confirm_transfer">Estimado: /¿Desea transferir $/ a la cuenta de / con un coste de uso de $1.000?</string>
 
-        <!--Consultar Saldo-->
-    <string name="dialog_confirm_get_balance">Estimado: /Esta accion tendra un coste de 1.000$ /¿Desea continuar?</string>
+    <!--Consultar Saldo-->
+    <string name="dialog_confirm_get_balance">Estimado: /Esta accion tendra un coste de $1.000 /¿Desea continuar?</string>
 
 
     <!--Toasts-->
-        <!--Toasts de base de datos-->
+    <!--Toasts de base de datos-->
     <string name="toast_make_user_success">"¡Se ha creada la cuenta con exito!"</string>
 
     <!--Mensajes de error-->
-        <!--Errores generales-->
+    <!--Errores generales-->
     <string name="error_invalid">Invalido.</string>
     <string name="error_wrong">Incorrecto.</string>
 
-        <!--Base de datos-->
+    <!--Base de datos-->
     <string name="error_already_registered">Ya se encuentra registrado.</string>
     <string name="error_not_registered">No se encuentra registrado.</string>
     <string name="error_default_admin">Se produjo un error al crear la informacion por defecto del corresponsal.</string>
@@ -96,7 +96,7 @@
     <string name="error_fetch_data">Error al cargar información desde la base de datos.</string>
     <string name="error_write_data">Error al escribir información en la base de datos.</string>
 
-        <!---Campos de input-->
+    <!---Campos de input-->
     <string name="error_empty">No puede estar vacio.</string>
     <string name="error_spaces">No puede contener espacios.</string>
     <string name="error_only_caps">Solo puede contener letras mayusculas.</string>

@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
 import com.example.wpossbank.database.Database;
 
 public class NewUserActivity extends AppCompatActivity {
     Context context;
+    SharedPreference sp;
     Database db;
     Validate validate;
 
@@ -31,6 +33,7 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
 
         context = this;
+        sp = new SharedPreference(context);
         validate = new Validate(context);
 
         admin = new Admin();
@@ -68,6 +71,7 @@ public class NewUserActivity extends AppCompatActivity {
                 admin.update(context, admin);
 
                 db.addUser(user);
+                sp.setActiveUser(user.getUserId());
                 db.newLogEntry("new user", "0", user.getCc());
 
                 finish();

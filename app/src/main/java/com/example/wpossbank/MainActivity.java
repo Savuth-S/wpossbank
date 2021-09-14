@@ -12,7 +12,7 @@ import com.example.wpossbank.database.Database;
 public class MainActivity extends AppCompatActivity{
     Context context = this;
     Button cardPaymentsButton, withdrawalsButton, depositsButton,
-            transfersButton, balanceButton, historyButton;
+            transfersButton, balanceButton, historyButton, logOutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,29 +25,26 @@ public class MainActivity extends AppCompatActivity{
         transfersButton = findViewById(R.id.transfersButton);
         balanceButton = findViewById(R.id.balanceButton);
         historyButton = findViewById(R.id.historyButton);
+        logOutButton = findViewById(R.id.logOutButton);
 
-        cardPaymentsButton.setOnClickListener(showCardPayment -> {
-            startActivity(new Intent(context, CardPaymentActivity.class));
-        });
+        cardPaymentsButton.setOnClickListener(showCardPayment ->
+            startActivity(new Intent(context, CardPaymentActivity.class)));
 
-        withdrawalsButton.setOnClickListener(showWithdraws -> {
-            startActivity(new Intent(context, WithdrawalsActivity.class));
-        });
+        withdrawalsButton.setOnClickListener(showWithdraws ->
+            startActivity(new Intent(context, WithdrawalsActivity.class)));
 
-        depositsButton.setOnClickListener(showDeposits -> {
-            startActivity(new Intent(context, DepositsActivity.class));
-        });
+        depositsButton.setOnClickListener(showDeposits ->
+            startActivity(new Intent(context, DepositsActivity.class)));
 
-        transfersButton.setOnClickListener(showTransfers -> {
-            startActivity(new Intent(context, TransfersActivity.class));
-        });
+        transfersButton.setOnClickListener(showTransfers ->
+            startActivity(new Intent(context, TransfersActivity.class)));
 
-        balanceButton.setOnClickListener(showBalance -> {
-            startActivity(new Intent(context, GetBalanceActivity.class));
-        });
+        balanceButton.setOnClickListener(showBalance ->
+            startActivity(new Intent(context, GetBalanceActivity.class)));
 
-        historyButton.setOnClickListener(showHistory -> {
-            startActivity(new Intent(context, UserProfileActivity.class));
-        });
+        historyButton.setOnClickListener(showHistory ->
+                startActivity(new Intent(context, UserProfileActivity.class)));
+
+        logOutButton.setOnClickListener(finishActivity -> finish());
     }
 }

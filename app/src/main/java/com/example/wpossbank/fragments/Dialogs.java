@@ -51,15 +51,14 @@ public class Dialogs {
 
             user.loadData(user);
             this.transferUser = transferUser.loadUser(ccTransfer);
-            res = getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
-                    .setPositiveButton(res.getString(R.string.button_confirm),
+            builder.setTitle(R.string.confirm).setMessage(message)
+                    .setPositiveButton(R.string.button_confirm,
                             (dialogInterface, i) -> {
                                 admin.update(context, admin);
 
@@ -69,12 +68,13 @@ public class Dialogs {
                                 transferUser.setBalance(addAmount);
                                 transferUser.update(context, transferUser);
 
-                                db.newLogEntry(type, source, Integer.toString(addAmount-(addAmount*2)));
+                                db.newLogEntry(type, Integer.toString(addAmount-(addAmount*2)), source);
+                                db.newLogEntry(type, Integer.toString(addAmount), source, transferUser.getUserId());
 
                                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                                 dismiss();
                             })
-                    .setNegativeButton(res.getString(R.string.button_cancel),
+                    .setNegativeButton(R.string.button_cancel,
                             (dialogInterface, i) -> {
                                 new Dialogs.TransactionFailed().show(requireActivity().getSupportFragmentManager(), "FAIL");
                                 dismiss();
@@ -113,28 +113,27 @@ public class Dialogs {
             user = new User(context);
 
             user.loadData(user);
-            res = getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
-                    .setPositiveButton(res.getString(R.string.button_confirm),
+            builder.setTitle(R.string.confirm).setMessage(message)
+                    .setPositiveButton(R.string.button_confirm,
                             (dialogInterface, i) -> {
                                 admin.update(context, admin);
 
                                 user.setBalance(admin.getBalance()-(admin.getBalance()*2));
                                 user.update(context, user);
 
-                                db.newLogEntry(type, source, "0");
+                                db.newLogEntry(type, "0", source);
 
                                 requireActivity().finish();
                                 startActivity(new Intent(context, UserProfileActivity.class));
                                 dismiss();
                             })
-                    .setNegativeButton(res.getString(R.string.button_cancel),
+                    .setNegativeButton(R.string.button_cancel,
                             (dialogInterface, i) -> {
                                 new Dialogs.TransactionFailed().show(requireActivity().getSupportFragmentManager(), "FAIL");
                                 dismiss();
@@ -176,15 +175,14 @@ public class Dialogs {
             user = new User(context);
 
             user.loadData(user);
-            res = getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
-                    .setPositiveButton(res.getString(R.string.button_confirm),
+            builder.setTitle(R.string.confirm).setMessage(message)
+                    .setPositiveButton(R.string.button_confirm,
                             (dialogInterface, i) -> {
                                 admin.update(context, admin);
 
@@ -196,7 +194,7 @@ public class Dialogs {
                                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                                 dismiss();
                             })
-                    .setNegativeButton(res.getString(R.string.button_cancel),
+                    .setNegativeButton(R.string.button_cancel,
                             (dialogInterface, i) -> {
                                 new Dialogs.TransactionFailed().show(requireActivity().getSupportFragmentManager(), "FAIL");
                                 dismiss();
@@ -209,7 +207,6 @@ public class Dialogs {
 
     public static class ConfirmAdminAddBalance extends DialogFragment {
         Context context;
-        Resources res;
         Database db;
         Admin admin;
 
@@ -226,15 +223,14 @@ public class Dialogs {
             this.source = source;
 
             db = new Database(context);
-            res = context.getResources();
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(res.getString(R.string.confirm)).setMessage(message)
-                    .setPositiveButton(res.getString(R.string.button_confirm),
+            builder.setTitle(R.string.confirm).setMessage(message)
+                    .setPositiveButton(R.string.button_confirm,
                             (dialogInterface, i) -> {
                                 admin.update(context, admin);
                                 db.newLogEntry(type, Integer.toString(admin.getBalance()), source);
@@ -242,7 +238,7 @@ public class Dialogs {
                                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                                 dismiss();
                             })
-                    .setNegativeButton(res.getString(R.string.button_cancel),
+                    .setNegativeButton(R.string.button_cancel,
                             (dialogInterface, i) -> {
                                 new Dialogs.TransactionFailed().show(requireActivity().getSupportFragmentManager(), "FAIL");
                                 dismiss();

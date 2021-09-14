@@ -111,7 +111,8 @@ public class CardPaymentActivity extends AppCompatActivity {
                     paymentValidate = validate.payment(paymentAmountInput),
                     duesValidate = validate.dues(duesInput);
 
-            if (cardNumberValidate && expDateValidate && ccvValidate && nameValidate && lastnameValidate && paymentValidate && duesValidate){
+            if (cardNumberValidate && expDateValidate && ccvValidate && nameValidate
+                    && lastnameValidate && paymentValidate && duesValidate){
                 admin.setBalance(Integer.parseInt(card.getPaymentAmmount()));
 
                 new Dialogs.ConfirmAdminAddBalance(context, admin,
