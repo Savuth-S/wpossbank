@@ -1,7 +1,9 @@
 package com.example.wpossbank.modelos;
 
 import android.content.Context;
+import android.database.Cursor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wpossbank.database.Database;
@@ -32,5 +34,19 @@ public class Admin extends AppCompatActivity {
     public void update(Context context, Admin admin){
         Database db = new Database(context);
         db.updateAdmin(admin);
+    }
+
+    public void loadData(Context context, @NonNull Admin admin){
+        Database db = new Database(context);
+        try (Cursor fetch = db.fetchData(
+                "1",
+                db.getTable("admin"),
+                db.getColumn("id"))){
+            fetch.moveToFirst();
+            admin.setId(fetch.getString(0));
+            admin.setEmail(fetch.getString(1));
+            admin.setPassword(fetch.getString(2));
+            admin.setBalance(fetch.getInt(3));
+        }
     }
 }

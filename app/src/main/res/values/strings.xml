@@ -18,8 +18,10 @@
     <string name="button_go_back">Regresar</string>
     <string name="button_confirm">Confirmar</string>
 
-    <!--Menú de logeo-->
+    <!--Menu principal-->
+    <string name="button_log_in">Iniciar Sesion</string>
     <string name="button_new_user">Registrarse</string>
+    <string name="button_admin">Panel del Administrador</string>
 
     <!--Menú general-->
     <string name="button_card_payments">Pagos con Tarjeta</string>
@@ -31,6 +33,11 @@
     <string name="button_log_out">Cerrar Sesion</string>
 
     <!--Campos de texto-->
+    <!--Admin-->
+    <string name="input_email">Correo Electronico</string>
+    <string name="input_password">Contraseña</string>
+    <string name="input_password_confirm">Confirmar Contraseña</string>
+
     <!--Logeo y registrarse-->
     <string name="input_account">Número de la Cuenta</string>
     <string name="input_cc">Número de Cedula Ciudadana</string>

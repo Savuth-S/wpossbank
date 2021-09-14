@@ -9,19 +9,20 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.wpossbank.database.Database;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
-import com.example.wpossbank.database.Database;
 
-public class LoginActivity extends AppCompatActivity {
+public class AdminLoginActivity extends AppCompatActivity {
     Context context = this;
     SharedPreference sp;
     Validate validate;
-    User user;
 
-    EditText ccInput, pinInput;
+    Admin admin;
+
+    EditText emailInput, passwordInput;
     Button enterButton;
 
     @Override
@@ -30,22 +31,24 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         sp = new SharedPreference(context);
         validate = new Validate(context);
-        user = new User(context);
 
-        ccInput= findViewById(R.id.ccInput);
-        pinInput = findViewById(R.id.pinInput);
+        admin = new Admin();
+
+        emailInput= findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.passwordInput);
 
         enterButton = findViewById(R.id.enterButton);
 
         enterButton.setOnClickListener( validateLogin ->{
-            if (validate.login(ccInput,pinInput)){
-                user.setCc(ccInput.getText().toString());
-                user.setPin(pinInput.getText().toString());
+            if (validate.adminLogin(emailInput,passwordInput)){
+                admin.setEmail(emailInput.getText().toString());
+                admin.setPassword(passwordInput.getText().toString());
 
-                Log.d("LOGIN","user="+user.getUserId());
-                sp.setActiveUser(user.getUserId());
-                startActivity(new Intent(context, MainActivity.class));
+                Log.d("ADMIN","logged into admin panel");
+                startActivity(new Intent(context, AdminPanelActivity.class));
             }
         });
     }
+
+
 }

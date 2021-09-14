@@ -3,7 +3,6 @@ package com.example.wpossbank.modelos;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -78,6 +77,50 @@ public class Validate {
         }else{ return false;}
     }
 
+    public boolean email(EditText emailInput){
+        String email = emailInput.getText().toString();
+
+        if (isEmpty(emailInput)){
+            return false;
+        }else if (email.matches("(.*\\s.*)")){
+            emailInput.setError(res.getString(R.string.error_spaces));
+            return false;
+        }else if(email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
+            return true;
+        }else {
+            emailInput.setError(res.getString(R.string.error_invalid));
+            return false;
+        }
+    }
+
+    public boolean password(EditText passwordInput){
+        String password = passwordInput.getText().toString();
+
+        if (isEmpty(passwordInput)){
+            return false;
+        }else if (password.length() < 8){
+            passwordInput.setError("La contraseña debe contener almenos ocho caracteres.");
+            return false;
+        }else if (password.matches("(.*\\s.*)")){
+            passwordInput.setError("La contraseña no puede contener espacios.");
+            return false;
+        }else if (!password.matches("(.*[A-Z].*)")){
+            passwordInput.setError("La contraseña debe contener al menos una letra mayuscula.");
+            return false;
+        }else if (!password.matches("(.*[a-z].*)")){
+            passwordInput.setError("La contraseña debe contener al menos una letra minuscula.");
+            return false;
+        }else if (!password.matches("(.*[0-9].*)")){
+            passwordInput.setError("La contraseña debe contener al menos un numero.");
+            return false;
+        }else if (!password.matches("(.*[@#$%^&+*=!()].*)")){
+            passwordInput.setError("La contraseña debe contener al menos un caracter especial.");
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public boolean name(@NonNull EditText nameInput){
         if (!isEmpty(nameInput)) {
 
@@ -142,54 +185,6 @@ public class Validate {
             return false;
         }
     }
-
-    /*
-    public boolean email(EditText emailInput){
-        String email = emailInput.getText().toString();
-
-        if (isEmpty(emailInput)){
-            return false;
-        }else if (db.fetchData(email, db.getTableUser(), db.getColumnEmail()).getCount() > 0) {
-            emailInput.setError("La direccion de correo ya esta registrada.");
-            return false;
-        }else if (email.matches("(.*\\s.*)")){
-            emailInput.setError("La direccion de correo no puede contener espacios.");
-            return false;
-        }else if(email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
-            return true;
-        }else {
-            emailInput.setError("Direccion de correo electronica invalida.");
-            return false;
-        }
-    }
-
-    public boolean password(EditText passwordInput){
-        String password = passwordInput.getText().toString();
-
-        if (isEmpty(passwordInput)){
-            return false;
-        }else if (password.length() < 8){
-            passwordInput.setError("La contraseña debe contener almenos ocho caracteres.");
-            return false;
-        }else if (password.matches("(.*\\s.*)")){
-            passwordInput.setError("La contraseña no puede contener espacios.");
-            return false;
-        }else if (!password.matches("(.*[A-Z].*)")){
-            passwordInput.setError("La contraseña debe contener al menos una letra mayuscula.");
-            return false;
-        }else if (!password.matches("(.*[a-z].*)")){
-            passwordInput.setError("La contraseña debe contener al menos una letra minuscula.");
-            return false;
-        }else if (!password.matches("(.*[0-9].*)")){
-            passwordInput.setError("La contraseña debe contener al menos un numero.");
-            return false;
-        }else if (!password.matches("(.*[@#$%^&+*=!()].*)")){
-            passwordInput.setError("La contraseña debe contener al menos un caracter especial.");
-            return false;
-        }else{
-            return true;
-        }
-    }*/
 
     public boolean cardNumber(@NonNull EditText cardNumberInput){
         String cardNumber = cardNumberInput.getText().toString();
@@ -271,6 +266,62 @@ public class Validate {
         }
     }
 
+    public boolean adminLogin(@NonNull EditText emailInput, @NonNull EditText passwordInput) {
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
+
+        if (isEmpty(emailInput) || isEmpty(passwordInput)) {
+            return false;
+        }else{
+            Cursor fetch = db.fetchData(email, db.getTable("admin"), db.getColumn("email"));
+            String registeredPassword = "empty";
+
+            while (fetch.moveToNext()) {
+                registeredPassword = fetch.getString(2);// TABLE_ADMINS - COLUMN_PASSWORD
+            }
+
+            if (fetch.getCount() > 0) {
+                if (password.equals(registeredPassword)) {
+                    return true;
+                } else {
+                    passwordInput.setError(res.getString(R.string.error_wrong));
+                    return false;
+                }
+            } else {
+                emailInput.setError(res.getString(R.string.error_not_registered));
+                return false;
+            }
+        }
+    }
+
+    public boolean login(@NonNull EditText ccInput, @NonNull EditText pinInput) {
+        String cc = ccInput.getText().toString();
+        String pin = pinInput.getText().toString();
+
+        if (isEmpty(ccInput) || isEmpty(pinInput)) {
+            return false;
+        }else{
+            Cursor fetch = db.fetchData(cc, db.getTable("user"), db.getColumn("cc"));
+            String registeredPin = "empty";
+
+            while (fetch.moveToNext()) {
+                registeredPin = fetch.getString(3);// TABLE_USERS - COLUMN_PIN
+            }
+
+            if (fetch.getCount() > 0) {
+                if (pin.equals(registeredPin)) {
+                    return true;
+                } else {
+                    pinInput.setError(res.getString(R.string.error_wrong));
+                    return false;
+                }
+            } else {
+                ccInput.setError(res.getString(R.string.error_not_registered));
+                return false;
+            }
+        }
+    }
+
     public boolean useBalance(@NonNull EditText moneyInput){
         if(!isEmpty(moneyInput)) {
             try (Cursor fetch = db.fetchData(sp.getActiveUser(),
@@ -300,34 +351,6 @@ public class Validate {
                 }
             }
         }else{ return false; }
-    }
-
-    public boolean login(@NonNull EditText ccInput, @NonNull EditText pinInput) {
-        String cc = ccInput.getText().toString();
-        String pin = pinInput.getText().toString();
-
-        if (isEmpty(ccInput) || isEmpty(pinInput)) {
-            return false;
-        }else{
-            Cursor fetch = db.fetchData(cc, db.getTable("user"), db.getColumn("cc"));
-            String registeredPin = "empty";
-
-            while (fetch.moveToNext()) {
-                registeredPin = fetch.getString(3);// TABLE_USERS - COLUMN_PIN
-            }
-
-            if (fetch.getCount() > 0) {
-                if (pin.equals(registeredPin)) {
-                    return true;
-                } else {
-                    pinInput.setError(res.getString(R.string.error_wrong));
-                    return false;
-                }
-            } else {
-                ccInput.setError(res.getString(R.string.error_not_registered));
-                return false;
-            }
-        }
     }
 
     public boolean matchUserData(@NonNull EditText textInput, String parameter){

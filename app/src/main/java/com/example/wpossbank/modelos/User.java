@@ -77,7 +77,7 @@ public class User {
             user.setId(fetch.getString(0));
             user.setCc(fetch.getString(2));
             user.setPin(fetch.getString(3));
-            user.setBalance(Integer.parseInt(fetch.getString(4)));
+            user.setBalance(fetch.getInt(4));
             user.setName(fetch.getString(5));
 
             return user;
