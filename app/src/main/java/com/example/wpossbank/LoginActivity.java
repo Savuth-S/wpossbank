@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.SharedPreference;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText ccInput, pinInput;
     Button enterButton;
+    ImageView backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         pinInput = findViewById(R.id.pinInput);
 
         enterButton = findViewById(R.id.enterButton);
+        backArrow = findViewById(R.id.backArrow);
 
         enterButton.setOnClickListener( validateLogin ->{
             if (validate.login(ccInput,pinInput)){
@@ -47,5 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(context, MainActivity.class));
             }
         });
+
+        backArrow.setOnClickListener( goBack -> finish());
     }
 }

@@ -2,7 +2,7 @@
     <string name="app_name">WPOSSBANK</string>
 
     <!--Generales-->
-    <string name="front_subheader_text">Soluciones Modernas</string>
+    <string name="front_subheader_text">soluciones modernas</string>
 
     <string name="confirm">Confirmar</string>
     <string name="credit_card_sell">Venta con tarjeta</string>
@@ -36,12 +36,16 @@
 
     <!--Campos de texto-->
     <!--Admin-->
-    <string name="input_email">Correo Electronico</string>
-    <string name="input_password">Contraseña</string>
-    <string name="input_password_confirm">Confirmar Contraseña</string>
+    <string name="email">Correo Electronico</string>
+    <string name="input_email">Ingrese el correo electronico</string>
+
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar Contraseña</string>
+    <string name="input_password">********</string>
 
     <!--Logeo y registrarse-->
-    <string name="input_account">Número de la Cuenta</string>
+    <string name="account">Número de Cuenta</string>
+    <string name="input_account">Ingrese su número de cuenta</string>
 
     <string name="name">Nombre</string>
     <string name="input_name">Ingrese su nombre</string>
@@ -124,4 +128,11 @@
     <string name="error_mustbe_4">Debe ser de cuatro caracteres.</string>
     <string name="error_between_15and16">Debe contener entre quince y dieciseis caracteres.</string>
     <string name="error_between_2and7">Debe contener entre dos y siete caracteres.</string>
+    <string name="admin_panel">Panel de Administrador</string>
+    <string name="hello_admin">Hola Administrador,</string>
+    <string name="admin_balance_is" >El balance del corresponsal es </string>
+    <string name="update">Actualizar</string>
+    <string name="update_admin_data">ACTUALIZAR DATOS DE ADMINISTRADOR</string>
+    <string name="button_add_money">Añadir Dinero</string>
+    <string name="log_in">Iniciar Sesion</string>
 </resources>

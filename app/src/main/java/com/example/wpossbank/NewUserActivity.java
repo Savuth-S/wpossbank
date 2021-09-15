@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.SharedPreference;
@@ -26,6 +27,7 @@ public class NewUserActivity extends AppCompatActivity {
 
     EditText nameInput, lastnameInput, ccInput, pinInput, pinConfirmInput, balanceInput;
     Button enterButton;
+    ImageView backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,9 @@ public class NewUserActivity extends AppCompatActivity {
         pinInput = findViewById(R.id.pinInput);
         pinConfirmInput = findViewById(R.id.pinConfirmInput);
         balanceInput = findViewById(R.id.balanceInput);
+
         enterButton = findViewById(R.id.enterButton);
+        backArrow = findViewById(R.id.backArrow);
 
         enterButton.setOnClickListener( addNewUser -> {
             db = new Database(context);
@@ -77,6 +81,8 @@ public class NewUserActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        backArrow.setOnClickListener( goBack -> finish());
 
     }
 }

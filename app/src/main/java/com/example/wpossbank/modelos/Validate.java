@@ -270,27 +270,28 @@ public class Validate {
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
 
-        if (isEmpty(emailInput) || isEmpty(passwordInput)) {
+        boolean passwordEmpty = isEmpty(passwordInput),
+                emailEmpty = isEmpty(emailInput);
+
+        if (passwordEmpty ||  emailEmpty){
             return false;
-        }else{
-            Cursor fetch = db.fetchData(email, db.getTable("admin"), db.getColumn("email"));
-            String registeredPassword = "empty";
+        }
 
-            while (fetch.moveToNext()) {
-                registeredPassword = fetch.getString(2);// TABLE_ADMINS - COLUMN_PASSWORD
-            }
-
-            if (fetch.getCount() > 0) {
-                if (password.equals(registeredPassword)) {
-                    return true;
-                } else {
-                    passwordInput.setError(res.getString(R.string.error_wrong));
-                    return false;
-                }
+        Cursor fetch = db.fetchData(email, db.getTable("admin"), db.getColumn("email"));
+        String registeredPassword = "empty";
+        while (fetch.moveToNext()) {
+            registeredPassword = fetch.getString(2);// TABLE_ADMINS - COLUMN_PASSWORD
+        }
+        if (fetch.getCount() > 0) {
+            if (password.equals(registeredPassword)) {
+                return true;
             } else {
-                emailInput.setError(res.getString(R.string.error_not_registered));
+                passwordInput.setError(res.getString(R.string.error_wrong));
                 return false;
             }
+        } else {
+            emailInput.setError(res.getString(R.string.error_not_registered));
+            return false;
         }
     }
 
@@ -298,27 +299,28 @@ public class Validate {
         String cc = ccInput.getText().toString();
         String pin = pinInput.getText().toString();
 
-        if (isEmpty(ccInput) || isEmpty(pinInput)) {
+        boolean ccEmpty = isEmpty(ccInput),
+                pinEmpty = isEmpty(pinInput);
+
+        if (ccEmpty || pinEmpty) {
             return false;
-        }else{
-            Cursor fetch = db.fetchData(cc, db.getTable("user"), db.getColumn("cc"));
-            String registeredPin = "empty";
+        }
 
-            while (fetch.moveToNext()) {
-                registeredPin = fetch.getString(3);// TABLE_USERS - COLUMN_PIN
-            }
-
-            if (fetch.getCount() > 0) {
-                if (pin.equals(registeredPin)) {
-                    return true;
-                } else {
-                    pinInput.setError(res.getString(R.string.error_wrong));
-                    return false;
-                }
+        Cursor fetch = db.fetchData(cc, db.getTable("user"), db.getColumn("cc"));
+        String registeredPin = "empty";
+        while (fetch.moveToNext()) {
+            registeredPin = fetch.getString(3);// TABLE_USERS - COLUMN_PIN
+        }
+        if (fetch.getCount() > 0) {
+            if (pin.equals(registeredPin)) {
+                return true;
             } else {
-                ccInput.setError(res.getString(R.string.error_not_registered));
+                pinInput.setError(res.getString(R.string.error_wrong));
                 return false;
             }
+        } else {
+            ccInput.setError(res.getString(R.string.error_not_registered));
+            return false;
         }
     }
 

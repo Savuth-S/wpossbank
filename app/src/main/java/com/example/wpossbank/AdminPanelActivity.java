@@ -5,10 +5,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wpossbank.adaptadores.TransactionLogAdapter;
@@ -21,6 +25,9 @@ import com.example.wpossbank.modelos.Validate;
 
 import java.util.ArrayList;
 
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
+
 public class AdminPanelActivity extends AppCompatActivity {
     Context context;
     Validate validate;
@@ -29,9 +36,11 @@ public class AdminPanelActivity extends AppCompatActivity {
 
     Admin admin;
 
+    BlurView blurView;
     TextView balanceText;
     EditText emailInput, passwordInput, passwordConfirmInput;
-    Button enterButton;
+    Button updateButton, addMoneyButton;
+    ImageView backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +55,22 @@ public class AdminPanelActivity extends AppCompatActivity {
         admin = new Admin();
         admin.loadData(context, admin);
 
+        blurView = (BlurView)findViewById(R.id.blurView);
+        blurBackground();
+
         balanceText = findViewById(R.id.textView2);
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
         passwordConfirmInput = findViewById(R.id.passwordConfirmInput);
-        enterButton = findViewById(R.id.enterButton);
+
+        updateButton = findViewById(R.id.updateButton);
+        addMoneyButton = findViewById(R.id.addMoneyButton);
+        backArrow = findViewById(R.id.backArrow);
 
         balanceText.setText(String.format("$%s", messages.separateNumberRight(
                 Integer.toString(admin.getBalance()), ".", 3)));
 
-        enterButton.setOnClickListener( validateLogin ->{
+        updateButton.setOnClickListener( validateLogin ->{
             boolean emailValidate = validate.email(emailInput),
                     passwordValidate = validate.password(passwordInput);
 
@@ -71,5 +86,27 @@ public class AdminPanelActivity extends AppCompatActivity {
                 admin.update(context, admin);
             }
         });
+
+        addMoneyButton.setOnClickListener( showAddMoneyActivity ->{
+
+        });
+
+        backArrow.setOnClickListener( goBack -> finish());
+
+    }
+
+    private void blurBackground(){
+        float radius = 20f;
+
+        View decorView = getWindow().getDecorView();
+        ViewGroup rootView = (ViewGroup) decorView.findViewById(android.R.id.content);
+        Drawable windowBackground = decorView.getBackground();
+
+        blurView.setupWith(rootView)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(this))
+                .setBlurRadius(radius)
+                .setBlurAutoUpdate(true)
+                .setHasFixedTransformationMatrix(true);
     }
 }

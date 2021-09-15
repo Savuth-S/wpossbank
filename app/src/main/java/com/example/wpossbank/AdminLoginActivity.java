@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.wpossbank.database.Database;
 import com.example.wpossbank.modelos.Admin;
@@ -24,6 +25,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
     EditText emailInput, passwordInput;
     Button enterButton;
+    ImageView backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInput);
 
         enterButton = findViewById(R.id.enterButton);
+        backArrow = findViewById(R.id.backArrow);
 
         enterButton.setOnClickListener( validateLogin ->{
             if (validate.adminLogin(emailInput,passwordInput)){
@@ -48,6 +51,8 @@ public class AdminLoginActivity extends AppCompatActivity {
                 startActivity(new Intent(context, AdminPanelActivity.class));
             }
         });
+
+        backArrow.setOnClickListener( goBack -> finish());
     }
 
 
