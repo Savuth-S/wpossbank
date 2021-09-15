@@ -135,4 +135,5 @@
     <string name="update_admin_data">ACTUALIZAR DATOS DE ADMINISTRADOR</string>
     <string name="button_add_money">Añadir Dinero</string>
     <string name="log_in">Iniciar Sesion</string>
+    <string name="select_an_option">Eliga una opción</string>
 </resources>
