@@ -1,7 +1,9 @@
 <resources>
-    <string name="app_name">Wpossbank</string>
+    <string name="app_name">WPOSSBANK</string>
 
     <!--Generales-->
+    <string name="front_subheader_text">Soluciones Modernas</string>
+
     <string name="confirm">Confirmar</string>
     <string name="credit_card_sell">Venta con tarjeta</string>
     <string name="money_withdrawal">Retiro</string>
@@ -21,7 +23,7 @@
     <!--Menu principal-->
     <string name="button_log_in">Iniciar Sesion</string>
     <string name="button_new_user">Registrarse</string>
-    <string name="button_admin">Panel del Administrador</string>
+    <string name="button_admin">Administrador</string>
 
     <!--Menú general-->
     <string name="button_card_payments">Pagos con Tarjeta</string>
@@ -40,12 +42,22 @@
 
     <!--Logeo y registrarse-->
     <string name="input_account">Número de la Cuenta</string>
-    <string name="input_cc">Número de Cedula Ciudadana</string>
-    <string name="input_pin">PIN</string>
-    <string name="input_pin_confirm">Confirmar PIN</string>
-    <string name="input_name">Nombre</string>
-    <string name="input_lastname">Apellido</string>
-    <string name="input_balance">Saldo Inicial</string>
+
+    <string name="name">Nombre</string>
+    <string name="input_name">Ingrese su nombre</string>
+
+    <string name="lastname">Apellidos</string>
+    <string name="input_lastname">Ingrese sus apellidos</string>
+
+    <string name="cc">Número de Cedula</string>
+    <string name="input_cc">Ingrese su número de Cedula</string>
+
+    <string name="pin">PIN</string>
+    <string name="pin_confirm">Confirmar PIN</string>
+    <string name="input_pin">****</string>
+
+    <string name="balance">Saldo Inicial</string>
+    <string name="input_balance">Ingrese el saldo inicial</string>
 
     <!--Pago con tarjeta-->
     <string name="input_card_number">Número de Tarjeta de Credito</string>
