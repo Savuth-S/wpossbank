@@ -30,7 +30,6 @@ import java.util.Calendar;
 
 public class Database extends SQLiteOpenHelper {
     private final Context context;
-    private final Resources res;
     private final SharedPreference sp;
 
     private static final String NAME = "wpossbank.db";
@@ -38,6 +37,7 @@ public class Database extends SQLiteOpenHelper {
 
     //Campos comunes
     private static final String COLUMN_ID = "_id";
+    private static final String COLUMN_OBJECTID = "object_id";
     private static final String COLUMN_BALANCE = "cuenta_balance";
 
     //Tabla de cuentas de administrador
@@ -47,7 +47,6 @@ public class Database extends SQLiteOpenHelper {
 
     //Tabla de cuentas de usuario
     private static final String TABLE_USER = "usuarios";
-    private static final String COLUMN_USERID = "object_id";
     private static final String COLUMN_CC = "usuario_cedula";
     private static final String COLUMN_PIN = "usuario_pin";
     private static final String COLUMN_NAME = "usuario_nombre";
@@ -62,7 +61,6 @@ public class Database extends SQLiteOpenHelper {
 
     public Database(@NonNull Context context){
         super(context, NAME, null, VERSION);
-        res = context.getResources();
         sp = new SharedPreference(context);
         this.context = context;
     }
@@ -84,8 +82,8 @@ public class Database extends SQLiteOpenHelper {
         switch (columnName){
             case "id":
                 return COLUMN_ID;
-            case "user id":
-                return COLUMN_USERID;
+            case "object id":
+                return COLUMN_OBJECTID;
             case "active user":
                 return COLUMN_ACTIVEUSER;
             case "email":
@@ -118,13 +116,14 @@ public class Database extends SQLiteOpenHelper {
         String adminQuery =
             "CREATE TABLE "+ TABLE_ADMIN +
                     "(" + COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    COLUMN_OBJECTID +" TEXT, "+
                     COLUMN_EMAIL +" TEXT, "+
                     COLUMN_PASSWORD +" TEXT, "+
                     COLUMN_BALANCE +" TEXT);";
         String userQuery =
             "CREATE TABLE "+ TABLE_USER +
                     "("+COLUMN_ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                    COLUMN_USERID +" TEXT, "+
+                    COLUMN_OBJECTID +" TEXT, "+
                     COLUMN_CC +" TEXT, "+
                     COLUMN_PIN +" TEXT, "+
                     COLUMN_BALANCE +" TEXT, "+
@@ -163,14 +162,15 @@ public class Database extends SQLiteOpenHelper {
             ContentValues cv = new ContentValues();
 
             cv.put(COLUMN_ID, admin.getId());
+            cv.put(COLUMN_OBJECTID, admin.toString().split("@")[1]);
             cv.put(COLUMN_EMAIL, admin.getEmail());
             cv.put(COLUMN_PASSWORD, admin.getPassword());
-            cv.put(COLUMN_PASSWORD, admin.getBalance());
+            cv.put(COLUMN_BALANCE, admin.getBalance());
 
             long result = db.insert(TABLE_ADMIN, null, cv);
             if (result == -1){
                 Log.e("MAKE","Failed to add default admin to database, database="+db.toString() +" result="+result +" admin="+admin.toString());
-                Toast.makeText(context, res.getString(R.string.error_default_admin), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, context.getString(R.string.error_default_admin), Toast.LENGTH_LONG).show();
             }else{
                 Log.d("MAKE","Default admin made successfully");
             }
@@ -182,14 +182,16 @@ public class Database extends SQLiteOpenHelper {
             ContentValues cv = new ContentValues();
             Cursor adminData = fetchData("1", TABLE_ADMIN, COLUMN_ID);
 
+            Log.e("TAG DATABASE",admin.getEmail());
+
             if (adminData.getCount() > 0){
                 adminData.moveToFirst();
 
                 cv.put(COLUMN_EMAIL, admin.getEmail());
                 cv.put(COLUMN_PASSWORD, admin.getPassword());
-                cv.put(COLUMN_BALANCE, adminData.getInt(3)+admin.getBalance());
+                cv.put(COLUMN_BALANCE, admin.getBalance());
 
-                long result = db.update(TABLE_ADMIN, cv, "_id=?", new String[]{admin.getId()});
+                long result = db.update(TABLE_ADMIN, cv, "_id=?", new String[]{"1"});
                 if (result == -1){
                     Log.e("UPDATE","Failed to updated admin data, database="+db.toString() +" result="+result +" admin="+admin.toString());
                 }else{
@@ -198,7 +200,7 @@ public class Database extends SQLiteOpenHelper {
             }else{
                 Log.e("UPDATE","Couldn't find admin data, making default admin instead, adminData="+adminData.toString());
                 makeDefaultAdmin(new Admin());
-                updateAdmin(admin);
+                admin.update(context);
             }
         }
     }
@@ -207,7 +209,7 @@ public class Database extends SQLiteOpenHelper {
         try(SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
 
-            cv.put(COLUMN_USERID, user.toString().split("@")[1]);
+            cv.put(COLUMN_OBJECTID, user.toString().split("@")[1]);
             cv.put(COLUMN_CC, user.getCc());
             cv.put(COLUMN_PIN, user.getPin());
             cv.put(COLUMN_BALANCE, user.getBalance());
@@ -215,9 +217,9 @@ public class Database extends SQLiteOpenHelper {
 
             long result = db.insert(TABLE_USER,null,cv);
             if (result == -1) {
-                Toast.makeText(context, res.getString(R.string.error_make_user), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.error_make_user), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(context, res.getString(R.string.toast_make_user_success), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.toast_make_user_success), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -225,7 +227,7 @@ public class Database extends SQLiteOpenHelper {
     public void updateUser(@NonNull User user){
         try (SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
-            Cursor userData = fetchData(sp.getActiveUser(), TABLE_USER, COLUMN_USERID);
+            Cursor userData = fetchData(sp.getActiveUser(), TABLE_USER, COLUMN_OBJECTID);
 
             if (userData.getCount() > 0){
                 userData.moveToFirst();
@@ -235,7 +237,7 @@ public class Database extends SQLiteOpenHelper {
                 cv.put(COLUMN_BALANCE, userData.getInt(4)+user.getBalance());
                 cv.put(COLUMN_NAME, user.getName());
 
-                long result = db.update(TABLE_USER, cv, "object_id=?", new String[]{user.getUserId()});
+                long result = db.update(TABLE_USER, cv, "object_id=?", new String[]{user.getObjectId()});
                 if (result == -1){
                     Log.e("UPDATE","Failed to updated user data, database="+db.toString() +" result="+result +" admin="+user.toString());
                 }else{
@@ -243,7 +245,7 @@ public class Database extends SQLiteOpenHelper {
                 }
             }else{
                 Log.e("UPDATE","Couldn't find user data, userData="+userData.toString());
-                Toast.makeText(context,res.getString(R.string.error_fetch_data),Toast.LENGTH_LONG).show();
+                Toast.makeText(context,context.getString(R.string.error_fetch_data),Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -276,7 +278,7 @@ public class Database extends SQLiteOpenHelper {
 
             long result = db.insert(TABLE_LOG,null,cv);
             if (result == -1) {
-                Toast.makeText(context, res.getString(R.string.error_write_data), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.error_write_data), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -286,25 +288,28 @@ public class Database extends SQLiteOpenHelper {
 
         switch(type){
             case "card":
-                actionType = res.getString(R.string.credit_card_sell);
+                actionType = context.getString(R.string.credit_card_sell);
                 break;
             case "withdraw":
-                actionType = res.getString(R.string.money_withdrawal);
+                actionType = context.getString(R.string.money_withdrawal);
                 break;
             case "deposit":
-                actionType = res.getString(R.string.money_deposit);
+                actionType = context.getString(R.string.money_deposit);
                 break;
             case "transfer":
-                actionType = res.getString(R.string.money_transfer);
+                actionType = context.getString(R.string.money_transfer);
                 break;
             case "show balance":
-                actionType = res.getString(R.string.show_account_balance);
+                actionType = context.getString(R.string.show_account_balance);
                 break;
             case "new user":
-                actionType = res.getString(R.string.make_new_account);
+                actionType = context.getString(R.string.make_new_account);
+                break;
+            case "update":
+                actionType = context.getString(R.string.update);
                 break;
             default:
-                actionType = res.getString(R.string.error_invalid);
+                actionType = context.getString(R.string.error_invalid);
                 break;
         }
         return actionType;

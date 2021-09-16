@@ -1,12 +1,7 @@
 package com.example.wpossbank;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wpossbank.adaptadores.TransactionLogAdapter;
 import com.example.wpossbank.database.Database;
@@ -28,7 +27,7 @@ import java.util.ArrayList;
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class TransfersHistoryActivity extends AppCompatActivity {
     Context context;
     SharedPreference sp;
     Database db;
@@ -36,8 +35,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     User user;
 
-    TextView balanceText;
-    Button addMoneyButton;
     ImageView backArrow;
 
     BlurView blurView;
@@ -50,7 +47,7 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_transfers_history);
 
         context = this;
         sp = new SharedPreference(context);
@@ -60,17 +57,12 @@ public class UserProfileActivity extends AppCompatActivity {
         user = new User(context);
 
         user.loadData(user);
-        balanceText = findViewById(R.id.textView2);
-        addMoneyButton = findViewById(R.id.addMoneyButton);
         backArrow = findViewById(R.id.backArrow);
 
         recyclerView = findViewById((R.id.recyclerView));
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
-
-        balanceText.setText(String.format("$%s", messages.separateNumberRight(
-                Integer.toString(user.getBalance()), ".", 3)));
 
         entryDate = new ArrayList<>();
         entryType = new ArrayList<>();
@@ -82,9 +74,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-        addMoneyButton.setOnClickListener( showAddMoneyActivity ->
-                startActivity(new Intent(context, DepositsActivity.class)));
 
         backArrow.setOnClickListener( goBack -> finish());
     }

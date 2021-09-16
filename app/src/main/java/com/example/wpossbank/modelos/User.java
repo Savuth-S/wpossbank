@@ -38,7 +38,7 @@ public class User {
 
     public void setName(String name) { this.name = name; }
 
-    public String getUserId(){
+    public String getObjectId(){
         try (Cursor fetch = db.fetchData(
                 getCc(),
                 db.getTable("user"),
@@ -56,7 +56,7 @@ public class User {
         try (Cursor fetch = db.fetchData(
                 sp.getActiveUser(),
                 db.getTable("user"),
-                db.getColumn("user id"))){
+                db.getColumn("object id"))){
             fetch.moveToFirst();
             user.setId(fetch.getString(0));
             user.setCc(fetch.getString(2));

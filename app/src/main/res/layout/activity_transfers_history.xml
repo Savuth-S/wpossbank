@@ -68,7 +68,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/alegreya_sans"
-                android:text="@string/see_balance"
+                android:text="@string/transfers_history"
                 android:textColor="@color/purple_text_dark"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -79,51 +79,18 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="-6dp"
-                android:fontFamily="@font/alegreya_sans"
-                android:text="@string/your_balance_is"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alef"
-                android:text="$9.000.000"
+                android:text="@string/transfers_of_the_account"
                 android:textColor="@color/white"
-                android:textSize="36sp"
+                android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toBottomOf="@+id/textView16"
-                app:layout_constraintVertical_bias="0.046" />
-
-            <Button
-                android:id="@+id/addMoneyButton"
-                android:layout_width="94dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/light_roundless_button"
-                android:fontFamily="@font/alegreya_sans_bold"
-                android:text="@string/deposit_money"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView16"
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
@@ -131,7 +98,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="52dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="45dp"
                 android:background="@drawable/floating_box"
@@ -140,36 +107,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/floating_box" />
-
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="24dp"
-                android:layout_weight="1"
-                android:elevation="7dp"
-                android:fontFamily="@font/alef"
-                android:text="@string/balance_history"
-                android:textAllCaps="true"
-                android:textColor="@color/purple_text_dark"
-                android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-                app:layout_constraintEnd_toEndOf="@+id/imageView13"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/imageView13"
-                app:layout_constraintTop_toTopOf="@+id/imageView13"
-                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="24dp"
                 android:layout_weight="1"
                 android:elevation="7dp"
@@ -182,7 +127,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/imageView13"
-                app:layout_constraintTop_toBottomOf="@+id/textView21"
+                app:layout_constraintTop_toTopOf="@+id/imageView13"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView

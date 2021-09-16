@@ -53,7 +53,8 @@ public class NewUserActivity extends AppCompatActivity {
 
         enterButton.setOnClickListener( addNewUser -> {
             db = new Database(context);
-            boolean ccValidate = validate.cc((ccInput)),
+            boolean ccValidate = validate.isNotInDatabase(ccInput, db.getTable("user"),db.getColumn("cc"))
+                        && validate.isNumber(ccInput) && validate.isInRange(ccInput,10,13),
                     nameValidate = validate.name(nameInput),
                     lastnameValidate = validate.name(lastnameInput),
                     pinValidate = validate.pin(pinInput),
@@ -72,10 +73,10 @@ public class NewUserActivity extends AppCompatActivity {
 
                 Log.d("NEW USER","user="+user.toString().split("@")[1]);
                 admin.setBalance(admin.getCost()*5);
-                admin.update(context, admin);
+                admin.update(context);
 
                 db.addUser(user);
-                sp.setActiveUser(user.getUserId());
+                sp.setActiveUser(user.getObjectId());
                 db.newLogEntry("new user", "0", user.getCc());
 
                 finish();

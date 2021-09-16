@@ -56,7 +56,7 @@ public class MakeMessages extends AppCompatActivity {
         }
     }
 
-    public String cardPayment(@NonNull CreditCard card) {
+    public String cardPayment(@NonNull Context context, @NonNull CreditCard card) {
         String message;
         String[] template = res.getString(R.string.dialog_confirm_cardpayment).split("/");
 
@@ -96,7 +96,7 @@ public class MakeMessages extends AppCompatActivity {
                 template[1] + separateNumberRight(card.getPaymentAmmount(),".", 3)
                 + template[2] + card.getDuesNumber() + template[3] + System.getProperty("line.separator") +
                 System.getProperty("line.separator") + template[4] +
-                System.getProperty("line.separator") + cardEnds + " - " + card.getType();
+                System.getProperty("line.separator") + cardEnds + " - " + card.getType(context);
 
         return message;
     }

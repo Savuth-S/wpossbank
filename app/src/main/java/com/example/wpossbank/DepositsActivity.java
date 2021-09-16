@@ -3,15 +3,22 @@ package com.example.wpossbank;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
+
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 
 public class DepositsActivity extends AppCompatActivity {
     Context context;
@@ -21,8 +28,11 @@ public class DepositsActivity extends AppCompatActivity {
     Admin admin;
     User user;
 
+    BlurView blurView;
+
     EditText ccInput, ccDepositInput, depositInput;
     Button goBackButton, confirmButton;
+    ImageView backArrow;
 
 
     @Override
@@ -36,12 +46,15 @@ public class DepositsActivity extends AppCompatActivity {
         admin = new Admin();
         user = new User(context);
 
+        blurView = findViewById(R.id.blurView);
+        blurBackground();
+
         ccInput = findViewById(R.id.ccInput);
         ccDepositInput = findViewById(R.id.ccDepositInput);
         depositInput = findViewById(R.id.depositInput);
 
-        goBackButton = findViewById(R.id.goBackButton);
         confirmButton = findViewById(R.id.confirmButton);
+        backArrow = findViewById(R.id.backArrow);
 
         user.loadData(user);//Carga la información del usuario desde la base de datos
 
@@ -61,6 +74,21 @@ public class DepositsActivity extends AppCompatActivity {
             }
         });
 
-        goBackButton.setOnClickListener( goBack -> finish());
+        backArrow.setOnClickListener( goBack -> finish());
+    }
+
+    private void blurBackground(){
+        float radius = 20f;
+
+        View decorView = getWindow().getDecorView();
+        ViewGroup rootView = decorView.findViewById(android.R.id.content);
+        Drawable windowBackground = decorView.getBackground();
+
+        blurView.setupWith(rootView)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(this))
+                .setBlurRadius(radius)
+                .setBlurAutoUpdate(true)
+                .setHasFixedTransformationMatrix(true);
     }
 }

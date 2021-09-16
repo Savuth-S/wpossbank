@@ -5,9 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
@@ -18,6 +23,9 @@ import com.example.wpossbank.database.Database;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
+
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 
 public class CardPaymentActivity extends AppCompatActivity {
     Context context;
@@ -30,9 +38,13 @@ public class CardPaymentActivity extends AppCompatActivity {
     Admin admin;
     CreditCard card;
 
-    TextInputLayout textInputLayout;
+    BlurView blurView;
+
+    TextView cardTextView;
     EditText cardNumberInput, expDateInput, ccvInput, nameInput, lastnameInput, paymentAmountInput, duesInput;
-    Button goBackButton, confirmButton;
+
+    Button confirmButton;
+    ImageView backArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +62,11 @@ public class CardPaymentActivity extends AppCompatActivity {
         admin = new Admin();
         card = new CreditCard();
 
+        blurView = findViewById(R.id.blurView);
+        blurBackground();
+
         //Declaracion de elementos del layout
-        textInputLayout = findViewById(R.id.textInputLayout);
+        cardTextView = findViewById(R.id.cardTextView);
 
         cardNumberInput = findViewById(R.id.cardNumberInput);
         expDateInput = findViewById(R.id.expDateInput);
@@ -61,8 +76,8 @@ public class CardPaymentActivity extends AppCompatActivity {
         paymentAmountInput = findViewById(R.id.paymentAmountInput);
         duesInput = findViewById(R.id.duesInput);
 
-        goBackButton = findViewById(R.id.goBackButton);
         confirmButton = findViewById(R.id.confirmButton);
+        backArrow = findViewById(R.id.backArrow);
 
         //Abre el calendario para seleccionar la fecha al tocar el campo de texto
         expDateInput.setOnClickListener( openDatePicker-> {
@@ -85,7 +100,7 @@ public class CardPaymentActivity extends AppCompatActivity {
             card.setNumber(cardNumberInput.getText().toString());
 
             if (!validate.isEmpty(cardNumberInput)) {
-                textInputLayout.setHint(card.getType());
+                cardTextView.setText(card.getType(context));
             }else{
                 cardNumberInput.setError(res.getString(R.string.error_invalid));
             }
@@ -115,13 +130,28 @@ public class CardPaymentActivity extends AppCompatActivity {
                     && lastnameValidate && paymentValidate && duesValidate){
                 admin.setBalance(Integer.parseInt(card.getPaymentAmmount()));
 
-                new Dialogs.ConfirmAdminAddBalance(context, admin,
-                        messages.cardPayment(card), "card",
+                new Dialogs.ConfirmUpdateAdmin(context, admin,
+                        messages.cardPayment(context, card), "card",
                         cardNumberInput.getText().toString())
                         .show(getSupportFragmentManager(),"Confirm");
             }
         });
 
-        goBackButton.setOnClickListener( goBack -> finish());
+        backArrow.setOnClickListener( goBack -> finish());
+    }
+
+    private void blurBackground(){
+        float radius = 20f;
+
+        View decorView = getWindow().getDecorView();
+        ViewGroup rootView = decorView.findViewById(android.R.id.content);
+        Drawable windowBackground = decorView.getBackground();
+
+        blurView.setupWith(rootView)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(this))
+                .setBlurRadius(radius)
+                .setBlurAutoUpdate(true)
+                .setHasFixedTransformationMatrix(true);
     }
 }

@@ -45,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
                 user.setCc(ccInput.getText().toString());
                 user.setPin(pinInput.getText().toString());
 
-                Log.d("LOGIN","user="+user.getUserId());
-                sp.setActiveUser(user.getUserId());
+                Log.d("LOGIN","user="+user.getObjectId());
+                sp.setActiveUser(user.getObjectId());
                 startActivity(new Intent(context, MainActivity.class));
             }
         });

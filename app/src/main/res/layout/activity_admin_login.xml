@@ -80,6 +80,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/alegreya_sans_bold"
                 android:text="@string/password"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +98,7 @@
                 android:ems="10"
                 android:fontFamily="@font/alegreya_sans_light"
                 android:hint="@string/input_password"
-                android:inputType="numberPassword"
+                android:inputType="textPassword"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/gray"
@@ -111,6 +112,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:fontFamily="@font/alegreya_sans_bold"
+                android:text="@string/email"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/emailInput"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.39" />
 
             <Button
                 android:id="@+id/enterButton"

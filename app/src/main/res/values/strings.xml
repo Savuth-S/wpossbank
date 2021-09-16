@@ -3,6 +3,7 @@
 
     <!--Generales-->
     <string name="front_subheader_text">soluciones modernas</string>
+    <string name="main_welcome_message">Hola %1$s, </string>
 
     <string name="confirm">Confirmar</string>
     <string name="credit_card_sell">Venta con tarjeta</string>
@@ -29,9 +30,9 @@
     <string name="button_card_payments">Pagos con Tarjeta</string>
     <string name="button_withdrawals">Retirar Dinero</string>
     <string name="button_deposits">Depositar Dinero</string>
-    <string name="button_transfers">Transferir A Una Cuenta</string>
-    <string name="button_balance">Saldo</string>
-    <string name="button_history">Historial de Transacciones</string>
+    <string name="button_transfers">Transferir Dinero</string>
+    <string name="button_balance">Consultar Saldo</string>
+    <string name="button_history">Ver Movimientos</string>
     <string name="button_log_out">Cerrar Sesion</string>
 
     <!--Campos de texto-->
@@ -64,27 +65,42 @@
     <string name="input_balance">Ingrese el saldo inicial</string>
 
     <!--Pago con tarjeta-->
-    <string name="input_card_number">Número de Tarjeta de Credito</string>
-    <string name="input_exp_date">Fecha de Expiración de la Tarjeta</string>
-    <string name="input_ccv">CCV</string>
-    <string name="input_payment_amount">Valor a Pagar</string>
-    <string name="input_dues">Número de Cuotas</string>
+    <string name="card_number">Número de Tarjeta de Credito</string>
+    <string name="input_card_number">Ingrese el número de la tarjeta</string>
+
+    <string name="input_exp_date">Ingrese la fecha de expiración de la tarjeta</string>
+
+    <string name="ccv">CCV</string>
+    <string name="input_ccv">Ingrese el CCV de la tarjeta</string>
+
+    <string name="payment_amount">Valor a Pagar</string>
+    <string name="input_payment_amount">Ingrese el valor a pagar</string>
+
+    <string name="dues">Número de Cuotas</string>
+    <string name="input_dues">Ingrese el número de cuotas</string>
 
     <!--Retiro de dinero-->
     <string name="input_withdrawal_amount">Monto a Retirar</string>
 
     <!--Depositar dinero-->
-    <string name="input_deposit_amount">Monto a Depositar</string>
+    <string name="deposit_amount">Monto a Depositar</string>
+    <string name="input_deposit_amount">Ingrese la cantidad a depositar</string>
 
     <!--Transferir dinero-->
-    <string name="input_transfer_account">Número de la Cuenta de Transferencia</string>
-    <string name="input_transfer_amount">Monto a Transferir</string>
+    <string name="transfer_account">Número de la Cuenta de Transferencia</string>
+    <string name="input_transfer_account">Ingrese el número de la cuenta de transferencía</string>
+
+    <string name="transfer_amount">Monto a Transferir</string>
+    <string name="input_transfer_amount1">Ingrese la cantidad a transferir</string>
 
 
     <!--Dialogos-->
     <!--Dialogos generales-->
     <string name="dialog_success">TRANSACCIÓN EXITOSA</string>
     <string name="dialog_fail">TRANSACCIÓN RECHAZADA</string>
+
+        <!--Panel del Administrador-->
+    <string name="dialog_confirm_update_admin">¿Esta seguro que desea actualizar los datos del corresponsal?</string>
 
     <!--Pago con tarjeta-->
     <string name="dialog_confirm_cardpayment">Estimado: /¿Desea realizar el pago a WPOSS por un valor de $/ a / cuotas?/Número de tarjeta: </string>
@@ -128,7 +144,10 @@
     <string name="error_mustbe_4">Debe ser de cuatro caracteres.</string>
     <string name="error_between_15and16">Debe contener entre quince y dieciseis caracteres.</string>
     <string name="error_between_2and7">Debe contener entre dos y siete caracteres.</string>
-    <string name="admin_panel">Panel de Administrador</string>
+
+
+
+    <string name="admin_panel">Panel del Administrador</string>
     <string name="hello_admin">Hola Administrador,</string>
     <string name="admin_balance_is" >El balance del corresponsal es </string>
     <string name="update">Actualizar</string>
@@ -137,4 +156,23 @@
     <string name="log_in">Iniciar Sesion</string>
     <string name="select_an_option">Eliga una opción</string>
     <string name="deposit">Depositar</string>
+    <string name="money_in_the_account">Dinero en la cuenta</string>
+    <string name="withdraw">Retirar</string>
+    <string name="money_from_the_accoun">Dinero de la cuenta</string>
+    <string name="withdrawal_amount">Monto a Retirar</string>
+    <string name="transfer">Transferir</string>
+    <string name="money_to_another_account">Dinero a otra cuenta</string>
+    <string name="see_balance">Consultar</string>
+    <string name="balance_of_the_account">Saldo de la cuenta</string>
+    <string name="date">FECHA</string>
+    <string name="type">TIPO</string>
+    <string name="value">VALOR</string>
+    <string name="transfers_history">Historial</string>
+    <string name="your_balance_is">Su saldo es</string>
+    <string name="balance_history">HISTORIAL DE TRANSACCIONES</string>
+    <string name="deposit_money">Depositar Dinero</string>
+    <string name="transfers_of_the_account">Movimientos de la cuenta</string>
+    <string name="card_payment">Credito</string>
+    <string name="pay_with_a_credit_card">Pagar con una tarjeta</string>
+    <string name="exp_date">Fecha de Expiración</string>
 </resources>

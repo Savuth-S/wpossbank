@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_rectangle" />
+        app:srcCompat="@drawable/bg_transparent_gradient" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_rectangle" />
+        app:srcCompat="@drawable/bg_transparent_gradient" />
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/blurView"
@@ -43,60 +43,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-    </eightbitlab.com.blurview.BlurView>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/backArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_back" />
-
-        <Button
-            android:id="@+id/addMoneyButton"
-            android:layout_width="105dp"
-            android:layout_height="58dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/light_roundless_button"
-            android:drawableTop="@drawable/ic_depositar"
-            android:drawablePadding="-7dp"
-            android:paddingVertical="7dp"
-            android:text="@string/deposit"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView16"
-            app:layout_constraintVertical_bias="0.0" />
-
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/userView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="44dp"
             android:fontFamily="@font/alegreya_sans"
-            android:text="Hola Usuario,"
+            android:text="Hola Usuario, "
             android:textColor="@color/purple_text_dark"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/backArrow"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -111,18 +76,39 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView16"
-            app:layout_constraintTop_toBottomOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="@+id/userView"
+            app:layout_constraintTop_toBottomOf="@+id/userView"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/depositsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/light_roundless_button"
+            android:drawableTop="@drawable/ic_depositar"
+            android:drawablePadding="-7dp"
+            android:fontFamily="@font/alegreya_sans_bold"
+            android:paddingVertical="7dp"
+            android:text="@string/deposit"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/userView"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageView13"
             android:layout_width="0dp"
-            android:layout_height="330dp"
+            android:layout_height="0dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="45dp"
             android:background="@drawable/floating_box"
             android:elevation="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -132,27 +118,11 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/floating_box" />
 
-        <Button
-            android:id="@+id/updateButton"
-            android:layout_width="200dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp"
-            android:background="@drawable/light_purple_button"
-            android:text="@string/update"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toTopOf="@+id/imageView14"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView13"
-            app:layout_constraintVertical_bias="0.0" />
-
         <ScrollView
             android:id="@+id/scrollView4"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:elevation="7dp"
-            android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView13"
             app:layout_constraintEnd_toEndOf="@+id/imageView13"
             app:layout_constraintStart_toStartOf="@+id/imageView13"
@@ -166,18 +136,17 @@
                 tools:layout_editor_absoluteX="30dp"
                 tools:layout_editor_absoluteY="31dp">
 
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="140dp"
+                <Button
+                    android:id="@+id/withdrawalsButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/alef"
-                    android:text="@string/update_admin_data"
-                    android:textAllCaps="true"
-                    android:textColor="@color/purple_text_dark"
-                    android:textSize="13sp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:background="#00FFFFFF"
+                    android:drawableTop="@drawable/ic_withdraw"
+                    android:text="@string/button_withdrawals"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -186,76 +155,75 @@
                     app:layout_constraintVertical_bias="0.0" />
 
                 <Button
-                    android:id="@+id/cardPaymentsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/button_card_payments"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <Button
-                    android:id="@+id/withdrawalsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/button_withdrawals"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cardPaymentsButton" />
-
-                <Button
-                    android:id="@+id/depositsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/button_deposits"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/withdrawalsButton" />
-
-                <Button
                     android:id="@+id/transfersButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="#00FFFFFF"
+                    android:drawableTop="@drawable/ic_transfer"
                     android:text="@string/button_transfers"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple_light"
+                    app:layout_constraintBottom_toBottomOf="@+id/withdrawalsButton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/depositsButton" />
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/withdrawalsButton"
+                    app:layout_constraintTop_toTopOf="@+id/withdrawalsButton"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <Button
                     android:id="@+id/balanceButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
+                    android:background="#00FFFFFF"
+                    android:drawableTop="@drawable/ic_balance"
                     android:text="@string/button_balance"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple_light"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/transfersButton" />
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/withdrawalsButton"
+                    app:layout_constraintTop_toBottomOf="@+id/withdrawalsButton"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <Button
                     android:id="@+id/historyButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="#00FFFFFF"
+                    android:drawableTop="@drawable/ic_transactions"
                     android:text="@string/button_history"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple_light"
+                    app:layout_constraintBottom_toBottomOf="@+id/balanceButton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/balanceButton" />
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/balanceButton"
+                    app:layout_constraintTop_toTopOf="@+id/balanceButton" />
 
                 <Button
-                    android:id="@+id/logOutButton"
+                    android:id="@+id/cardPaymentsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
-                    android:text="@string/button_log_out"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.438"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/historyButton" />
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="#00FFFFFF"
+                    android:drawableTop="@drawable/ic_credit_card"
+                    android:fontFamily="@font/alegreya_sans_bold"
+                    android:text="@string/button_card_payments"
+                    android:textAllCaps="false"
+                    android:textColor="@color/purple_light"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/historyButton"
+                    app:layout_constraintStart_toStartOf="@+id/balanceButton"
+                    app:layout_constraintTop_toBottomOf="@+id/balanceButton"
+                    app:layout_constraintVertical_bias="1.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -273,4 +241,27 @@
             app:srcCompat="@drawable/bg_colored_rectangle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/logOutButton"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="75dp"
+                android:background="@drawable/light_roundless_button"
+                android:fontFamily="@font/alegreya_sans_bold"
+                android:text="@string/button_log_out"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </eightbitlab.com.blurview.BlurView>
 </androidx.constraintlayout.widget.ConstraintLayout>

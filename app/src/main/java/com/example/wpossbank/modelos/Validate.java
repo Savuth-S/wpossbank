@@ -77,6 +77,21 @@ public class Validate {
         }else{ return false;}
     }
 
+    public boolean isNotInDatabase(@NonNull EditText editText, String table, String column){
+        if (!isEmpty(editText)) {
+            String text = editText.getText().toString();
+            Cursor fetch = db.fetchData(text, db.getTable(table), db.getColumn(column));
+            fetch.moveToFirst();
+
+            if (fetch.getCount() > 0){
+                editText.setError(res.getString(R.string.error_already_registered));
+                return false;
+            }else {
+                return true;
+            }
+        }else{ return false;}
+    }
+
     public boolean email(EditText emailInput){
         String email = emailInput.getText().toString();
 
@@ -94,30 +109,32 @@ public class Validate {
     }
 
     public boolean password(EditText passwordInput){
-        String password = passwordInput.getText().toString();
+        if (!isEmpty(passwordInput)){
+            String password = passwordInput.getText().toString();
 
-        if (isEmpty(passwordInput)){
-            return false;
-        }else if (password.length() < 8){
-            passwordInput.setError("La contraseña debe contener almenos ocho caracteres.");
-            return false;
-        }else if (password.matches("(.*\\s.*)")){
-            passwordInput.setError("La contraseña no puede contener espacios.");
-            return false;
-        }else if (!password.matches("(.*[A-Z].*)")){
-            passwordInput.setError("La contraseña debe contener al menos una letra mayuscula.");
-            return false;
-        }else if (!password.matches("(.*[a-z].*)")){
-            passwordInput.setError("La contraseña debe contener al menos una letra minuscula.");
-            return false;
-        }else if (!password.matches("(.*[0-9].*)")){
-            passwordInput.setError("La contraseña debe contener al menos un numero.");
-            return false;
-        }else if (!password.matches("(.*[@#$%^&+*=!()].*)")){
-            passwordInput.setError("La contraseña debe contener al menos un caracter especial.");
-            return false;
+            if (password.length() < 8){
+                passwordInput.setError("La contraseña debe contener almenos ocho caracteres.");
+                return false;
+            }else if (password.matches("(.*\\s.*)")){
+                passwordInput.setError("La contraseña no puede contener espacios.");
+                return false;
+            }else if (!password.matches("(.*[A-Z].*)")){
+                passwordInput.setError("La contraseña debe contener al menos una letra mayuscula.");
+                return false;
+            }else if (!password.matches("(.*[a-z].*)")){
+                passwordInput.setError("La contraseña debe contener al menos una letra minuscula.");
+                return false;
+            }else if (!password.matches("(.*[0-9].*)")){
+                passwordInput.setError("La contraseña debe contener al menos un numero.");
+                return false;
+            }else if (!password.matches("(.*[@#$%^&+*=!()].*)")){
+                passwordInput.setError("La contraseña debe contener al menos un caracter especial.");
+                return false;
+            }else{
+                return true;
+            }
         }else{
-            return true;
+            return false;
         }
     }
 
@@ -280,7 +297,7 @@ public class Validate {
         Cursor fetch = db.fetchData(email, db.getTable("admin"), db.getColumn("email"));
         String registeredPassword = "empty";
         while (fetch.moveToNext()) {
-            registeredPassword = fetch.getString(2);// TABLE_ADMINS - COLUMN_PASSWORD
+            registeredPassword = fetch.getString(3);// TABLE_ADMINS - COLUMN_PASSWORD
         }
         if (fetch.getCount() > 0) {
             if (password.equals(registeredPassword)) {
@@ -328,7 +345,7 @@ public class Validate {
         if(!isEmpty(moneyInput)) {
             try (Cursor fetch = db.fetchData(sp.getActiveUser(),
                     db.getTable("user"),
-                    db.getColumn("user id"))) {
+                    db.getColumn("object id"))) {
                 fetch.moveToNext();
 
                 if (fetch.getCount() > 0) {

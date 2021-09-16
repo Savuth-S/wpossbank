@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.wpossbank.adaptadores.TransactionLogAdapter;
 import com.example.wpossbank.database.Database;
+import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.SharedPreference;
@@ -37,8 +38,10 @@ public class AdminPanelActivity extends AppCompatActivity {
     Admin admin;
 
     BlurView blurView;
+
     TextView balanceText;
     EditText emailInput, passwordInput, passwordConfirmInput;
+
     Button updateButton, addMoneyButton;
     ImageView backArrow;
 
@@ -55,7 +58,7 @@ public class AdminPanelActivity extends AppCompatActivity {
         admin = new Admin();
         admin.loadData(context, admin);
 
-        blurView = (BlurView)findViewById(R.id.blurView);
+        blurView = findViewById(R.id.blurView);
         blurBackground();
 
         balanceText = findViewById(R.id.textView2);
@@ -83,13 +86,15 @@ public class AdminPanelActivity extends AppCompatActivity {
                 admin.setEmail(emailInput.getText().toString());
                 admin.setPassword(passwordInput.getText().toString());
 
-                admin.update(context, admin);
+                String message = context.getString(R.string.dialog_confirm_update_admin);
+
+                new Dialogs.ConfirmUpdateAdmin(context, admin, message, "update", admin.getEmail())
+                        .show(getSupportFragmentManager(),"Confirm");
             }
         });
 
-        addMoneyButton.setOnClickListener( showAddMoneyActivity ->{
-
-        });
+        addMoneyButton.setOnClickListener( showAddMoneyActivity ->
+                startActivity(new Intent(context, AdminDepositActivity.class)));
 
         backArrow.setOnClickListener( goBack -> finish());
 
@@ -99,7 +104,7 @@ public class AdminPanelActivity extends AppCompatActivity {
         float radius = 20f;
 
         View decorView = getWindow().getDecorView();
-        ViewGroup rootView = (ViewGroup) decorView.findViewById(android.R.id.content);
+        ViewGroup rootView = decorView.findViewById(android.R.id.content);
         Drawable windowBackground = decorView.getBackground();
 
         blurView.setupWith(rootView)

@@ -1,5 +1,7 @@
 package com.example.wpossbank.modelos;
 
+import android.content.Context;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wpossbank.R;
@@ -30,7 +32,7 @@ public class CreditCard extends AppCompatActivity {
     public String getDuesNumber() { return duesNumber; }
     public void setDuesNumber(String duesNumber) { this.duesNumber = duesNumber; }
 
-    public String getType(){
+    public String getType(Context context){
         switch (getNumber().charAt(0)) {
             case '3':
                 return "American Express";
@@ -41,7 +43,7 @@ public class CreditCard extends AppCompatActivity {
             case '6':
                 return "UnionPay";
             default:
-                return "Número de Tarjeta de Credito";
+                return context.getString(R.string.card_number);
         }
     }
 }

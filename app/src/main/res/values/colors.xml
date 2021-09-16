@@ -3,6 +3,7 @@
     <color name="purple_text_dark">#FF7E36A0</color>
     <color name="purple">#FF974EB0</color>
     <color name="purple_dark">#FF864A9B</color>
+    <color name="purple_light">#FFAB63D8</color>
 
     <color name="purple_button">#FF974EB0</color>
     <color name="purple_dark_button">#FF864A9B</color>

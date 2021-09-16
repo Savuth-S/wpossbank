@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".WithdrawalsActivity">
+    tools:context=".AdminDepositActivity">
 
     <ImageView
         android:id="@+id/imageView11"
@@ -68,7 +68,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/alegreya_sans"
-                android:text="@string/withdraw"
+                android:text="@string/deposit"
                 android:textColor="@color/purple_text_dark"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alef"
-                android:text="@string/money_from_the_accoun"
+                android:text="@string/money_in_the_account"
                 android:textColor="@color/white"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -136,25 +136,25 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="32dp"
                         android:fontFamily="@font/alegreya_sans_bold"
-                        android:text="@string/account"
+                        android:text="@string/email"
                         android:textColor="@color/purple_text_dark"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/passwordInput"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/ccInput"
+                        app:layout_constraintStart_toStartOf="@+id/emailInput"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <EditText
-                        android:id="@+id/ccInput"
+                        android:id="@+id/emailInput"
                         android:layout_width="0dp"
                         android:layout_height="35dp"
                         android:background="@drawable/input_purple"
                         android:ems="10"
                         android:fontFamily="@font/alegreya_sans_light"
                         android:hint="@string/input_account"
-                        android:inputType="number"
+                        android:inputType="textEmailAddress"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/gray"
@@ -176,24 +176,24 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/alegreya_sans_bold"
-                        android:text="@string/pin"
+                        android:text="@string/password"
                         android:textColor="@color/purple_text_dark"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/ccInput"
-                        app:layout_constraintTop_toBottomOf="@+id/ccInput"
+                        app:layout_constraintStart_toStartOf="@+id/emailInput"
+                        app:layout_constraintTop_toBottomOf="@+id/emailInput"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <EditText
-                        android:id="@+id/pinInput"
+                        android:id="@+id/passwordInput"
                         android:layout_width="0dp"
                         android:layout_height="35dp"
                         android:background="@drawable/input_purple"
                         android:ems="10"
                         android:fontFamily="@font/alegreya_sans_light"
-                        android:hint="@string/input_pin"
+                        android:hint="@string/input_password"
                         android:inputType="numberPassword"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
@@ -216,25 +216,25 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/alegreya_sans_bold"
-                        android:text="@string/pin_confirm"
+                        android:text="@string/deposit_amount"
                         android:textColor="@color/purple_text_dark"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/pinInput"
-                        app:layout_constraintTop_toBottomOf="@+id/pinInput"
+                        app:layout_constraintStart_toStartOf="@+id/passwordInput"
+                        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <EditText
-                        android:id="@+id/pinConfirmInput"
+                        android:id="@+id/depositInput"
                         android:layout_width="0dp"
                         android:layout_height="35dp"
                         android:background="@drawable/input_purple"
                         android:ems="10"
                         android:fontFamily="@font/alegreya_sans_light"
-                        android:hint="@string/input_pin"
-                        android:inputType="numberPassword"
+                        android:hint="@string/input_deposit_amount"
+                        android:inputType="number"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/gray"
@@ -249,64 +249,32 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView5"
                         app:layout_constraintVertical_bias="0.0" />
 
-                    <TextView
-                        android:id="@+id/textView6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/alegreya_sans_bold"
-                        android:text="@string/withdrawal_amount"
-                        android:textColor="@color/purple_text_dark"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/pinConfirmInput"
-                        app:layout_constraintTop_toBottomOf="@+id/pinConfirmInput"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                    <EditText
-                        android:id="@+id/withdrawalInput"
-                        android:layout_width="0dp"
-                        android:layout_height="35dp"
-                        android:background="@drawable/input_purple"
-                        android:ems="10"
-                        android:fontFamily="@font/alegreya_sans_light"
-                        android:hint="@string/input_withdrawal_amount"
-                        android:inputType="number"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:textColor="@color/gray"
-                        android:textColorHighlight="@color/white"
-                        android:textColorHint="@color/gray"
-                        android:textColorLink="@color/purple_text_dark"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView6"
-                        app:layout_constraintVertical_bias="0.0" />
-
-                    <Button
-                        android:id="@+id/confirmButton"
-                        android:layout_width="0dp"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginBottom="30dp"
-                        android:background="@drawable/light_roundless_button"
-                        android:fontFamily="@font/alegreya_sans_bold"
-                        android:text="@string/button_confirm"
-                        android:textAllCaps="false"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/withdrawalInput"
-                        app:layout_constraintVertical_bias="1.0" />
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:elevation="7dp">
+
+                <Button
+                    android:id="@+id/confirmButton"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginBottom="75dp"
+                    android:background="@drawable/light_roundless_button"
+                    android:fontFamily="@font/alegreya_sans_bold"
+                    android:text="@string/button_confirm"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imageView14"
