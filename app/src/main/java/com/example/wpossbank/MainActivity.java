@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
         logOutButton = findViewById(R.id.logOutButton);
 
         user.loadData(user);
-        userView.setText(getString(R.string.main_welcome_message, user.getName()));
+        userView.setText(getString(R.string.main_welcome_message, user.getName().split(" ")[0]));
 
         cardPaymentsButton.setOnClickListener(showCardPayment ->
             startActivity(new Intent(context, CardPaymentActivity.class)));

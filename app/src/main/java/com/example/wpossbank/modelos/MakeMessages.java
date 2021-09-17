@@ -12,11 +12,6 @@ import com.example.wpossbank.R;
 import com.example.wpossbank.database.Database;
 
 public class MakeMessages extends AppCompatActivity {
-    Resources res;
-
-    public MakeMessages(@NonNull Context context){
-        res = context.getResources();
-    }
 
     public String separateNumberRight(String number, String character, int everyNCharacters){
 
@@ -58,7 +53,7 @@ public class MakeMessages extends AppCompatActivity {
 
     public String cardPayment(@NonNull Context context, @NonNull CreditCard card) {
         String message;
-        String[] template = res.getString(R.string.dialog_confirm_cardpayment).split("/");
+        String[] template = context.getString(R.string.dialog_confirm_cardpayment).split("/");
 
         //Reemplaza cada numero excepto los cuatro ultimos por *
         int cardLength = card.getNumber().length();
@@ -103,7 +98,7 @@ public class MakeMessages extends AppCompatActivity {
 
     public String withdraw(Context context, EditText withdrawInput) {
         String message;
-        String[] template = res.getString(R.string.dialog_confirm_deposit).split("/");
+        String[] template = context.getString(R.string.dialog_confirm_withdrawal).split("/");
 
         User user = new User(context);
         user.loadData(user);
@@ -118,7 +113,7 @@ public class MakeMessages extends AppCompatActivity {
 
     public String deposit(Context context, @NonNull EditText depositInput) {
         String message;
-        String[] template = res.getString(R.string.dialog_confirm_deposit).split("/");
+        String[] template = context.getString(R.string.dialog_confirm_deposit).split("/");
 
         User user = new User(context);
         user.loadData(user);
@@ -132,7 +127,7 @@ public class MakeMessages extends AppCompatActivity {
 
     public String transfer(Context context, EditText transferInput, @NonNull EditText ccTransferInput) {
         String message;
-        String[] template = res.getString(R.string.dialog_confirm_transfer).split("/");
+        String[] template = context.getString(R.string.dialog_confirm_transfer).split("/");
 
         User user = new User(context);
         user.loadData(user);
@@ -152,13 +147,13 @@ public class MakeMessages extends AppCompatActivity {
 
             return message;
         }else{
-            return res.getString(R.string.error_fetch_data);
+            return context.getString(R.string.error_fetch_data);
         }
     }
 
     public String getBalance(Context context) {
         String message;
-        String[] template = res.getString(R.string.dialog_confirm_get_balance).split("/");
+        String[] template = context.getString(R.string.dialog_confirm_get_balance).split("/");
 
         User user = new User(context);
         user.loadData(user);

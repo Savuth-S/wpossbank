@@ -55,7 +55,7 @@ public class UserProfileActivity extends AppCompatActivity {
         context = this;
         sp = new SharedPreference(context);
         db = new Database(context);
-        messages = new MakeMessages(context);
+        messages = new MakeMessages();
 
         user = new User(context);
 

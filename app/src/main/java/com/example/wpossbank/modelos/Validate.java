@@ -255,7 +255,7 @@ public class Validate {
     }
 
     public boolean payment(@NonNull EditText paymentInput){
-        if (!isEmpty(paymentInput)) {
+        if (!isEmpty(paymentInput) && isInRange(paymentInput,3,7)) {
             int payment = Integer.parseInt(paymentInput.getText().toString());
             if (payment >= 10000 && payment <= 1000000) {
                 return true;

@@ -53,7 +53,7 @@ public class NewUserActivity extends AppCompatActivity {
 
         enterButton.setOnClickListener( addNewUser -> {
             db = new Database(context);
-            boolean ccValidate = validate.isNotInDatabase(ccInput, db.getTable("user"),db.getColumn("cc"))
+            boolean ccValidate = validate.isNotInDatabase(ccInput, "user","cc")
                         && validate.isNumber(ccInput) && validate.isInRange(ccInput,10,13),
                     nameValidate = validate.name(nameInput),
                     lastnameValidate = validate.name(lastnameInput),

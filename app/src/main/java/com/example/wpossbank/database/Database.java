@@ -258,7 +258,7 @@ public class Database extends SQLiteOpenHelper {
         try(SQLiteDatabase db = getWritableDatabase()) {
             ContentValues cv = new ContentValues();
             Calendar calendar = Calendar.getInstance();
-            MakeMessages messages = new MakeMessages(context);
+            MakeMessages messages = new MakeMessages();
 
             String[] dateArray = calendar.getTime().toString().split(" ");
             String[] timeArray = dateArray[3].split(":");

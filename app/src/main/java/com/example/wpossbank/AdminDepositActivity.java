@@ -35,7 +35,7 @@ public class AdminDepositActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_deposit);
         context = this;
         validate = new Validate(context);
-        messages = new MakeMessages(context);
+        messages = new MakeMessages();
 
         admin = new Admin();
         user = new User(context);

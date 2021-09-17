@@ -234,17 +234,16 @@ public class Dialogs {
         Database db;
         Admin admin;
 
-        String message;
-        String type;
-        String source;
+        String message, type, source, active;
 
-        public ConfirmUpdateAdmin(Context context, Admin admin, String message, String type, String source) {
+        public ConfirmUpdateAdmin(Context context, Admin admin, String message, String type, String source, String active) {
             this.context = context;
             this.admin = admin;
 
             this.message = message;
             this.type = type;
             this.source = source;
+            this.active = active;
 
             db = new Database(context);
         }
@@ -265,7 +264,7 @@ public class Dialogs {
 
             positiveButton.setOnClickListener( showSuccessDialog ->{
                 admin.update(context);
-                db.newLogEntry(type, Integer.toString(admin.getBalance()), source, admin.getEmail());
+                db.newLogEntry(type, Integer.toString(admin.getBalance()), source, active);
 
                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                 dismiss();

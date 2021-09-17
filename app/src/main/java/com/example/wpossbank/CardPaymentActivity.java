@@ -18,9 +18,9 @@ import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.CreditCard;
 import com.example.wpossbank.modelos.MakeMessages;
+import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.Validate;
 import com.example.wpossbank.database.Database;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 
@@ -30,6 +30,7 @@ import eightbitlab.com.blurview.RenderScriptBlur;
 public class CardPaymentActivity extends AppCompatActivity {
     Context context;
     Resources res;
+    SharedPreference sp;
 
     Database db;
     Validate validate;
@@ -52,13 +53,14 @@ public class CardPaymentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_card_payment);
         context = this;
         res = getResources();
+        sp = new SharedPreference(context);
 
         //Declaracion de metodos
         validate = new Validate(context);
 
         //Declaracion de objetos
         db = new Database(context);
-        messages = new MakeMessages(context);
+        messages = new MakeMessages();
         admin = new Admin();
         card = new CreditCard();
 
@@ -132,7 +134,7 @@ public class CardPaymentActivity extends AppCompatActivity {
 
                 new Dialogs.ConfirmUpdateAdmin(context, admin,
                         messages.cardPayment(context, card), "card",
-                        cardNumberInput.getText().toString())
+                        cardNumberInput.getText().toString(), sp.getActiveUser())
                         .show(getSupportFragmentManager(),"Confirm");
             }
         });

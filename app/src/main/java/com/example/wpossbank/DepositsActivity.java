@@ -41,7 +41,7 @@ public class DepositsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_deposit);
         context = this;
         validate = new Validate(context);
-        messages = new MakeMessages(context);
+        messages = new MakeMessages();
 
         admin = new Admin();
         user = new User(context);

@@ -53,7 +53,7 @@ public class AdminPanelActivity extends AppCompatActivity {
         context = this;
         validate = new Validate(context);
         db = new Database(context);
-        messages = new MakeMessages(context);
+        messages = new MakeMessages();
 
         admin = new Admin();
         admin.loadData(context, admin);
@@ -88,7 +88,7 @@ public class AdminPanelActivity extends AppCompatActivity {
 
                 String message = context.getString(R.string.dialog_confirm_update_admin);
 
-                new Dialogs.ConfirmUpdateAdmin(context, admin, message, "update", admin.getEmail())
+                new Dialogs.ConfirmUpdateAdmin(context, admin, message, "update", admin.getEmail(), admin.getEmail())
                         .show(getSupportFragmentManager(),"Confirm");
             }
         });

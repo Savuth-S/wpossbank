@@ -148,7 +148,7 @@
 
 
     <string name="admin_panel">Panel del Administrador</string>
-    <string name="hello_admin">Hola Administrador,</string>
+    <string name="hello_admin">Hola ADMINISTRADOR,</string>
     <string name="admin_balance_is" >El balance del corresponsal es </string>
     <string name="update">Actualizar</string>
     <string name="update_admin_data">ACTUALIZAR DATOS DE ADMINISTRADOR</string>

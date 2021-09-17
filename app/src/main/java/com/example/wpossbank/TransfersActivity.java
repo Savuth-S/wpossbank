@@ -41,7 +41,7 @@ public class TransfersActivity extends AppCompatActivity {
         validate = new Validate(context);
 
         admin = new Admin();
-        messages = new MakeMessages(context);
+        messages = new MakeMessages();
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
