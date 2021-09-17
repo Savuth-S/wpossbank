@@ -22,13 +22,14 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_new_user.xml" value="0.41" />
         <entry key="app/src/main/res/layout/activity_transfers.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.2140625" />
+        <entry key="app/src/main/res/layout/activity_transfers_history.xml" value="0.9" />
+        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_welcome_screen.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_withdrawals.xml" value="0.33" />
         <entry key="app/src/main/res/layout/dialog_confirm.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/dialog_fail.xml" value="0.17617753623188406" />
         <entry key="app/src/main/res/layout/dialog_success.xml" value="0.17617753623188406" />
-        <entry key="app/src/main/res/layout/layout_log_entry.xml" value="0.5103734439834025" />
+        <entry key="app/src/main/res/layout/layout_log_entry.xml" value="0.5" />
         <entry key="app/src/main/res/layout/test.xml" value="0.12817028985507245" />
       </map>
     </option>
