@@ -56,7 +56,7 @@ public class GetBalanceActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         backArrow = findViewById(R.id.backArrow);
 
-        user.loadData(user);//Carga la información del usuario desde la base de datos
+        user.loadData();//Carga la información del usuario desde la base de datos
 
         confirmButton.setOnClickListener(confirmPayment -> {
             //Deckara y verifica si los campos tienen la información correcta

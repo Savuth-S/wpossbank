@@ -88,7 +88,7 @@ public class AdminPanelActivity extends AppCompatActivity {
 
                 String message = context.getString(R.string.dialog_confirm_update_admin);
 
-                new Dialogs.ConfirmUpdateAdmin(context, admin, message, "update", admin.getEmail(), admin.getEmail())
+                new Dialogs.ConfirmUpdateAdmin(context, admin, message, "update", admin.getEmail(), admin.getObjectId(context))
                         .show(getSupportFragmentManager(),"Confirm");
             }
         });

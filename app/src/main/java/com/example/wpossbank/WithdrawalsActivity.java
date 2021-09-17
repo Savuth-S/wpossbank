@@ -57,7 +57,7 @@ public class WithdrawalsActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         backArrow = findViewById(R.id.backArrow);
 
-        user.loadData(user);//Carga la información del usuario desde la base de datos
+        user.loadData();//Carga la información del usuario desde la base de datos
 
         confirmButton.setOnClickListener(confirmPayment -> {
             //Deckara y verifica si los campos tienen la información correcta
@@ -74,7 +74,7 @@ public class WithdrawalsActivity extends AppCompatActivity {
                 int withdrawValue = Integer.parseInt(withdrawalInput.getText().toString());
 
                 admin.setBalance(admin.getCost());
-                new Dialogs.ConfirmUserAddBalance(context , admin,
+                new Dialogs.ConfirmUserUpdateBalance(context , admin,
                         messages.withdraw(context,withdrawalInput), "withdraw", user.getCc(),
                         withdrawValue-(withdrawValue*2+admin.getCost()))
                         .show(getSupportFragmentManager(),"CONFIRM2");

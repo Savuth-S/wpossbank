@@ -22,6 +22,8 @@ import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 
 public class Dialogs {
+
+    // Dialogo para la transferencia de dinero entre usuarios
     public static class ConfirmUserTransferBalance extends DialogFragment {
         Context context;
         Database db;
@@ -51,8 +53,9 @@ public class Dialogs {
             user = new User(context);
             transferUser = new User(context);
 
-            user.loadData(user);
-            this.transferUser = transferUser.loadUser(ccTransfer);
+            // carga la informaci�n dek usuario activo desde la base de datos al nuevo objeto local de usuario
+            user.loadData();
+            transferUser.loadUser(ccTransfer);
         }
 
         @NonNull
@@ -60,24 +63,31 @@ public class Dialogs {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+            /* carga el layout a la view del dialogo, luego obtiene los elementos del layout
+                y declara los objetos correspondientes */
             LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.dialog_confirm, null);
             TextView textView = view.findViewById(R.id.message);
             Button positiveButton = view.findViewById(R.id.positiveButton),
                     negativeButton = view.findViewById(R.id.negativeButton);
 
+            // carga el mensaje de confirmaci�n en el layout y luego carga la view al dialogo
             textView.setText(message);
             builder.setView(view);
 
             positiveButton.setOnClickListener( showSuccessDialog ->{
+                // agrega el cobro de comision a la cuenta del corresponsal
                 admin.update(context);
 
-                user.setBalance(addAmount-(addAmount*2));
+                // elimina el monto de la transferencia y el cobro de comision de el saldo del usuario
+                user.setBalance(addAmount-(addAmount*2+admin.getBalance()));
                 user.update(context, user);
 
+                // agrega el monto de la transferencia al saldo del usuario que la esta recibiendo
                 transferUser.setBalance(addAmount);
                 transferUser.update(context, transferUser);
 
+                // agrega la transacci�n al registro de transacciones
                 db.newLogEntry(type, Integer.toString(addAmount-(addAmount*2)), source);
                 db.newLogEntry(type, Integer.toString(addAmount), source, transferUser.getObjectId());
 
@@ -96,6 +106,7 @@ public class Dialogs {
 
 
 
+    // Dialogo para confirmar el cobro de comision por ver el saldo actual del usuario
     public static class ConfirmUserGetBalance extends DialogFragment {
         Context context;
         Database db;
@@ -121,7 +132,8 @@ public class Dialogs {
             sp = new SharedPreference(context);
             user = new User(context);
 
-            user.loadData(user);
+            // carga la informaci�n dek usuario activo desde la base de datos al nuevo objeto local de usuario
+            user.loadData();
         }
 
         @NonNull
@@ -129,21 +141,27 @@ public class Dialogs {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+            /* carga el layout a la view del dialogo, luego obtiene los elementos del layout
+                y declara los objetos correspondientes */
             LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.dialog_confirm, null);
             TextView textView = view.findViewById(R.id.message);
             Button positiveButton = view.findViewById(R.id.positiveButton),
                     negativeButton = view.findViewById(R.id.negativeButton);
 
+            // carga el mensaje de confirmaci�n en el layout y luego carga la view al dialogo
             textView.setText(message);
             builder.setView(view);
 
             positiveButton.setOnClickListener( showSuccessDialog ->{
+                // agrega el cobro de comision a la cuenta del corresponsal
                 admin.update(context);
 
+                // elimina el cobro de comision del saldo del usuario
                 user.setBalance(admin.getBalance()-(admin.getBalance()*2));
                 user.update(context, user);
 
+                // añade la transacci�n en el registro de transacciones
                 db.newLogEntry(type, "0", source);
 
                 requireActivity().finish();
@@ -162,8 +180,8 @@ public class Dialogs {
 
 
 
-
-    public static class ConfirmUserAddBalance extends DialogFragment {
+    // Dialogo para la confirmaci�n de las transacciones del usuario
+    public static class ConfirmUserUpdateBalance extends DialogFragment {
         Context context;
         Database db;
         SharedPreference sp;
@@ -176,7 +194,7 @@ public class Dialogs {
         String source;
         int addAmount;
 
-        public ConfirmUserAddBalance(Context context, Admin admin, String message, String type,
+        public ConfirmUserUpdateBalance(Context context, Admin admin, String message, String type,
                                      String source, int addAmount) {
             this.context = context;
             this.admin = admin;
@@ -190,7 +208,8 @@ public class Dialogs {
             sp = new SharedPreference(context);
             user = new User(context);
 
-            user.loadData(user);
+            // carga la informaci�n dek usuario activo desde la base de datos al nuevo objeto local de usuario
+            user.loadData();
         }
 
         @NonNull
@@ -198,21 +217,27 @@ public class Dialogs {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+            /* carga el layout a la view del dialogo, luego obtiene los elementos del layout
+                y declara los objetos correspondientes */
             LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.dialog_confirm, null);
             TextView textView = view.findViewById(R.id.message);
             Button positiveButton = view.findViewById(R.id.positiveButton),
                     negativeButton = view.findViewById(R.id.negativeButton);
 
+            // carga el mensaje de confirmaci�n en el layout y luego carga la view al dialogo
             textView.setText(message);
             builder.setView(view);
 
             positiveButton.setOnClickListener( showSuccessDialog ->{
+                // agrega el cobro de comision a la cuenta del corresponsal
                 admin.update(context);
 
+                // añade (o elimina si es negativo) el monto de la transacci�n al saldo del usuario
                 user.setBalance(addAmount);
                 user.update(context, user);
 
+                // añade la transaccion al registro de transacciones
                 db.newLogEntry(type, Integer.toString(addAmount), source);
 
                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
@@ -229,6 +254,8 @@ public class Dialogs {
     }
 
 
+
+    // Dialogo para confirmar la actualizacion de informacio�n de la cuenta del corresponsal
     public static class ConfirmUpdateAdmin extends DialogFragment {
         Context context;
         Database db;
@@ -243,7 +270,7 @@ public class Dialogs {
             this.message = message;
             this.type = type;
             this.source = source;
-            this.active = active;
+            this.active = active; // usuario activo con el que asociar esta transacci�n
 
             db = new Database(context);
         }
@@ -253,16 +280,21 @@ public class Dialogs {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+            /* carga el layout a la view del dialogo, luego obtiene los elementos del layout
+                y declara los objetos correspondientes */
             LayoutInflater inflater = requireActivity().getLayoutInflater();
             View view = inflater.inflate(R.layout.dialog_confirm, null);
             TextView textView = view.findViewById(R.id.message);
             Button positiveButton = view.findViewById(R.id.positiveButton),
                     negativeButton = view.findViewById(R.id.negativeButton);
 
+            // carga el mensaje de confirmaci�n en el layout y luego carga la view al dialogo
             textView.setText(message);
             builder.setView(view);
 
             positiveButton.setOnClickListener( showSuccessDialog ->{
+                /* actualiza la informaci�n del objeto local del admin a la base de datos
+                   y añade una entrada a la tabla de transacciones */
                 admin.update(context);
                 db.newLogEntry(type, Integer.toString(admin.getBalance()), source, active);
 
@@ -280,6 +312,7 @@ public class Dialogs {
 
 
     }
+
 
 
     public static class TransactionSuccess extends DialogFragment {

@@ -16,25 +16,25 @@ import java.util.Calendar;
 public class Validate {
     Context context;
     Database db;
-    Resources res;
     SharedPreference sp;
 
     public Validate(Context context) {
         this.context = context;
         db = new Database(context);
-        res = context.getResources();
         sp = new SharedPreference(context);
     }
 
+    // valida si un input esta vacio y devuelve verdadero si lo es
     public boolean isEmpty(@NonNull EditText editText){
         if (editText.getText().toString().isEmpty()) {
-            editText.setError(res.getString(R.string.error_empty));
+            editText.setError(context.getString(R.string.error_empty));
             return true;
         }else{
             return false;
         }
     }
 
+    // valida si un input solo contiene numeros
     public boolean isNumber(@NonNull EditText editText){
         if (!isEmpty(editText)) {
 
@@ -43,12 +43,13 @@ public class Validate {
             if (text.matches("^[0-9]+$")) {
                 return true;
             } else {
-                editText.setError(res.getString(R.string.error_only_numbers));
+                editText.setError(context.getString(R.string.error_only_numbers));
                 return false;
             }
         }else{ return false;}
     }
 
+    // valida si la string ingresada en un input es de un tamaño dentro del rango especificado
     public boolean isInRange(@NonNull EditText editText, int min, int max){
         if (!isEmpty(editText)) {
             String text = editText.getText().toString();
@@ -56,12 +57,13 @@ public class Validate {
             if (text.matches(regex)) {
                 return true;
             } else {
-                editText.setError(res.getString(R.string.error_invalid));
+                editText.setError(context.getString(R.string.error_invalid));
                 return false;
             }
         }else{ return false;}
     }
 
+    // valida si la informacion ingresada en el input ya existe en la base de datos
     public boolean isInDatabase(@NonNull EditText editText, String table, String column){
         if (!isEmpty(editText)) {
             String text = editText.getText().toString();
@@ -71,12 +73,13 @@ public class Validate {
             if (fetch.getCount() > 0){
                 return true;
             }else {
-                editText.setError(res.getString(R.string.error_not_registered));
+                editText.setError(context.getString(R.string.error_not_registered));
                 return false;
             }
         }else{ return false;}
     }
 
+    // valida si la informaci�n ingresada en el input no existe en la base de datos
     public boolean isNotInDatabase(@NonNull EditText editText, String table, String column){
         if (!isEmpty(editText)) {
             String text = editText.getText().toString();
@@ -84,7 +87,7 @@ public class Validate {
             fetch.moveToFirst();
 
             if (fetch.getCount() > 0){
-                editText.setError(res.getString(R.string.error_already_registered));
+                editText.setError(context.getString(R.string.error_already_registered));
                 return false;
             }else {
                 return true;
@@ -92,43 +95,45 @@ public class Validate {
         }else{ return false;}
     }
 
-    public boolean email(EditText emailInput){
+    // valida si la informacion ingresada en el input es una direcci�n de correo valida
+    public boolean email(@NonNull EditText emailInput){
         String email = emailInput.getText().toString();
 
         if (isEmpty(emailInput)){
             return false;
         }else if (email.matches("(.*\\s.*)")){
-            emailInput.setError(res.getString(R.string.error_spaces));
+            emailInput.setError(context.getString(R.string.error_spaces));
             return false;
         }else if(email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")){
             return true;
         }else {
-            emailInput.setError(res.getString(R.string.error_invalid));
+            emailInput.setError(context.getString(R.string.error_invalid));
             return false;
         }
     }
 
+    // valida si el input contiene una contraseña valida
     public boolean password(EditText passwordInput){
         if (!isEmpty(passwordInput)){
             String password = passwordInput.getText().toString();
 
             if (password.length() < 8){
-                passwordInput.setError("La contraseña debe contener almenos ocho caracteres.");
+                passwordInput.setError(context.getString(R.string.error_atleast_8));
                 return false;
             }else if (password.matches("(.*\\s.*)")){
-                passwordInput.setError("La contraseña no puede contener espacios.");
+                passwordInput.setError(context.getString(R.string.error_spaces));
                 return false;
             }else if (!password.matches("(.*[A-Z].*)")){
-                passwordInput.setError("La contraseña debe contener al menos una letra mayuscula.");
+                passwordInput.setError(context.getString(R.string.error_atleast_cap));
                 return false;
             }else if (!password.matches("(.*[a-z].*)")){
-                passwordInput.setError("La contraseña debe contener al menos una letra minuscula.");
+                passwordInput.setError(context.getString(R.string.error_atleast_letter));
                 return false;
             }else if (!password.matches("(.*[0-9].*)")){
-                passwordInput.setError("La contraseña debe contener al menos un numero.");
+                passwordInput.setError(context.getString(R.string.error_atleast_number));
                 return false;
             }else if (!password.matches("(.*[@#$%^&+*=!()].*)")){
-                passwordInput.setError("La contraseña debe contener al menos un caracter especial.");
+                passwordInput.setError(context.getString(R.string.error_atleast_special));
                 return false;
             }else{
                 return true;
@@ -138,6 +143,7 @@ public class Validate {
         }
     }
 
+    // valida si el string del input solo contiene letras mayusculas
     public boolean name(@NonNull EditText nameInput){
         if (!isEmpty(nameInput)) {
 
@@ -145,12 +151,13 @@ public class Validate {
             if (name.matches("^[A-ZÁ-Ú\\s]+$")) {
                 return true;
             } else {
-                nameInput.setError(res.getString(R.string.error_only_caps));
+                nameInput.setError(context.getString(R.string.error_only_caps));
                 return false;
             }
         }else{ return false; }
     }
 
+    // valida si el nuymero de cedula del input es valido
     public boolean cc(@NonNull EditText ccInput) {
         String cc = ccInput.getText().toString();
         if (isEmpty(ccInput)) {
@@ -160,66 +167,70 @@ public class Validate {
         }else if (isInDatabase(ccInput,"user","cc")){
             return false;
         } else if (cc.matches("(.*\\s.*)")) {
-            ccInput.setError(res.getString(R.string.error_spaces));
+            ccInput.setError(context.getString(R.string.error_spaces));
             return false;
         } else if (cc.matches("^[0-9]+$")) {
             return true;
         }else{
-            ccInput.setError(res.getString(R.string.error_already_registered));
+            ccInput.setError(context.getString(R.string.error_already_registered));
             return false;
         }
     }
 
+    // valida si el pin ingresado en el input es valido
     public boolean pin(@NonNull EditText pinInput) {
         String pin = pinInput.getText().toString();
         if (isEmpty(pinInput)) {
             return false;
         } else if (!pin.matches("(.{4})")){
-            pinInput.setError(res.getString(R.string.error_mustbe_4));
+            pinInput.setError(context.getString(R.string.error_mustbe_4));
             return false;
         } else if (pin.matches("(.*\\s.*)")) {
-            pinInput.setError(res.getString(R.string.error_spaces));
+            pinInput.setError(context.getString(R.string.error_spaces));
             return false;
         } else if (pin.matches("^[0-9]+$")) {
             return true;
         }else{
-            pinInput.setError(res.getString(R.string.error_only_numbers));
+            pinInput.setError(context.getString(R.string.error_only_numbers));
             return false;
         }
     }
 
+    // valida si el saldo inicial del input es valido
     public boolean initialBalance(@NonNull EditText balanceInput) {
         String balance = balanceInput.getText().toString();
         if (isEmpty(balanceInput)) {
             return false;
         } else if (balance.matches("(.*\\s.*)")) {
-            balanceInput.setError(res.getString(R.string.error_spaces));
+            balanceInput.setError(context.getString(R.string.error_spaces));
             return false;
         } else if (balance.matches("^[0-9]+$") && Integer.parseInt(balance) >= 10_000) {
             return true;
         }else{
-            balanceInput.setError(res.getString(R.string.error_invalid));
+            balanceInput.setError(context.getString(R.string.error_invalid));
             return false;
         }
     }
 
+    // valida si el n�mero de tarjeta ingresado en el input es valido
     public boolean cardNumber(@NonNull EditText cardNumberInput){
         String cardNumber = cardNumberInput.getText().toString();
 
         if (isEmpty(cardNumberInput)){
             return false;
         }else if (!cardNumber.matches("(.{15,16})")){
-            cardNumberInput.setError(res.getString(R.string.error_between_15and16));
+            cardNumberInput.setError(context.getString(R.string.error_between_15and16));
             return false;
         }else if(cardNumber.charAt(0) == '3' || cardNumber.charAt(0) == '4'||
                 cardNumber.charAt(0) == '5' || cardNumber.charAt(0) == '6'){
             return true;
         }else{
-            cardNumberInput.setError(res.getString(R.string.error_invalid));
+            cardNumberInput.setError(context.getString(R.string.error_invalid));
             return false;
         }
     }
 
+    // valida si la fecha de expiracion de la tarjeta es mayor al actual
     public boolean expDate(@NonNull EditText expDateInput){
         if (!isEmpty(expDateInput)) {
             Calendar currentDate = Calendar.getInstance();
@@ -234,7 +245,7 @@ public class Validate {
                 expDateInput.setError(null);
                 return true;
             }else{
-                expDateInput.setError(res.getString(R.string.error_invalid));
+                expDateInput.setError(context.getString(R.string.error_invalid));
                 return false;
             }
         }else{
@@ -242,6 +253,7 @@ public class Validate {
         }
     }
 
+    // valida si el ccv de la tarjeta es de cuatro caracteres
     public boolean ccv(@NonNull EditText ccvInput){
         String ccv = ccvInput.getText().toString();
         if (isEmpty(ccvInput)){
@@ -249,18 +261,19 @@ public class Validate {
         }else if (ccv.matches("(.{4})")){
             return true;
         }else{
-            ccvInput.setError(res.getString(R.string.error_invalid));
+            ccvInput.setError(context.getString(R.string.error_invalid));
             return false;
         }
     }
 
+    // valuda si el pago a realizar es valido
     public boolean payment(@NonNull EditText paymentInput){
-        if (!isEmpty(paymentInput) && isInRange(paymentInput,3,7)) {
+        if (!isEmpty(paymentInput) && isInRange(paymentInput,3,7) && isNumber(paymentInput)) {
             int payment = Integer.parseInt(paymentInput.getText().toString());
             if (payment >= 10000 && payment <= 1000000) {
                 return true;
             } else {
-                paymentInput.setError(res.getString(R.string.error_invalid));
+                paymentInput.setError(context.getString(R.string.error_invalid));
                 return false;
             }
         }else{
@@ -268,14 +281,13 @@ public class Validate {
         }
     }
 
+    // valida si la cantidad de cuotas esta dentro del rango valido
     public boolean dues(@NonNull EditText duesInput){
         if(!isEmpty(duesInput)) {
-            int dues = Integer.parseInt(duesInput.getText().toString());
-
-            if (dues > 0 && dues < 13) {
+            if (isInRange(duesInput, 1, 12)) {
                 return true;
             } else {
-                duesInput.setError(res.getString(R.string.error_invalid));
+                duesInput.setError(context.getString(R.string.error_invalid));
                 return false;
             }
         }else{
@@ -283,6 +295,7 @@ public class Validate {
         }
     }
 
+    // verifica los credenciales de logeo para el panel de administrador del corresponsal
     public boolean adminLogin(@NonNull EditText emailInput, @NonNull EditText passwordInput) {
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
@@ -303,15 +316,16 @@ public class Validate {
             if (password.equals(registeredPassword)) {
                 return true;
             } else {
-                passwordInput.setError(res.getString(R.string.error_wrong));
+                passwordInput.setError(context.getString(R.string.error_wrong));
                 return false;
             }
         } else {
-            emailInput.setError(res.getString(R.string.error_not_registered));
+            emailInput.setError(context.getString(R.string.error_not_registered));
             return false;
         }
     }
 
+    // verifica credenciales de logeo para el usuario
     public boolean login(@NonNull EditText ccInput, @NonNull EditText pinInput) {
         String cc = ccInput.getText().toString();
         String pin = pinInput.getText().toString();
@@ -332,15 +346,16 @@ public class Validate {
             if (pin.equals(registeredPin)) {
                 return true;
             } else {
-                pinInput.setError(res.getString(R.string.error_wrong));
+                pinInput.setError(context.getString(R.string.error_wrong));
                 return false;
             }
         } else {
-            ccInput.setError(res.getString(R.string.error_not_registered));
+            ccInput.setError(context.getString(R.string.error_not_registered));
             return false;
         }
     }
 
+    // verifica si hay suficientes fondos en la cuenta para relizar la transacci�n
     public boolean useBalance(@NonNull EditText moneyInput){
         if(!isEmpty(moneyInput)) {
             try (Cursor fetch = db.fetchData(sp.getActiveUser(),
@@ -355,69 +370,72 @@ public class Validate {
                         if (withdrawal + 2_000 <= Integer.parseInt(fetch.getString(4))) {
                             return true;
                         } else {
-                            moneyInput.setError(res.getString(R.string.error_enough_funds));
+                            moneyInput.setError(context.getString(R.string.error_enough_funds));
                             return false;
                         }
                     }else {
-                        moneyInput.setError(res.getString(R.string.error_between_2and7));
+                        moneyInput.setError(context.getString(R.string.error_between_2and7));
                         return false;
                     }
                 } else {
                     Log.e("VALIDATE", "Failed to load cursor data from database, " +
                             "database=" + db.toString() + "fetch=" + fetch.toString());
-                    moneyInput.setError(res.getString(R.string.error_fetch_data));
+                    moneyInput.setError(context.getString(R.string.error_fetch_data));
                     return false;
                 }
             }
         }else{ return false; }
     }
 
+    // verifica si la informaci�n ingresada concuerda con la informaci�n del usuario actual
     public boolean matchUserData(@NonNull EditText textInput, String parameter){
         if(!isEmpty(textInput)){
             String text = textInput.getText().toString();
             User user = new User(context);
-            user.loadData(user);
+            user.loadData();
 
+            // tabla para verificar cada tipo individual de informaci�n de usuario
             switch (parameter){
                 case "pin":
                     if (text.equals(user.getPin())){
                         return true;
                     }else{
-                        textInput.setError(res.getString(R.string.error_wrong));
+                        textInput.setError(context.getString(R.string.error_wrong));
                         return false;
                     }
                 case "cc":
                     if (text.equals(user.getCc())){
                         return true;
                     }else{
-                        textInput.setError(res.getString(R.string.error_wrong));
+                        textInput.setError(context.getString(R.string.error_wrong));
                         return false;
                     }
                 case "balance":
                     if (text.equals(String.valueOf(user.getBalance()))){
                         return true;
                     }else{
-                        textInput.setError(res.getString(R.string.error_wrong));
+                        textInput.setError(context.getString(R.string.error_wrong));
                         return false;
                     }
                 case "name":
                     if (text.equals(user.getName())){
                         return true;
                     }else{
-                        textInput.setError(res.getString(R.string.error_wrong));
+                        textInput.setError(context.getString(R.string.error_wrong));
                         return false;
                     }
                 default:
-                    textInput.setError(res.getString(R.string.error_wrong));
+                    textInput.setError(context.getString(R.string.error_wrong));
                     return false;
                 }
         }else{ return false; }
     }
 
+    // verifica si la informaci�n ingresada no es igual a la informaci�n del usuario actual
     public boolean notMatchUserData(@NonNull EditText textInput, String parameter){
         if(!isEmpty(textInput)){
             if (matchUserData(textInput, parameter)){
-                textInput.setError(res.getString(R.string.error_wrong));
+                textInput.setError(context.getString(R.string.error_wrong));
                 return false;
             }else{
                 textInput.setError(null);

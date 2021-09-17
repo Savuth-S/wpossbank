@@ -32,6 +32,7 @@ public class CreditCard extends AppCompatActivity {
     public String getDuesNumber() { return duesNumber; }
     public void setDuesNumber(String duesNumber) { this.duesNumber = duesNumber; }
 
+    // tabla que devuelve el tipo de tarjeta de credito en base al primer numero de la tarjeta
     public String getType(Context context){
         switch (getNumber().charAt(0)) {
             case '3':

@@ -36,6 +36,7 @@ public class TransactionLogAdapter extends RecyclerView.Adapter<TransactionLogAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //Introduce el texto correspondiente de cada array en los elementos indicados
         holder.entryDateTxt.setText(String.valueOf(entryDate.get(position)));
         holder.entryTypeTxt.setText(String.valueOf(entryType.get(position)));
         holder.entryValueTxt.setText(String.valueOf(entryValue.get(position)));
@@ -48,7 +49,7 @@ public class TransactionLogAdapter extends RecyclerView.Adapter<TransactionLogAd
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-
+        //Clase para cada entrada en el recyclerView
         TextView entryDateTxt, entryTypeTxt, entrySourceTxt, entryValueTxt;
 
         ViewHolder(@NonNull View itemView) {

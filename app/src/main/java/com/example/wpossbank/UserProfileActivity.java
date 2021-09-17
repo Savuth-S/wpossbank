@@ -59,7 +59,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         user = new User(context);
 
-        user.loadData(user);
+        user.loadData();
         balanceText = findViewById(R.id.textView2);
         addMoneyButton = findViewById(R.id.addMoneyButton);
         backArrow = findViewById(R.id.backArrow);

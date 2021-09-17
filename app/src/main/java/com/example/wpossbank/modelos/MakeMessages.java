@@ -13,8 +13,9 @@ import com.example.wpossbank.database.Database;
 
 public class MakeMessages extends AppCompatActivity {
 
-    public String separateNumberRight(String number, String character, int everyNCharacters){
-
+    /* Devuelve el array de numeros separados por el caracter especificados cada N cantidad de numeros
+       comenzando de derecha a izquierda */
+    public String separateNumberRight(@NonNull String number, String character, int everyNCharacters){
         if (number.length() > 0) {
             String newNumber = "";
 
@@ -32,7 +33,9 @@ public class MakeMessages extends AppCompatActivity {
         }
     }
 
-    public String separateNumberLeft(String number, String character, int everyNCharacters){
+    /* Devuelve el array de numeros separados por el caracter especificados cada N cantidad de numeros
+       comenzando de izquierda a derecha */
+    public String separateNumberLeft(@NonNull String number, String character, int everyNCharacters){
 
         if (number.length() > 0) {
             String newNumber = "";
@@ -51,8 +54,11 @@ public class MakeMessages extends AppCompatActivity {
         }
     }
 
+    // devuelve una sola string con el mensaje para el dialogo de pago con tarjeta
     public String cardPayment(@NonNull Context context, @NonNull CreditCard card) {
         String message;
+        /* corta el resource string en pedazos  usnado el caracter / como referencia,
+           para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_cardpayment).split("/");
 
         //Reemplaza cada numero excepto los cuatro ultimos por *
@@ -66,6 +72,7 @@ public class MakeMessages extends AppCompatActivity {
                     cardEnds = cardEnds.concat(" ");
                 }
 
+                //reemplaza los numeros anteriores a los cuatro ultimos con *
                 if (i < cardLength - 4) {
                     cardEnds = cardEnds.concat("*");
                 } else {
@@ -77,6 +84,7 @@ public class MakeMessages extends AppCompatActivity {
                     cardEnds = cardEnds.concat(" ");
                 }
 
+                //reemplaza los numeros anteriores a los tres ultimos con *
                 if (i < cardLength - 3) {
                     cardEnds = cardEnds.concat("*");
                 } else {
@@ -96,12 +104,15 @@ public class MakeMessages extends AppCompatActivity {
         return message;
     }
 
-    public String withdraw(Context context, EditText withdrawInput) {
+    // devuelve una sola string con el mensaje para el dialogo de retirar dinero
+    public String withdraw(@NonNull Context context, @NonNull EditText withdrawInput) {
         String message;
+        /* corta el resource string en pedazos  usnado el caracter / como referencia,
+           para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_withdrawal).split("/");
 
         User user = new User(context);
-        user.loadData(user);
+        user.loadData();
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + user.getName() + System.getProperty("line.separator") +
@@ -111,9 +122,12 @@ public class MakeMessages extends AppCompatActivity {
         return message;
     }
 
-    public String adminDeposit(Context context, @NonNull EditText depositInput) {
+    // devuelve una sola string con el mensaje para el dialogo de añadir fondos al corresponsal
+    public String adminDeposit(@NonNull Context context, @NonNull EditText depositInput) {
         String message;
-        String[] template = context.getString(R.string.dialog_confirm_deposit).split("/");
+        /* corta el resource string en pedazos  usnado el caracter / como referencia,
+           para luego llenar los campos correspondientes */
+        String[] template = context.getString(R.string.dialog_confirm_admin_deposit).split("/");
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + System.getProperty("line.separator") +
@@ -122,12 +136,15 @@ public class MakeMessages extends AppCompatActivity {
         return message;
     }
 
-    public String deposit(Context context, @NonNull EditText depositInput) {
+    // devuelve una sola string con el mensaje para el dialogo de depositar dinero en la cuenta
+    public String deposit(@NonNull Context context, @NonNull EditText depositInput) {
         String message;
+        /* corta el resource string en pedazos  usnado el caracter / como referencia,
+           para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_deposit).split("/");
 
         User user = new User(context);
-        user.loadData(user);
+        user.loadData();
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + System.getProperty("line.separator") +
@@ -136,13 +153,18 @@ public class MakeMessages extends AppCompatActivity {
         return message;
     }
 
-    public String transfer(Context context, EditText transferInput, @NonNull EditText ccTransferInput) {
+    // devuelve una sola string con el mensaje para el dialogo de transferir dinero
+    public String transfer(@NonNull Context context, EditText transferInput, @NonNull EditText ccTransferInput) {
         String message;
+        /* corta el resource string en pedazos  usnado el caracter / como referencia,
+           para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_transfer).split("/");
 
+        // carga la informacion del usuario que reliza la transferencia
         User user = new User(context);
-        user.loadData(user);
+        user.loadData();
 
+        // obtiene la informaci�n del usuario que recibe la transferencia
         Database db = new Database(context);
         Cursor fetch = db.fetchData(ccTransferInput.getText().toString(),
                 db.getTable("user"),
@@ -162,12 +184,15 @@ public class MakeMessages extends AppCompatActivity {
         }
     }
 
-    public String getBalance(Context context) {
+    // devuelve una sola string con el mensaje para el dialogo de ver el saldo de la cuenta
+    public String getBalance(@NonNull Context context) {
         String message;
+        /* corta el resource string en pedazos  usnado el caracter / como referencia,
+           para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_get_balance).split("/");
 
         User user = new User(context);
-        user.loadData(user);
+        user.loadData();
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + user.getName() + System.getProperty("line.separator") +

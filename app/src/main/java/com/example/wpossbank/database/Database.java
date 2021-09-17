@@ -61,10 +61,12 @@ public class Database extends SQLiteOpenHelper {
 
     public Database(@NonNull Context context){
         super(context, NAME, null, VERSION);
-        sp = new SharedPreference(context);
+
         this.context = context;
+        sp = new SharedPreference(context);
     }
 
+    // metodo para acceder al nombre de las tablas de la base de datos fac�lmente
     public String getTable(String tableName){
         switch (tableName){
             case "admin":
@@ -78,6 +80,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    // devuelve el nombre de las columnas para facil acceso
     public String getColumn(String columnName){
         switch (columnName){
             case "id":
@@ -150,6 +153,8 @@ public class Database extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_LOG);
     }
 
+
+    // devuelve un cursor con la informaci�n de la fila si la hay
     public Cursor fetchData(String entry, String table, String column){
         SQLiteDatabase db = getReadableDatabase();
         return db.query(table, new String[]{"*"},
@@ -157,6 +162,7 @@ public class Database extends SQLiteOpenHelper {
                         null, null, null);
     }
 
+    // escribe los valores por defecto del objeto Admin en la base de datos
     public void makeDefaultAdmin(@NonNull Admin admin){
         try(SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
@@ -177,15 +183,12 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    // actualiza la informaci�n de la cuenta del corresponsal en la base de datos
     public void updateAdmin(@NonNull Admin admin){
         try (SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
-            Cursor adminData = fetchData("1", TABLE_ADMIN, COLUMN_ID);
 
-            Log.e("TAG DATABASE",admin.getEmail());
-
-            if (adminData.getCount() > 0){
-                adminData.moveToFirst();
+            if (fetchData("1", TABLE_ADMIN, COLUMN_ID).getCount() > 0){
 
                 cv.put(COLUMN_EMAIL, admin.getEmail());
                 cv.put(COLUMN_PASSWORD, admin.getPassword());
@@ -198,13 +201,16 @@ public class Database extends SQLiteOpenHelper {
                     Log.d("UPDATE","Admin data updated successfully");
                 }
             }else{
-                Log.e("UPDATE","Couldn't find admin data, making default admin instead, adminData="+adminData.toString());
+                Log.e("UPDATE","Couldn't find admin data, making default admin instead");
                 makeDefaultAdmin(new Admin());
+
+                // vuelve a intentar actualizar la informaci�n del admin despues de generar las entradas en la base de datos
                 admin.update(context);
             }
         }
     }
 
+    // añade un usuario a la base de datos
     public void addUser(@NonNull User user){
         try(SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
@@ -217,6 +223,7 @@ public class Database extends SQLiteOpenHelper {
 
             long result = db.insert(TABLE_USER,null,cv);
             if (result == -1) {
+                Log.e("NEW USER","Error while trying to write data to database, result="+result);
                 Toast.makeText(context, context.getString(R.string.error_make_user), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, context.getString(R.string.toast_make_user_success), Toast.LENGTH_SHORT).show();
@@ -224,6 +231,7 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    // actualiza la informaci�n de el usuario activo en la ba se de datos
     public void updateUser(@NonNull User user){
         try (SQLiteDatabase db = getWritableDatabase()){
             ContentValues cv = new ContentValues();
@@ -234,7 +242,7 @@ public class Database extends SQLiteOpenHelper {
 
                 cv.put(COLUMN_CC, user.getCc());
                 cv.put(COLUMN_PIN, user.getPin());
-                cv.put(COLUMN_BALANCE, userData.getInt(4)+user.getBalance());
+                cv.put(COLUMN_BALANCE, userData.getInt(4)+user.getBalance()); // añade el dinero al saldo en la base de datos
                 cv.put(COLUMN_NAME, user.getName());
 
                 long result = db.update(TABLE_USER, cv, "object_id=?", new String[]{user.getObjectId()});
@@ -250,24 +258,27 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
+    // añade una entrada al registro de transacciones de la base de datos
+        // metodo que utiliza el usuario activo
     public void newLogEntry(String type, String amount, String source){
         newLogEntry(type, amount, source, sp.getActiveUser());
     }
-
+        //metodo que utiliza un usario especifico como usuario activo
     public void newLogEntry(String type, String amount, String source, String activeUser){
         try(SQLiteDatabase db = getWritableDatabase()) {
             ContentValues cv = new ContentValues();
             Calendar calendar = Calendar.getInstance();
             MakeMessages messages = new MakeMessages();
 
+            // obtiene fecha y hora actual y crea una string con la fecha entera
             String[] dateArray = calendar.getTime().toString().split(" ");
             String[] timeArray = dateArray[3].split(":");
             String currentDate = dateArray[1]+" "+dateArray[2]+" "+dateArray[5]+" "+timeArray[0]+":"+timeArray[1];
 
-            Log.d("TAG",currentDate);
+            Log.d("LOG ENTRY","currentDate="+currentDate);
 
+            // obtiene el tipo de acci�n de una tabla de tipos de acciones
             String actionType;
-
             actionType = getLogEntryType(type);
 
             cv.put(COLUMN_ACTIVEUSER, activeUser);
@@ -278,12 +289,14 @@ public class Database extends SQLiteOpenHelper {
 
             long result = db.insert(TABLE_LOG,null,cv);
             if (result == -1) {
+                Log.e("LOG ENTRY","Failed to write transaction entry to database");
                 Toast.makeText(context, context.getString(R.string.error_write_data), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public String getLogEntryType(String type){
+    // tabla de tipo de acciones al registrar una entrada en el historial de transacciones
+    public String getLogEntryType(@NonNull String type){
         String actionType;
 
         switch(type){

@@ -140,9 +140,14 @@
     <string name="error_empty">No puede estar vacio.</string>
     <string name="error_spaces">No puede contener espacios.</string>
     <string name="error_only_caps">Solo puede contener letras mayusculas.</string>
+    <string name="error_atleast_cap">Al menos una letra mayuscula.</string>
+    <string name="error_atleast_letter">Al menos una letra minuscula.</string>
     <string name="error_only_numbers">Solo puede contener numeros.</string>
+    <string name="error_atleast_number">Al menos un numero.</string>
+    <string name="error_atleast_special">Al menos un caracter especial.</string>
     <string name="error_enough_funds">Fondos insuficientes.</string>
     <string name="error_mustbe_4">Debe ser de cuatro caracteres.</string>
+    <string name="error_atleast_8">Debe contener almenos ocho caracteres.</string>
     <string name="error_between_15and16">Debe contener entre quince y dieciseis caracteres.</string>
     <string name="error_between_2and7">Debe contener entre dos y siete caracteres.</string>
 

@@ -56,7 +56,7 @@ public class TransfersHistoryActivity extends AppCompatActivity {
 
         user = new User(context);
 
-        user.loadData(user);
+        user.loadData();
         backArrow = findViewById(R.id.backArrow);
 
         recyclerView = findViewById((R.id.recyclerView));

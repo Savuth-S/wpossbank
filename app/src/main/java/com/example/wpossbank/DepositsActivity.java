@@ -56,7 +56,7 @@ public class DepositsActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         backArrow = findViewById(R.id.backArrow);
 
-        user.loadData(user);//Carga la información del usuario desde la base de datos
+        user.loadData();//Carga la información del usuario desde la base de datos
 
         confirmButton.setOnClickListener(confirmDeposit -> {
             //Deckara y verifica si los campos tienen la información correcta
@@ -68,8 +68,8 @@ public class DepositsActivity extends AppCompatActivity {
                 int depositValue = Integer.parseInt(depositInput.getText().toString());
 
                 admin.setBalance(admin.getCost()/2);
-                new Dialogs.ConfirmUserAddBalance(context ,admin,
-                            messages.adminDeposit(context, depositInput), "deposit",
+                new Dialogs.ConfirmUserUpdateBalance(context ,admin,
+                            messages.deposit(context, depositInput), "deposit",
                         user.getCc(), depositValue).show(getSupportFragmentManager(),"CONFIRM");
             }
         });

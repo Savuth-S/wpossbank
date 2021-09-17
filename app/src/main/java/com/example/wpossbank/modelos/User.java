@@ -38,6 +38,7 @@ public class User {
 
     public void setName(String name) { this.name = name; }
 
+    // Obtiene el valor unico del ID del objeto registrado en la base de datos
     public String getObjectId(){
         try (Cursor fetch = db.fetchData(
                 getCc(),
@@ -52,38 +53,38 @@ public class User {
         }
     }
 
-    public void loadData(User user){
+    // carga la informaci�n en la base de datos del usuario activo a el objeto usuario local
+    public void loadData(){
         try (Cursor fetch = db.fetchData(
                 sp.getActiveUser(),
                 db.getTable("user"),
                 db.getColumn("object id"))){
             fetch.moveToFirst();
-            user.setId(fetch.getString(0));
-            user.setCc(fetch.getString(2));
-            user.setPin(fetch.getString(3));
-            user.setBalance(Integer.parseInt(fetch.getString(4)));
-            user.setName(fetch.getString(5));
+            setId(fetch.getString(0));
+            setCc(fetch.getString(2));
+            setPin(fetch.getString(3));
+            setBalance(Integer.parseInt(fetch.getString(4)));
+            setName(fetch.getString(5));
         }
     }
 
-    public User loadUser(String cc){
+    // carga la informaci�n en la base de datos con respecto al numero de cuenta de un usuario al objeto usuario local
+    public void loadUser(String cc){
         try (Cursor fetch = db.fetchData(
                 cc,
                 db.getTable("user"),
                 db.getColumn("cc"))){
-            User user = new User(context);
 
             fetch.moveToFirst();
-            user.setId(fetch.getString(0));
-            user.setCc(fetch.getString(2));
-            user.setPin(fetch.getString(3));
-            user.setBalance(fetch.getInt(4));
-            user.setName(fetch.getString(5));
-
-            return user;
+            setId(fetch.getString(0));
+            setCc(fetch.getString(2));
+            setPin(fetch.getString(3));
+            setBalance(fetch.getInt(4));
+            setName(fetch.getString(5));
         }
     }
 
+    // llama a la funcion para actualizar los datos del usuario en la base de datos
     public void update(Context context, User user){
         Database db = new Database(context);
         db.updateUser(user);
