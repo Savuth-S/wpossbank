@@ -13,8 +13,9 @@
         <entry key="app/src/main/res/drawable/light_purple_button.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/drawable/purple_button.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/font/alegreya_sans.xml" value="0.13072916666666667" />
+        <entry key="app/src/main/res/layout/activity_admin_deposit.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_admin_login.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_admin_panel.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_admin_panel.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_card_payment.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_deposit.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_get_balance.xml" value="0.33" />

@@ -2,8 +2,11 @@ package com.example.wpossbank;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,8 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.MakeMessages;
-import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
+
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 
 public class AdminDepositActivity extends AppCompatActivity {
     Context context;
@@ -22,10 +27,11 @@ public class AdminDepositActivity extends AppCompatActivity {
     MakeMessages messages;
 
     Admin admin;
-    User user;
+
+    BlurView blurView;
 
     EditText emailInput, passwordInput, depositInput;
-    Button goBackButton, confirmButton;
+    Button confirmButton;
     ImageView backArrow;
 
 
@@ -38,28 +44,44 @@ public class AdminDepositActivity extends AppCompatActivity {
         messages = new MakeMessages();
 
         admin = new Admin();
-        user = new User(context);
+
+        blurView = findViewById(R.id.blurView);
+        blurBackground();
 
         emailInput = findViewById(R.id.emailInput);
-        passwordInput = findViewById(R.id.ccDepositInput);
+        passwordInput = findViewById(R.id.passwordInput);
         depositInput = findViewById(R.id.depositInput);
         
         confirmButton = findViewById(R.id.confirmButton);
         backArrow = findViewById(R.id.backArrow);
 
-        user.loadData(user);//Carga la información del usuario desde la base de datos
-
         confirmButton.setOnClickListener(confirmDeposit -> {
             //Deckara y verifica si los campos tienen la información correcta
-            if (validate.adminLogin(emailInput,passwordInput)){
-                admin.setEmail(emailInput.getText().toString());
-                admin.setPassword(passwordInput.getText().toString());
+            if (validate.adminLogin(emailInput, passwordInput)) {
+                admin.setBalance(Integer.parseInt(depositInput.getText().toString()));
 
-                Log.d("ADMIN","logged into admin panel");
-                startActivity(new Intent(context, AdminPanelActivity.class));
+                new Dialogs.ConfirmUpdateAdmin(context, admin,
+                        messages.adminDeposit(context, depositInput), "deposit",
+                        admin.getEmail(), admin.getObjectId(context))
+                        .show(getSupportFragmentManager(),"CONFIRM");
             }
         });
 
         backArrow.setOnClickListener( goBack -> finish());
+    }
+
+    private void blurBackground(){
+        float radius = 20f;
+
+        View decorView = getWindow().getDecorView();
+        ViewGroup rootView = decorView.findViewById(android.R.id.content);
+        Drawable windowBackground = decorView.getBackground();
+
+        blurView.setupWith(rootView)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(this))
+                .setBlurRadius(radius)
+                .setBlurAutoUpdate(true)
+                .setHasFixedTransformationMatrix(true);
     }
 }

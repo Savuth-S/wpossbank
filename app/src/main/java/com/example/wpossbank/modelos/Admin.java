@@ -59,7 +59,7 @@ public class Admin extends AppCompatActivity {
             existingAdmin.setId(fetch.getString(0));
             existingAdmin.setEmail(fetch.getString(2));
             existingAdmin.setPassword(fetch.getString(3));
-            existingAdmin.setBalance(getBalance()+fetch.getInt(4));
+            existingAdmin.setBalance(fetch.getInt(4));
 
             if(!getEmail().equals(existingAdmin.getEmail())){
                 Log.d("UPDATE","New email found for admin, current email="+existingAdmin.getEmail()+" new email="+getEmail());
@@ -71,7 +71,8 @@ public class Admin extends AppCompatActivity {
                 existingAdmin.setPassword(getPassword());
             }
 
-            existingAdmin.setBalance(getBalance());
+            int balance = existingAdmin.getBalance();
+            existingAdmin.setBalance(balance + getBalance());
 
             db.updateAdmin(existingAdmin);
         }else{

@@ -14,7 +14,11 @@
         <activity
             android:name=".AdminPanelActivity"
             android:exported="true"
-            android:parentActivityName=".WelcomeScreenActivity" />
+            android:parentActivityName=".AdminLoginActivity" />
+        <activity
+            android:name=".AdminDepositActivity"
+            android:exported="true"
+            android:parentActivityName=".AdminLoginActivity" />
         <activity
             android:name=".AdminLoginActivity"
             android:exported="true"

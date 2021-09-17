@@ -111,6 +111,17 @@ public class MakeMessages extends AppCompatActivity {
         return message;
     }
 
+    public String adminDeposit(Context context, @NonNull EditText depositInput) {
+        String message;
+        String[] template = context.getString(R.string.dialog_confirm_deposit).split("/");
+
+        //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
+        message = template[0] + System.getProperty("line.separator") +
+                template[1] + separateNumberRight(depositInput.getText().toString(),".",3)
+                + template[2];
+        return message;
+    }
+
     public String deposit(Context context, @NonNull EditText depositInput) {
         String message;
         String[] template = context.getString(R.string.dialog_confirm_deposit).split("/");

@@ -31,7 +31,7 @@ public class DepositsActivity extends AppCompatActivity {
     BlurView blurView;
 
     EditText ccInput, ccDepositInput, depositInput;
-    Button goBackButton, confirmButton;
+    Button confirmButton;
     ImageView backArrow;
 
 
@@ -69,7 +69,7 @@ public class DepositsActivity extends AppCompatActivity {
 
                 admin.setBalance(admin.getCost()/2);
                 new Dialogs.ConfirmUserAddBalance(context ,admin,
-                            messages.deposit(context, depositInput), "deposit",
+                            messages.adminDeposit(context, depositInput), "deposit",
                         user.getCc(), depositValue).show(getSupportFragmentManager(),"CONFIRM");
             }
         });

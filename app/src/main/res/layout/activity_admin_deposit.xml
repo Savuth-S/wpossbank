@@ -153,7 +153,7 @@
                         android:background="@drawable/input_purple"
                         android:ems="10"
                         android:fontFamily="@font/alegreya_sans_light"
-                        android:hint="@string/input_account"
+                        android:hint="@string/input_email"
                         android:inputType="textEmailAddress"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
@@ -194,7 +194,7 @@
                         android:ems="10"
                         android:fontFamily="@font/alegreya_sans_light"
                         android:hint="@string/input_password"
-                        android:inputType="numberPassword"
+                        android:inputType="textPassword"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/gray"
@@ -249,32 +249,23 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView5"
                         app:layout_constraintVertical_bias="0.0" />
 
+                    <Button
+                        android:id="@+id/confirmButton"
+                        android:layout_width="0dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/light_roundless_button"
+                        android:fontFamily="@font/alegreya_sans_bold"
+                        android:text="@string/button_confirm"
+                        android:textAllCaps="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/depositInput" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:elevation="7dp">
-
-                <Button
-                    android:id="@+id/confirmButton"
-                    android:layout_width="0dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginEnd="60dp"
-                    android:layout_marginBottom="75dp"
-                    android:background="@drawable/light_roundless_button"
-                    android:fontFamily="@font/alegreya_sans_bold"
-                    android:text="@string/button_confirm"
-                    android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imageView14"
