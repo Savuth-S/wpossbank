@@ -56,7 +56,7 @@ public class AdminPanelActivity extends AppCompatActivity {
         messages = new MakeMessages();
 
         admin = new Admin();
-        admin.loadData(context, admin);
+        admin.loadData(context);
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
