@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="value_remove_money">#A03670</color>
+    <color name="value_add_money">#5B36A0</color>
+
     <color name="purple_text_dark">#FF7E36A0</color>
     <color name="purple">#FF974EB0</color>
     <color name="purple_dark">#FF864A9B</color>

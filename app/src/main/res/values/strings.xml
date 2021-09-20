@@ -3,7 +3,7 @@
 
     <!--Generales-->
     <string name="front_subheader_text">soluciones modernas</string>
-    <string name="main_welcome_message">Hola %1$s, </string>
+    <string name="main_welcome_message">♦%1$s, </string>
 
     <string name="confirm">Confirmar</string>
     <string name="credit_card_sell">Venta con tarjeta</string>
@@ -11,7 +11,7 @@
     <string name="money_deposit">Deposito</string>
     <string name="money_transfer">Transferencia</string>
     <string name="show_account_balance">Consulta de Saldo</string>
-    <string name="make_new_account">Creacion de cuenta</string>
+    <string name="make_new_account">Creación de cuenta</string>
 
     <!--Botones-->
     <!--Botones generales-->
@@ -22,11 +22,11 @@
     <string name="button_confirm">Confirmar</string>
 
     <!--Menu principal-->
-    <string name="button_log_in">Iniciar Sesion</string>
+    <string name="button_log_in">Iniciar Sesión</string>
     <string name="button_new_user">Registrarse</string>
     <string name="button_admin">Administrador</string>
 
-    <!--Menú general-->
+    <!--♦Menú general-->
     <string name="button_card_payments">Pagos con Tarjeta</string>
     <string name="button_withdrawals">Retirar Dinero</string>
     <string name="button_deposits">Depositar Dinero</string>
@@ -45,8 +45,8 @@
     <string name="input_password">********</string>
 
     <!--Logeo y registrarse-->
-    <string name="account">Número de Cuenta</string>
-    <string name="input_account">Ingrese su número de cuenta</string>
+    <string name="account">Número de Cedula de la Cuenta</string>
+    <string name="input_account">Ingrese el número de cedula la cuenta</string>
 
     <string name="name">Nombre</string>
     <string name="input_name">Ingrese su nombre</string>
@@ -55,7 +55,7 @@
     <string name="input_lastname">Ingrese sus apellidos</string>
 
     <string name="cc">Número de Cedula</string>
-    <string name="input_cc">Ingrese su número de Cedula</string>
+    <string name="input_cc">Ingrese su número de cedula</string>
 
     <string name="pin">PIN</string>
     <string name="pin_confirm">Confirmar PIN</string>
@@ -87,8 +87,8 @@
     <string name="input_deposit_amount">Ingrese la cantidad a depositar</string>
 
     <!--Transferir dinero-->
-    <string name="transfer_account">Número de la Cuenta de Transferencia</string>
-    <string name="input_transfer_account">Ingrese el número de la cuenta de transferencía</string>
+    <string name="transfer_account">Número de la Cedula de Transferencia</string>
+    <string name="input_transfer_account">Ingrese el número de la cedula de transferencía</string>
 
     <string name="transfer_amount">Monto a Transferir</string>
     <string name="input_transfer_amount1">Ingrese la cantidad a transferir</string>
@@ -127,6 +127,7 @@
     <!--Errores generales-->
     <string name="error_invalid">Invalido.</string>
     <string name="error_wrong">Incorrecto.</string>
+    <string name="error_invalid_input">Hay un campo con valores invalidos.</string>
 
     <!--Base de datos-->
     <string name="error_already_registered">Ya se encuentra registrado.</string>
@@ -164,7 +165,7 @@
     <string name="deposit">Depositar</string>
     <string name="money_in_the_account">Dinero en la cuenta</string>
     <string name="withdraw">Retirar</string>
-    <string name="money_from_the_accoun">Dinero de la cuenta</string>
+    <string name="money_from_the_account">Dinero de la cuenta</string>
     <string name="withdrawal_amount">Monto a Retirar</string>
     <string name="transfer">Transferir</string>
     <string name="money_to_another_account">Dinero a otra cuenta</string>

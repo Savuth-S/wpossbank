@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bg_oval" />
+        app:srcCompat="@drawable/bg_oval"
+        tools:ignore="ContentDescription" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -58,6 +59,7 @@
                 android:fontFamily="@font/alegreya_sans_light"
                 android:hint="@string/input_email"
                 android:inputType="textEmailAddress"
+                android:maxLength="13"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/gray"
@@ -70,7 +72,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -111,7 +114,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -156,7 +160,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_bar" />
+                app:srcCompat="@drawable/ic_bar"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -174,7 +179,8 @@
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toTopOf="@+id/scrollView2"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_oval" />
+        app:srcCompat="@drawable/bg_oval"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView9"
@@ -224,6 +230,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_back" />
+        app:srcCompat="@drawable/ic_back"
+        android:contentDescription="@string/button_go_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

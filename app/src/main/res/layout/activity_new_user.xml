@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bg_oval" />
+        app:srcCompat="@drawable/bg_oval"
+        tools:ignore="ContentDescription" />
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -49,13 +50,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_bar" />
+                app:srcCompat="@drawable/ic_bar"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="180dp"
                 android:fontFamily="@font/alegreya_sans_bold"
                 android:text="@string/name"
                 android:textColor="@color/white"
@@ -65,7 +68,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.276" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <EditText
                 android:id="@+id/nameInput"
@@ -79,6 +82,7 @@
                 android:inputType="textCapCharacters"
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp"
+                android:textAllCaps="true"
                 android:textColor="@color/gray"
                 android:textColorHighlight="@color/white"
                 android:textColorHint="@color/gray"
@@ -89,7 +93,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -119,6 +124,7 @@
                 android:inputType="textCapCharacters"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
+                android:textAllCaps="true"
                 android:textColor="@color/gray"
                 android:textColorHighlight="@color/white"
                 android:textColorHint="@color/gray"
@@ -129,7 +135,8 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -155,6 +162,7 @@
                 android:fontFamily="@font/alegreya_sans_light"
                 android:hint="@string/input_cc"
                 android:inputType="number"
+                android:maxLength="13"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/gray"
@@ -167,7 +175,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -193,6 +202,7 @@
                 android:fontFamily="@font/alegreya_sans_light"
                 android:hint="@string/input_pin"
                 android:inputType="numberPassword"
+                android:maxLength="4"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/gray"
@@ -205,7 +215,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:importantForAutofill="no" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -231,6 +242,7 @@
                 android:fontFamily="@font/alegreya_sans_light"
                 android:hint="@string/input_pin"
                 android:inputType="numberPassword"
+                android:maxLength="4"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/gray"
@@ -243,45 +255,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/alegreya_sans_bold"
-                android:text="@string/balance"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/pinConfirmInput" />
-
-            <EditText
-                android:id="@+id/balanceInput"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/input_white"
-                android:ems="10"
-                android:fontFamily="@font/alegreya_sans_light"
-                android:hint="@string/input_balance"
-                android:inputType="number"
-                android:paddingStart="15dp"
-                android:paddingEnd="15dp"
-                android:textColor="@color/gray"
-                android:textColorHighlight="@color/white"
-                android:textColorHint="@color/gray"
-                android:textColorLink="@color/purple_text_dark"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:importantForAutofill="no" />
 
             <Button
                 android:id="@+id/enterButton"
@@ -299,7 +274,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/imageView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/balanceInput"
+                app:layout_constraintTop_toBottomOf="@+id/pinConfirmInput"
                 app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -318,7 +293,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_oval" />
+        app:srcCompat="@drawable/bg_oval"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView"
@@ -368,6 +344,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_back" />
+        app:srcCompat="@drawable/ic_back"
+        android:contentDescription="@string/button_go_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

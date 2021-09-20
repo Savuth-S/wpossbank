@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_transparent_gradient" />
+        app:srcCompat="@drawable/bg_transparent_gradient"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -30,7 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_transparent_gradient" />
+        app:srcCompat="@drawable/bg_transparent_gradient"
+        tools:ignore="ContentDescription" />
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/blurView"
@@ -55,7 +57,7 @@
             android:layout_marginTop="44dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/alegreya_sans"
-            android:text="Hola Usuario, "
+            android:text="@string/main_welcome_message"
             android:textColor="@color/purple_text_dark"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -118,7 +120,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/floating_box" />
+            app:srcCompat="@drawable/floating_box"
+            tools:ignore="ContentDescription" />
 
         <ScrollView
             android:id="@+id/scrollView4"
@@ -240,7 +243,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/bg_colored_rectangle" />
+            app:srcCompat="@drawable/bg_colored_rectangle"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.SharedPreference;
@@ -25,7 +26,7 @@ public class NewUserActivity extends AppCompatActivity {
     Admin admin;
     User user;
 
-    EditText nameInput, lastnameInput, ccInput, pinInput, pinConfirmInput, balanceInput;
+    EditText nameInput, lastnameInput, ccInput, pinInput, pinConfirmInput;
     Button enterButton;
     ImageView backArrow;
 
@@ -46,7 +47,7 @@ public class NewUserActivity extends AppCompatActivity {
         ccInput = findViewById(R.id.ccInput);
         pinInput = findViewById(R.id.pinInput);
         pinConfirmInput = findViewById(R.id.pinConfirmInput);
-        balanceInput = findViewById(R.id.balanceInput);
+        //balanceInput = findViewById(R.id.balanceInput);
 
         enterButton = findViewById(R.id.enterButton);
         backArrow = findViewById(R.id.backArrow);
@@ -57,19 +58,19 @@ public class NewUserActivity extends AppCompatActivity {
                         && validate.isNumber(ccInput) && validate.isInRange(ccInput,10,13),
                     nameValidate = validate.name(nameInput),
                     lastnameValidate = validate.name(lastnameInput),
-                    pinValidate = validate.pin(pinInput),
-                    balanceValidate = validate.initialBalance(balanceInput);
+                    pinValidate = validate.pin(pinInput);
+                    //balanceValidate = validate.initialBalance(balanceInput);
 
             if (!validate.isEmpty(pinConfirmInput) &&
                     !pinInput.getText().toString().equals(pinConfirmInput.getText().toString())) {
                 Log.d("NEW USER", "The pins do not match, " +
                         "pin="+pinInput.getText().toString() +" confirm="+pinConfirmInput.getText().toString());
                 pinConfirmInput.setError(getResources().getString(R.string.error_wrong));
-            }else if (!validate.isEmpty(pinConfirmInput) && nameValidate && lastnameValidate && ccValidate && pinValidate && balanceValidate){
+            }else if (!validate.isEmpty(pinConfirmInput) && nameValidate && lastnameValidate && ccValidate && pinValidate){
                 user.setName(nameInput.getText().toString() + " " + lastnameInput.getText().toString());
                 user.setCc(ccInput.getText().toString());
                 user.setPin(pinInput.getText().toString());
-                user.setBalance(Integer.parseInt(balanceInput.getText().toString()));
+                //user.setBalance(Integer.parseInt(balanceInput.getText().toString()));
 
                 Log.d("NEW USER","user="+user.toString().split("@")[1]);
                 admin.setBalance(admin.getCost()*5);
@@ -80,6 +81,9 @@ public class NewUserActivity extends AppCompatActivity {
                 db.newLogEntry("new user", "0", user.getCc());
 
                 finish();
+            }else {
+                // Avisa al usuario si hay un campo con valores invalidos
+                Toast.makeText(context, R.string.error_invalid_input, Toast.LENGTH_LONG).show();
             }
         });
 

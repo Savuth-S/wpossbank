@@ -109,7 +109,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_oval" />
+        app:srcCompat="@drawable/bg_oval"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -124,7 +125,8 @@
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/bg_oval" />
+        app:srcCompat="@drawable/bg_oval"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -139,6 +141,7 @@
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_bar" />
+        app:srcCompat="@drawable/ic_bar"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

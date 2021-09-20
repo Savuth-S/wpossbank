@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_transparent_gradient" />
+        app:srcCompat="@drawable/bg_transparent_gradient"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -30,7 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_transparent_gradient" />
+        app:srcCompat="@drawable/bg_transparent_gradient"
+        tools:ignore="ContentDescription" />
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/blurView"
@@ -59,7 +61,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_back" />
+                app:srcCompat="@drawable/ic_back"
+                android:contentDescription="@string/button_go_back" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -108,7 +111,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/floating_box" />
+                app:srcCompat="@drawable/floating_box"
+                tools:ignore="ContentDescription" />
 
             <ScrollView
                 android:id="@+id/scrollView4"
@@ -156,6 +160,7 @@
                         android:fontFamily="@font/alegreya_sans_light"
                         android:hint="@string/input_card_number"
                         android:inputType="number"
+                        android:maxLength="16"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/gray"
@@ -168,7 +173,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/cardTextView"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:importantForAutofill="no" />
 
                     <TextView
                         android:id="@+id/textView24"
@@ -199,6 +205,7 @@
                         android:inputType="textCapCharacters"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
+                        android:textAllCaps="true"
                         android:textColor="@color/gray"
                         android:textColorHighlight="@color/white"
                         android:textColorHint="@color/gray"
@@ -209,7 +216,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView24"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:importantForAutofill="no" />
 
                     <TextView
                         android:id="@+id/textView23"
@@ -239,6 +247,7 @@
                         android:inputType="textCapCharacters"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
+                        android:textAllCaps="true"
                         android:textColor="@color/gray"
                         android:textColorHighlight="@color/white"
                         android:textColorHint="@color/gray"
@@ -249,7 +258,8 @@
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView23"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:importantForAutofill="no" />
 
                     <TextView
                         android:id="@+id/textView4"
@@ -292,7 +302,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView4"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:importantForAutofill="no" />
 
                     <TextView
                         android:id="@+id/textView22"
@@ -322,6 +333,7 @@
                         android:fontFamily="@font/alegreya_sans_light"
                         android:hint="@string/input_ccv"
                         android:inputType="number"
+                        android:maxLength="4"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/gray"
@@ -334,7 +346,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView22"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:importantForAutofill="no" />
 
                     <TextView
                         android:id="@+id/textView5"
@@ -364,6 +377,7 @@
                         android:fontFamily="@font/alegreya_sans_light"
                         android:hint="@string/input_payment_amount"
                         android:inputType="number"
+                        android:maxLength="7"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/gray"
@@ -376,7 +390,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView5"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:importantForAutofill="no" />
 
                     <TextView
                         android:id="@+id/textView25"
@@ -406,6 +421,7 @@
                         android:fontFamily="@font/alegreya_sans_light"
                         android:hint="@string/input_dues"
                         android:inputType="number"
+                        android:maxLength="2"
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:textColor="@color/gray"
@@ -418,7 +434,8 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView25"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        android:importantForAutofill="no" />
 
                     <Button
                         android:id="@+id/confirmButton"
@@ -451,7 +468,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/bg_colored_rectangle" />
+                app:srcCompat="@drawable/bg_colored_rectangle"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </eightbitlab.com.blurview.BlurView>

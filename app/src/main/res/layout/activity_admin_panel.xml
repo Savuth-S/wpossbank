@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_transparent_gradient" />
+        app:srcCompat="@drawable/bg_transparent_gradient"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/imageView12"
@@ -30,7 +31,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/bg_transparent_gradient" />
+        app:srcCompat="@drawable/bg_transparent_gradient"
+        tools:ignore="ContentDescription" />
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/blurView"
@@ -59,7 +61,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_back" />
+            app:srcCompat="@drawable/ic_back"
+            android:contentDescription="@string/button_go_back" />
 
         <Button
             android:id="@+id/addMoneyButton"
@@ -125,7 +128,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView16"
             app:layout_constraintTop_toBottomOf="@+id/textView16"
-            app:layout_constraintVertical_bias="0.046" />
+            app:layout_constraintVertical_bias="0.046"
+            tools:ignore="HardcodedText" />
 
         <ImageView
             android:id="@+id/imageView13"
@@ -142,7 +146,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/floating_box" />
+            app:srcCompat="@drawable/floating_box"
+            tools:ignore="ContentDescription" />
 
         <Button
             android:id="@+id/updateButton"
@@ -236,7 +241,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    android:importantForAutofill="no" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -276,7 +282,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    android:importantForAutofill="no" />
 
                 <TextView
                     android:id="@+id/textView5"
@@ -316,7 +323,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.0"
+                    android:importantForAutofill="no" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
@@ -331,7 +339,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/bg_colored_rectangle" />
+            app:srcCompat="@drawable/bg_colored_rectangle"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </eightbitlab.com.blurview.BlurView>

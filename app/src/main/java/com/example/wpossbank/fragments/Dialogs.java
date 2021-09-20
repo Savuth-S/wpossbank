@@ -162,7 +162,7 @@ public class Dialogs {
                 user.update(context, user);
 
                 // añade la transacci�n en el registro de transacciones
-                db.newLogEntry(type, "0", source);
+                db.newLogEntry(type, Integer.toString(admin.getBalance()-(admin.getBalance()*2)), source);
 
                 requireActivity().finish();
                 startActivity(new Intent(context, UserProfileActivity.class));
