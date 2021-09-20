@@ -87,8 +87,8 @@
     <string name="input_deposit_amount">Ingrese la cantidad a depositar</string>
 
     <!--Transferir dinero-->
-    <string name="transfer_account">Número de la Cedula de Transferencia</string>
-    <string name="input_transfer_account">Ingrese el número de la cedula de transferencía</string>
+    <string name="transfer_account">Número de Cedula de la Transferencia</string>
+    <string name="input_transfer_account">Ingrese el número de cedula de la transferencía</string>
 
     <string name="transfer_amount">Monto a Transferir</string>
     <string name="input_transfer_amount1">Ingrese la cantidad a transferir</string>
