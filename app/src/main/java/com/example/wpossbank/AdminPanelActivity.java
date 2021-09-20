@@ -1,7 +1,6 @@
 package com.example.wpossbank;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,16 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.wpossbank.adaptadores.TransactionLogAdapter;
 import com.example.wpossbank.database.Database;
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.MakeMessages;
-import com.example.wpossbank.modelos.SharedPreference;
-import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
-
-import java.util.ArrayList;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
@@ -106,6 +100,12 @@ public class AdminPanelActivity extends AppCompatActivity {
 
         backArrow.setOnClickListener( goBack -> finish());
 
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        recreate();
     }
 
     private void blurBackground(){
