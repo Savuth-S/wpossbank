@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
@@ -61,19 +62,23 @@ public class GetBalanceActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(confirmPayment -> {
             //Deckara y verifica si los campos tienen la información correcta
             boolean ccValidate = validate.isNumber(ccInput) && validate.matchUserData(ccInput, "cc"),
-                    pinValidate = validate.pin(pinInput) && validate.matchUserData(pinInput, "pin");
+                    pinValidate = validate.pin(pinInput) && validate.matchUserData(pinInput, "pin"),
+                    balanceValidate = validate.useBalance(ccInput, 0);
 
             if (!validate.isEmpty(pinConfirmInput) &&
                     !pinInput.getText().toString().equals(pinConfirmInput.getText().toString())) {
                 Log.d("WITHDRAW", "The pins do not match, " +
                         "pin=" + pinInput.getText().toString() + " confirm=" + pinConfirmInput.getText().toString());
                 pinConfirmInput.setError(getResources().getString(R.string.error_wrong));
-            } else if (!validate.isEmpty(pinConfirmInput) && ccValidate && pinValidate) {
+            } else if (!validate.isEmpty(pinConfirmInput) && ccValidate && pinValidate && balanceValidate) {
 
                 admin.setBalance(admin.getCost() / 2);
                 new Dialogs.ConfirmUserGetBalance(context, admin,
                         messages.getBalance(context), "show balance", user.getCc())
                         .show(getSupportFragmentManager(), "CONFIRM");
+            }else {
+                // Avisa al usuario si hay un campo con valores invalidos
+                Toast.makeText(context, R.string.error_invalid_input, Toast.LENGTH_LONG).show();
             }
         });
 

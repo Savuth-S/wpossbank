@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_admin_deposit.xml" value="0.292259083728278" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_admin_deposit.xml" value="0.25" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_admin_login.xml" value="0.33" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_admin_panel.xml" value="0.33" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_card_payment.xml" value="0.33" />
@@ -11,7 +11,7 @@
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_get_balance.xml" value="0.33" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_new_user.xml" value="0.25" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_new_user.xml" value="0.4083333333333333" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_transfers.xml" value="0.25910364145658266" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_transfers_history.xml" value="0.33" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_user_profile.xml" value="0.25" />

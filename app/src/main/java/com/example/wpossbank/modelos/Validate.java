@@ -357,6 +357,10 @@ public class Validate {
 
     // verifica si hay suficientes fondos en la cuenta para relizar la transacci�n
     public boolean useBalance(@NonNull EditText moneyInput){
+        return useBalance(moneyInput, Integer.parseInt(moneyInput.getText().toString()));
+    }
+
+    public boolean useBalance(@NonNull EditText moneyInput, int withdrawal){
         if(!isEmpty(moneyInput)) {
             try (Cursor fetch = db.fetchData(sp.getActiveUser(),
                     db.getTable("user"),
@@ -364,8 +368,7 @@ public class Validate {
                 fetch.moveToNext();
 
                 if (fetch.getCount() > 0) {
-                    if (moneyInput.getText().toString().matches("(.{2,7})")){
-                        int withdrawal = Integer.parseInt(moneyInput.getText().toString());
+                    if (withdrawal >= 0 && withdrawal <= 9_999_999){
 
                         if (withdrawal + 2_000 <= Integer.parseInt(fetch.getString(4))) {
                             return true;

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
@@ -136,6 +137,9 @@ public class CardPaymentActivity extends AppCompatActivity {
                         messages.cardPayment(context, card), "card",
                         cardNumberInput.getText().toString(), sp.getActiveUser())
                         .show(getSupportFragmentManager(),"Confirm");
+            }else {
+                // Avisa al usuario si hay un campo con valores invalidos
+                Toast.makeText(context, R.string.error_invalid_input, Toast.LENGTH_LONG).show();
             }
         });
 

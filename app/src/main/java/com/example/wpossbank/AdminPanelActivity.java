@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wpossbank.adaptadores.TransactionLogAdapter;
 import com.example.wpossbank.database.Database;
@@ -91,6 +92,9 @@ public class AdminPanelActivity extends AppCompatActivity {
 
                 new Dialogs.ConfirmUpdateAdmin(context, admin, message, "update", admin.getEmail(), admin.getObjectId(context))
                         .show(getSupportFragmentManager(),"Confirm");
+            }else {
+                // Avisa al usuario si hay un campo con valores invalidos
+                Toast.makeText(context, R.string.error_invalid_input, Toast.LENGTH_LONG).show();
             }
         });
 
