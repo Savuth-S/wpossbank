@@ -1,5 +1,6 @@
 package com.example.wpossbank;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -71,7 +72,9 @@ public class AdminDepositActivity extends AppCompatActivity {
             }
         });
 
-        backArrow.setOnClickListener( goBack -> finish());
+        backArrow.setOnClickListener( goBack ->{
+            finish();
+        });
     }
 
     private void blurBackground(){

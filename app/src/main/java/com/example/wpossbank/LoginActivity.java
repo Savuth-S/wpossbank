@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         sp = new SharedPreference(context);
         validate = new Validate(context);
-        user = new User(context);
+        user = new User();
 
         ccInput= findViewById(R.id.ccInput);
         pinInput = findViewById(R.id.pinInput);
@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
                 user.setCc(ccInput.getText().toString());
                 user.setPin(pinInput.getText().toString());
 
-                Log.d("LOGIN","user="+user.getObjectId());
-                sp.setActiveUser(user.getObjectId());
+                Log.d("LOGIN","user="+user.getObjectId(context));
+                sp.setActiveUser(user.getObjectId(context));
                 startActivity(new Intent(context, MainActivity.class));
             }else {
                 // Avisa al usuario si hay un campo con valores invalidos

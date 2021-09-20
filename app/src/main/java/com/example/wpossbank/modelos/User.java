@@ -6,21 +6,11 @@ import android.database.Cursor;
 import com.example.wpossbank.database.Database;
 
 public class User {
-    private final Context context;
-    private final SharedPreference sp;
-    private final Database db;
-
     private String id = "0";
     private String pin = "1234";
     private String cc = "1234";
     private int balance = 0;
     private String name = "Usuario Usuario";
-
-    public User(Context context){
-        this.context = context;
-        sp = new SharedPreference(context);
-        db = new Database(context);
-    }
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
@@ -39,7 +29,9 @@ public class User {
     public void setName(String name) { this.name = name; }
 
     // Obtiene el valor unico del ID del objeto registrado en la base de datos
-    public String getObjectId(){
+    public String getObjectId(Context context){
+        Database db = new Database(context);
+
         try (Cursor fetch = db.fetchData(
                 getCc(),
                 db.getTable("user"),
@@ -54,7 +46,10 @@ public class User {
     }
 
     // carga la informaci�n en la base de datos del usuario activo a el objeto usuario local
-    public void loadData(){
+    public void loadData(Context context){
+        Database db = new Database(context);
+        SharedPreference sp = new SharedPreference(context);
+
         try (Cursor fetch = db.fetchData(
                 sp.getActiveUser(),
                 db.getTable("user"),
@@ -69,7 +64,9 @@ public class User {
     }
 
     // carga la informaci�n en la base de datos con respecto al numero de cuenta de un usuario al objeto usuario local
-    public void loadUser(String cc){
+    public void loadUser(Context context, String cc){
+        Database db = new Database(context);
+
         try (Cursor fetch = db.fetchData(
                 cc,
                 db.getTable("user"),
@@ -85,8 +82,8 @@ public class User {
     }
 
     // llama a la funcion para actualizar los datos del usuario en la base de datos
-    public void update(Context context, User user){
+    public void update(Context context){
         Database db = new Database(context);
-        db.updateUser(user);
+        db.updateUser(this);
     }
 }

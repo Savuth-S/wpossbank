@@ -48,7 +48,7 @@ public class NewUserActivity extends AppCompatActivity {
         validate = new Validate(context);
 
         admin = new Admin();
-        user = new User(context);
+        user = new User();
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
@@ -88,7 +88,7 @@ public class NewUserActivity extends AppCompatActivity {
                 admin.update(context);
 
                 db.addUser(user);
-                sp.setActiveUser(user.getObjectId());
+                sp.setActiveUser(user.getObjectId(context));
                 db.newLogEntry("new user", "0", user.getCc());
 
                 finish();

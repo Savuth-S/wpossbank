@@ -18,6 +18,7 @@ import com.example.wpossbank.R;
 import com.example.wpossbank.UserProfileActivity;
 import com.example.wpossbank.database.Database;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 
@@ -29,33 +30,28 @@ public class Dialogs {
         Database db;
         SharedPreference sp;
 
+        LogEntry logEntry;
         Admin admin;
         User user;
         User transferUser;
 
         String message;
-        String type;
-        String source;
-        int addAmount;
 
-        public ConfirmUserTransferBalance(Context context, Admin admin, String ccTransfer, String message,
-                                          String type, String source, int addAmount) {
+        public ConfirmUserTransferBalance(Context context, LogEntry logEntry, Admin admin, String ccTransfer, String message) {
             this.context = context;
+            this.logEntry = logEntry;
             this.admin = admin;
 
             this.message = message;
-            this.type = type;
-            this.source = source;
-            this.addAmount = addAmount;
 
             db = new Database(context);
             sp = new SharedPreference(context);
-            user = new User(context);
-            transferUser = new User(context);
+            user = new User();
+            transferUser = new User();
 
             // carga la informaci�n dek usuario activo desde la base de datos al nuevo objeto local de usuario
-            user.loadData();
-            transferUser.loadUser(ccTransfer);
+            user.loadData(context);
+            transferUser.loadUser(context, ccTransfer);
         }
 
         @NonNull
@@ -80,16 +76,19 @@ public class Dialogs {
                 admin.update(context);
 
                 // elimina el monto de la transferencia y el cobro de comision de el saldo del usuario
-                user.setBalance(addAmount-(addAmount*2+admin.getBalance()));
-                user.update(context, user);
+                user.setBalance(logEntry.getAmount()-(logEntry.getAmount()*2+admin.getBalance()));
+                user.update(context);
 
                 // agrega el monto de la transferencia al saldo del usuario que la esta recibiendo
-                transferUser.setBalance(addAmount);
-                transferUser.update(context, transferUser);
+                transferUser.setBalance(logEntry.getAmount());
+                transferUser.update(context);
 
                 // agrega la transacci�n al registro de transacciones
+                logEntry.addLogEntry(context);
+
+                logEntry.setActiveUser(transferUser.getObjectId(context));
                 db.newLogEntry(type, Integer.toString(addAmount-(addAmount*2)), source);
-                db.newLogEntry(type, Integer.toString(addAmount), source, transferUser.getObjectId());
+                db.newLogEntry(type, Integer.toString(addAmount), source, transferUser.getObjectId(context));
 
                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                 dismiss();
@@ -130,10 +129,10 @@ public class Dialogs {
 
             db = new Database(context);
             sp = new SharedPreference(context);
-            user = new User(context);
+            user = new User();
 
             // carga la informaci�n dek usuario activo desde la base de datos al nuevo objeto local de usuario
-            user.loadData();
+            user.loadData(context);
         }
 
         @NonNull
@@ -159,7 +158,7 @@ public class Dialogs {
 
                 // elimina el cobro de comision del saldo del usuario
                 user.setBalance(admin.getBalance()-(admin.getBalance()*2));
-                user.update(context, user);
+                user.update(context);
 
                 // añade la transacci�n en el registro de transacciones
                 db.newLogEntry(type, Integer.toString(admin.getBalance()-(admin.getBalance()*2)), source);
@@ -183,33 +182,26 @@ public class Dialogs {
     // Dialogo para la confirmaci�n de las transacciones del usuario
     public static class ConfirmUserUpdateBalance extends DialogFragment {
         Context context;
-        Database db;
         SharedPreference sp;
 
+        LogEntry logEntry;
         Admin admin;
         User user;
 
         String message;
-        String type;
-        String source;
-        int addAmount;
 
-        public ConfirmUserUpdateBalance(Context context, Admin admin, String message, String type,
-                                     String source, int addAmount) {
+        public ConfirmUserUpdateBalance(Context context, LogEntry logEntry, Admin admin, String message) {
             this.context = context;
+            this.logEntry = logEntry;
             this.admin = admin;
 
             this.message = message;
-            this.type = type;
-            this.source = source;
-            this.addAmount = addAmount;
 
-            db = new Database(context);
             sp = new SharedPreference(context);
-            user = new User(context);
+            user = new User();
 
             // carga la informaci�n dek usuario activo desde la base de datos al nuevo objeto local de usuario
-            user.loadData();
+            user.loadData(context);
         }
 
         @NonNull
@@ -234,11 +226,11 @@ public class Dialogs {
                 admin.update(context);
 
                 // añade (o elimina si es negativo) el monto de la transacci�n al saldo del usuario
-                user.setBalance(addAmount);
-                user.update(context, user);
+                user.setBalance(logEntry.getAmount());
+                user.update(context);
 
                 // añade la transaccion al registro de transacciones
-                db.newLogEntry(type, Integer.toString(addAmount), source);
+                logEntry.addLogEntry(context);
 
                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                 dismiss();

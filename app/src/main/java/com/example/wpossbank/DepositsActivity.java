@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
@@ -45,7 +46,7 @@ public class DepositsActivity extends AppCompatActivity {
         messages = new MakeMessages();
 
         admin = new Admin();
-        user = new User(context);
+        user = new User();
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
@@ -57,7 +58,7 @@ public class DepositsActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         backArrow = findViewById(R.id.backArrow);
 
-        user.loadData();//Carga la información del usuario desde la base de datos
+        user.loadData(context);//Carga la información del usuario desde la base de datos
 
         confirmButton.setOnClickListener(confirmDeposit -> {
             //Deckara y verifica si los campos tienen la información correcta
@@ -69,9 +70,14 @@ public class DepositsActivity extends AppCompatActivity {
                 int depositValue = Integer.parseInt(depositInput.getText().toString());
 
                 admin.setBalance(admin.getCost()/2);
-                new Dialogs.ConfirmUserUpdateBalance(context ,admin,
-                            messages.deposit(context, depositInput), "deposit",
-                        user.getCc(), depositValue).show(getSupportFragmentManager(),"CONFIRM");
+
+                LogEntry logEntry = new LogEntry();
+                logEntry.setType("deposit");
+                logEntry.setSource(user.getCc());
+                logEntry.setAmount(depositValue);
+
+                new Dialogs.ConfirmUserUpdateBalance(context, logEntry, admin,
+                            messages.deposit(context, depositInput)).show(getSupportFragmentManager(),"CONFIRM");
             }else {
                 // Avisa al usuario si hay un campo con valores invalidos
                 Toast.makeText(context, R.string.error_invalid_input, Toast.LENGTH_LONG).show();

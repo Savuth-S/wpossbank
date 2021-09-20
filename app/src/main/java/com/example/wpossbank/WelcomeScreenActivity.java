@@ -35,7 +35,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
 
     protected void makeDefaultAdmin(){
         Database db = new Database(context);
-        if (db.fetchData("1", db.getTable("admin"), db.getColumn("id")).getCount() < 1) {
+        if (db.fetchData("1", db.getTable("admin"), db.getColumn("id")).getCount() <= 0) {
             Log.e("LOGIN","Couldn't find admin data, making default admin instead");
             db.makeDefaultAdmin(admin);
         }

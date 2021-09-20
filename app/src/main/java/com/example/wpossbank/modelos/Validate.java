@@ -114,10 +114,12 @@ public class Validate {
 
     // valida si el input contiene una contraseña valida
     public boolean password(EditText passwordInput){
+        int minPassLength = 8;
+
         if (!isEmpty(passwordInput)){
             String password = passwordInput.getText().toString();
 
-            if (password.length() < 8){
+            if (password.length() < minPassLength){
                 passwordInput.setError(context.getString(R.string.error_atleast_8));
                 return false;
             }else if (password.matches("(.*\\s.*)")){
@@ -297,15 +299,15 @@ public class Validate {
 
     // verifica los credenciales de logeo para el panel de administrador del corresponsal
     public boolean adminLogin(@NonNull EditText emailInput, @NonNull EditText passwordInput) {
-        String email = emailInput.getText().toString();
-        String password = passwordInput.getText().toString();
-
         boolean passwordEmpty = isEmpty(passwordInput),
                 emailEmpty = isEmpty(emailInput);
 
         if (passwordEmpty ||  emailEmpty){
             return false;
         }
+
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
 
         Cursor fetch = db.fetchData(email, db.getTable("admin"), db.getColumn("email"));
         String registeredPassword = "empty";
@@ -327,15 +329,15 @@ public class Validate {
 
     // verifica credenciales de logeo para el usuario
     public boolean login(@NonNull EditText ccInput, @NonNull EditText pinInput) {
-        String cc = ccInput.getText().toString();
-        String pin = pinInput.getText().toString();
-
         boolean ccEmpty = isEmpty(ccInput),
                 pinEmpty = isEmpty(pinInput);
 
         if (ccEmpty || pinEmpty) {
             return false;
         }
+
+        String cc = ccInput.getText().toString();
+        String pin = pinInput.getText().toString();
 
         Cursor fetch = db.fetchData(cc, db.getTable("user"), db.getColumn("cc"));
         String registeredPin = "empty";
@@ -394,8 +396,8 @@ public class Validate {
     public boolean matchUserData(@NonNull EditText textInput, String parameter){
         if(!isEmpty(textInput)){
             String text = textInput.getText().toString();
-            User user = new User(context);
-            user.loadData();
+            User user = new User();
+            user.loadData(context);
 
             // tabla para verificar cada tipo individual de informaci�n de usuario
             switch (parameter){

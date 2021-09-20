@@ -14,15 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wpossbank.R;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class TransactionLogAdapter extends RecyclerView.Adapter<TransactionLogAdapter.ViewHolder> {
     private final Context context;
-    private final ArrayList<String> entryDate, entryType,entryValue, entrySource;
+    private final List<String> entryDate, entryType,entryValue, entrySource;
 
-    public TransactionLogAdapter(Context context, ArrayList<String> entryDate, ArrayList<String> entryType,
-                                 ArrayList<String> entryValue, ArrayList<String> entrySource) {
+    public TransactionLogAdapter(Context context, List<String> entryDate, List<String> entryType,
+                                 List<String> entryValue, List<String> entrySource) {
         this.context = context;
         this.entryDate = entryDate;
         this.entryType = entryType;

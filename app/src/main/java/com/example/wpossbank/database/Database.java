@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
@@ -245,7 +246,7 @@ public class Database extends SQLiteOpenHelper {
                 cv.put(COLUMN_BALANCE, userData.getInt(4)+user.getBalance()); // añade el dinero al saldo en la base de datos
                 cv.put(COLUMN_NAME, user.getName());
 
-                long result = db.update(TABLE_USER, cv, "object_id=?", new String[]{user.getObjectId()});
+                long result = db.update(TABLE_USER, cv, "object_id=?", new String[]{user.getObjectId(context)});
                 if (result == -1){
                     Log.e("UPDATE","Failed to updated user data, database="+db.toString() +" result="+result +" admin="+user.toString());
                 }else{
@@ -259,12 +260,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // añade una entrada al registro de transacciones de la base de datos
-        // metodo que utiliza el usuario activo
-    public void newLogEntry(String type, String amount, String source){
-        newLogEntry(type, amount, source, sp.getActiveUser());
-    }
-        //metodo que utiliza un usario especifico como usuario activo
-    public void newLogEntry(String type, String amount, String source, String activeUser){
+    public void addLogEntry(LogEntry logEntry){
         try(SQLiteDatabase db = getWritableDatabase()) {
             ContentValues cv = new ContentValues();
             Calendar calendar = Calendar.getInstance();
@@ -278,14 +274,12 @@ public class Database extends SQLiteOpenHelper {
             Log.d("LOG ENTRY","currentDate="+currentDate);
 
             // obtiene el tipo de acci�n de una tabla de tipos de acciones
-            String actionType;
-            actionType = getLogEntryType(type);
 
-            cv.put(COLUMN_ACTIVEUSER, activeUser);
+            cv.put(COLUMN_ACTIVEUSER, logEntry.getActiveUser());
             cv.put(COLUMN_DATE, currentDate);
-            cv.put(COLUMN_TYPE, actionType);
-            cv.put(COLUMN_AMMOUNT, "$"+messages.separateNumberRight(amount, ".", 3));
-            cv.put(COLUMN_SOURCE, source);
+            cv.put(COLUMN_TYPE, logEntry.getType());
+            cv.put(COLUMN_AMMOUNT, "$"+messages.separateNumberRight(String.valueOf(logEntry.getAmount()), ".", 3));
+            cv.put(COLUMN_SOURCE, logEntry.getSource());
 
             long result = db.insert(TABLE_LOG,null,cv);
             if (result == -1) {
@@ -295,36 +289,4 @@ public class Database extends SQLiteOpenHelper {
         }
     }
 
-    // tabla de tipo de acciones al registrar una entrada en el historial de transacciones
-    public String getLogEntryType(@NonNull String type){
-        String actionType;
-
-        switch(type){
-            case "card":
-                actionType = context.getString(R.string.credit_card_sell);
-                break;
-            case "withdraw":
-                actionType = context.getString(R.string.money_withdrawal);
-                break;
-            case "deposit":
-                actionType = context.getString(R.string.money_deposit);
-                break;
-            case "transfer":
-                actionType = context.getString(R.string.money_transfer);
-                break;
-            case "show balance":
-                actionType = context.getString(R.string.show_account_balance);
-                break;
-            case "new user":
-                actionType = context.getString(R.string.make_new_account);
-                break;
-            case "update":
-                actionType = context.getString(R.string.update);
-                break;
-            default:
-                actionType = context.getString(R.string.error_invalid);
-                break;
-        }
-        return actionType;
-    }
 }

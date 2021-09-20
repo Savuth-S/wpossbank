@@ -1,16 +1,13 @@
 package com.example.wpossbank;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +20,7 @@ import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
@@ -42,7 +40,7 @@ public class TransfersHistoryActivity extends AppCompatActivity {
     TransactionLogAdapter adapter;
     RecyclerView recyclerView;
 
-    ArrayList<String> entryDate, entryType, entrySource,entryValue;
+    List<String> entryDate, entryType, entrySource,entryValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +52,9 @@ public class TransfersHistoryActivity extends AppCompatActivity {
         db = new Database(context);
         messages = new MakeMessages();
 
-        user = new User(context);
+        user = new User();
 
-        user.loadData();
+        user.loadData(context);
         backArrow = findViewById(R.id.backArrow);
 
         recyclerView = findViewById((R.id.recyclerView));

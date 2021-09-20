@@ -111,8 +111,8 @@ public class MakeMessages extends AppCompatActivity {
            para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_withdrawal).split("/");
 
-        User user = new User(context);
-        user.loadData();
+        User user = new User();
+        user.loadData(context);
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + user.getName() + System.getProperty("line.separator") +
@@ -143,8 +143,8 @@ public class MakeMessages extends AppCompatActivity {
            para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_deposit).split("/");
 
-        User user = new User(context);
-        user.loadData();
+        User user = new User();
+        user.loadData(context);
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + System.getProperty("line.separator") +
@@ -161,8 +161,8 @@ public class MakeMessages extends AppCompatActivity {
         String[] template = context.getString(R.string.dialog_confirm_transfer).split("/");
 
         // carga la informacion del usuario que reliza la transferencia
-        User user = new User(context);
-        user.loadData();
+        User user = new User();
+        user.loadData(context);
 
         // obtiene la informaci�n del usuario que recibe la transferencia
         Database db = new Database(context);
@@ -191,8 +191,8 @@ public class MakeMessages extends AppCompatActivity {
            para luego llenar los campos correspondientes */
         String[] template = context.getString(R.string.dialog_confirm_get_balance).split("/");
 
-        User user = new User(context);
-        user.loadData();
+        User user = new User();
+        user.loadData(context);
 
         //Concatena el array de los mensajes de la plantilla con los valores de la tarjeta
         message = template[0] + user.getName() + System.getProperty("line.separator") +

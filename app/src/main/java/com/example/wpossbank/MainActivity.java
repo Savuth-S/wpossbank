@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         context = this;
-        user = new User(context);
+        user = new User();
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
         historyButton = findViewById(R.id.historyButton);
         logOutButton = findViewById(R.id.logOutButton);
 
-        user.loadData();
+        user.loadData(context);
         userView.setText(getString(R.string.main_welcome_message, user.getName().split(" ")[0]));
 
         cardPaymentsButton.setOnClickListener(showCardPayment ->

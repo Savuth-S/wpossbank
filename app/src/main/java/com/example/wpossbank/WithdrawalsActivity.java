@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.MakeMessages;
+import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
 
@@ -45,7 +47,7 @@ public class WithdrawalsActivity extends AppCompatActivity {
         messages = new MakeMessages();
 
         admin = new Admin();
-        user = new User(context);
+        user = new User();
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
@@ -58,7 +60,7 @@ public class WithdrawalsActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         backArrow = findViewById(R.id.backArrow);
 
-        user.loadData();//Carga la información del usuario desde la base de datos
+        user.loadData(context);//Carga la información del usuario desde la base de datos
 
         confirmButton.setOnClickListener(confirmPayment -> {
             //Deckara y verifica si los campos tienen la información correcta
@@ -75,9 +77,15 @@ public class WithdrawalsActivity extends AppCompatActivity {
                 int withdrawValue = Integer.parseInt(withdrawalInput.getText().toString());
 
                 admin.setBalance(admin.getCost());
-                new Dialogs.ConfirmUserUpdateBalance(context , admin,
-                        messages.withdraw(context,withdrawalInput), "withdraw", user.getCc(),
-                        withdrawValue-(withdrawValue*2+admin.getCost()))
+                LogEntry logEntry = new LogEntry();
+
+                logEntry.setType("withdraw");
+                logEntry.setSource(user.getCc());
+                logEntry.setAmount(withdrawValue-(withdrawValue*2+admin.getCost()));
+                logEntry.setActiveUser(new SharedPreference(context).getActiveUser());
+
+                new Dialogs.ConfirmUserUpdateBalance(context, logEntry, admin,
+                        messages.withdraw(context,withdrawalInput))
                         .show(getSupportFragmentManager(),"CONFIRM2");
             }else {
                 // Avisa al usuario si hay un campo con valores invalidos

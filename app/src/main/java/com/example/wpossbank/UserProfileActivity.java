@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -24,6 +23,7 @@ import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
@@ -45,7 +45,7 @@ public class UserProfileActivity extends AppCompatActivity {
     TransactionLogAdapter adapter;
     RecyclerView recyclerView;
 
-    ArrayList<String> entryDate, entryType, entrySource,entryValue;
+    List<String> entryDate, entryType, entrySource,entryValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +57,9 @@ public class UserProfileActivity extends AppCompatActivity {
         db = new Database(context);
         messages = new MakeMessages();
 
-        user = new User(context);
+        user = new User();
 
-        user.loadData();
+        user.loadData(context);
         balanceText = findViewById(R.id.textView2);
         addMoneyButton = findViewById(R.id.addMoneyButton);
         backArrow = findViewById(R.id.backArrow);

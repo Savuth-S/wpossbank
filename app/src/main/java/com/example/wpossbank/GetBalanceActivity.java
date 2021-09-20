@@ -33,7 +33,7 @@ public class GetBalanceActivity extends AppCompatActivity {
     BlurView blurView;
 
     EditText ccInput, pinInput, pinConfirmInput;
-    Button goBackButton, confirmButton;
+    Button confirmButton;
     ImageView backArrow;
 
     @Override
@@ -45,7 +45,7 @@ public class GetBalanceActivity extends AppCompatActivity {
         messages = new MakeMessages();
 
         admin = new Admin();
-        user = new User(context);
+        user = new User();
 
         blurView = findViewById(R.id.blurView);
         blurBackground();
@@ -57,7 +57,7 @@ public class GetBalanceActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         backArrow = findViewById(R.id.backArrow);
 
-        user.loadData();//Carga la información del usuario desde la base de datos
+        user.loadData(context);//Carga la información del usuario desde la base de datos
 
         confirmButton.setOnClickListener(confirmPayment -> {
             //Deckara y verifica si los campos tienen la información correcta
