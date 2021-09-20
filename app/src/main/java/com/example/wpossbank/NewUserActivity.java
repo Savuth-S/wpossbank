@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +20,9 @@ import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
 import com.example.wpossbank.database.Database;
 
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
+
 public class NewUserActivity extends AppCompatActivity {
     Context context;
     SharedPreference sp;
@@ -25,6 +31,8 @@ public class NewUserActivity extends AppCompatActivity {
 
     Admin admin;
     User user;
+
+    BlurView blurView;
 
     EditText nameInput, lastnameInput, ccInput, pinInput, pinConfirmInput;
     Button enterButton;
@@ -41,6 +49,9 @@ public class NewUserActivity extends AppCompatActivity {
 
         admin = new Admin();
         user = new User(context);
+
+        blurView = findViewById(R.id.blurView);
+        blurBackground();
 
         nameInput = findViewById(R.id.nameInput);
         lastnameInput = findViewById(R.id.lastnameInput);
@@ -89,5 +100,20 @@ public class NewUserActivity extends AppCompatActivity {
 
         backArrow.setOnClickListener( goBack -> finish());
 
+    }
+
+    private void blurBackground(){
+        float radius = 20f;
+
+        View decorView = getWindow().getDecorView();
+        ViewGroup rootView = decorView.findViewById(android.R.id.content);
+        Drawable windowBackground = decorView.getBackground();
+
+        blurView.setupWith(rootView)
+                .setFrameClearDrawable(windowBackground)
+                .setBlurAlgorithm(new RenderScriptBlur(this))
+                .setBlurRadius(radius)
+                .setBlurAutoUpdate(true)
+                .setHasFixedTransformationMatrix(true);
     }
 }

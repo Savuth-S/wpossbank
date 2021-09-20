@@ -42,7 +42,7 @@ public class AdminPanelActivity extends AppCompatActivity {
     TextView balanceText;
     EditText emailInput, passwordInput, passwordConfirmInput;
 
-    Button updateButton, addMoneyButton;
+    Button updateButton, addMoneyButton, newUserButton;
     ImageView backArrow;
 
     @Override
@@ -68,6 +68,7 @@ public class AdminPanelActivity extends AppCompatActivity {
 
         updateButton = findViewById(R.id.updateButton);
         addMoneyButton = findViewById(R.id.addMoneyButton);
+        newUserButton = findViewById(R.id.newUserButton);
         backArrow = findViewById(R.id.backArrow);
 
         balanceText.setText(String.format("$%s", messages.separateNumberRight(
@@ -95,6 +96,9 @@ public class AdminPanelActivity extends AppCompatActivity {
 
         addMoneyButton.setOnClickListener( showAddMoneyActivity ->
                 startActivity(new Intent(context, AdminDepositActivity.class)));
+
+        newUserButton.setOnClickListener( showNewUserActivity ->
+                startActivity(new Intent(context, NewUserActivity.class)));
 
         backArrow.setOnClickListener( goBack -> finish());
 

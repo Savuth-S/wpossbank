@@ -15,7 +15,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     Context context;
     Admin admin;
 
-    Button loginButton, newUserButton, adminButton;
+    Button loginButton, adminButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,9 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         makeDefaultAdmin();
 
         loginButton = findViewById(R.id.loginButton);
-        newUserButton = findViewById(R.id.newUserButton);
         adminButton = findViewById(R.id.adminButton);
 
         loginButton.setOnClickListener( showLoginScreen -> startActivity(new Intent(context, LoginActivity.class)));
-        newUserButton.setOnClickListener( showNewUser -> startActivity(new Intent(context, NewUserActivity.class)));
         adminButton.setOnClickListener( showAdminPanel -> startActivity(new Intent(context, AdminLoginActivity.class)));
     }
 

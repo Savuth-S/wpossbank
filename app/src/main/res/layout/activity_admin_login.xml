@@ -59,7 +59,6 @@
                 android:fontFamily="@font/alegreya_sans_light"
                 android:hint="@string/input_email"
                 android:inputType="textEmailAddress"
-                android:maxLength="13"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
                 android:textColor="@color/gray"

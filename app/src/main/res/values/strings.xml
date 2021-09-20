@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WPOSSBANK</string>
+    <string name="app_name" translatable="false">WPOSSBANK</string>
 
     <!--Generales-->
     <string name="front_subheader_text">soluciones modernas</string>
@@ -23,7 +23,7 @@
 
     <!--Menu principal-->
     <string name="button_log_in">Iniciar Sesión</string>
-    <string name="button_new_user">Registrarse</string>
+    <string name="button_new_user">Nuevo Usuario</string>
     <string name="button_admin">Administrador</string>
 
     <!--♦Menú general-->
@@ -155,7 +155,7 @@
 
 
     <string name="admin_panel">Panel del Administrador</string>
-    <string name="hello_admin">Hola ADMINISTRADOR,</string>
+    <string name="hello_admin">Hola ADMIN,</string>
     <string name="admin_balance_is" >El balance del corresponsal es </string>
     <string name="update">Actualizar</string>
     <string name="update_admin_data">ACTUALIZAR DATOS DE ADMINISTRADOR</string>
@@ -182,4 +182,6 @@
     <string name="card_payment">Credito</string>
     <string name="pay_with_a_credit_card">Pagar con una tarjeta</string>
     <string name="exp_date">Fecha de Expiración</string>
+    <string name="make_new_user">Nuevo</string>
+    <string name="user_of_bank">Usuario del Banco</string>
 </resources>

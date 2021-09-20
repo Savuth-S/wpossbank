@@ -18,7 +18,7 @@
         <activity
             android:name=".AdminDepositActivity"
             android:exported="true"
-            android:parentActivityName=".AdminLoginActivity" />
+            android:parentActivityName=".AdminPanelActivity" />
         <activity
             android:name=".AdminLoginActivity"
             android:exported="true"
@@ -67,7 +67,7 @@
         <activity
             android:name=".NewUserActivity"
             android:exported="true"
-            android:parentActivityName=".WelcomeScreenActivity" />
+            android:parentActivityName=".AdminPanelActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
