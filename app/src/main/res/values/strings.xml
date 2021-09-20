@@ -3,7 +3,7 @@
 
     <!--Generales-->
     <string name="front_subheader_text">soluciones modernas</string>
-    <string name="main_welcome_message">♦%1$s, </string>
+    <string name="main_welcome_message">Hola %1$s, </string>
 
     <string name="confirm">Confirmar</string>
     <string name="credit_card_sell">Venta con tarjeta</string>

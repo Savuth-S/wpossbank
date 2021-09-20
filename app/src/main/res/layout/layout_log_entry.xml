@@ -73,7 +73,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/alegreya_sans_bold"
                 android:text="$9.000.000"
-                android:textColor="@color/purple_text_dark"
+                android:textColor="@color/value_add_money"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,17 +1,21 @@
 package com.example.wpossbank.adaptadores;
 
 import android.content.Context;
+import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wpossbank.R;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TransactionLogAdapter extends RecyclerView.Adapter<TransactionLogAdapter.ViewHolder> {
     private final Context context;
@@ -34,6 +38,7 @@ public class TransactionLogAdapter extends RecyclerView.Adapter<TransactionLogAd
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Introduce el texto correspondiente de cada array en los elementos indicados
@@ -41,6 +46,15 @@ public class TransactionLogAdapter extends RecyclerView.Adapter<TransactionLogAd
         holder.entryTypeTxt.setText(String.valueOf(entryType.get(position)));
         holder.entryValueTxt.setText(String.valueOf(entryValue.get(position)));
         holder.entrySourceTxt.setText(String.valueOf(entrySource.get(position)));
+
+        String valueString = String.valueOf(entryValue.get(position)).replaceAll("[^0-9-]*", "");
+        Log.d("TAG", valueString);
+
+        if (Integer.parseInt(valueString) >= 0){
+            holder.entryValueTxt.setTextColor(context.getColor(R.color.value_add_money));
+        }else{
+            holder.entryValueTxt.setTextColor(context.getColor(R.color.value_remove_money));
+        }
     }
 
     @Override

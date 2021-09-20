@@ -8,11 +8,18 @@
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_admin_panel.xml" value="0.25" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_card_payment.xml" value="0.33" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_deposit.xml" value="0.33" />
-        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_get_balance.xml" value="0.33" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_new_user.xml" value="0.33" />
-        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_transfers.xml" value="0.5" />
-        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_transfers_history.xml" value="0.18" />
-        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_user_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_transfers.xml" value="0.25910364145658266" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_transfers_history.xml" value="0.33" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_user_profile.xml" value="0.25" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_welcome_screen.xml" value="0.15" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/activity_withdrawals.xml" value="0.292259083728278" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/dialog_confirm.xml" value="0.1" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/dialog_fail.xml" value="0.1" />
+        <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/dialog_success.xml" value="0.1" />
         <entry key="..\:/Users/Invitado_sin_pass/AndroidStudioProjects/wpossbank/app/src/main/res/layout/layout_log_entry.xml" value="0.5" />
       </map>
     </option>
