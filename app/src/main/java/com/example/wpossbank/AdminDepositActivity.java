@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.Validate;
 
@@ -62,9 +63,14 @@ public class AdminDepositActivity extends AppCompatActivity {
             if (validate.adminLogin(emailInput, passwordInput)) {
                 admin.setBalance(Integer.parseInt(depositInput.getText().toString()));
 
-                new Dialogs.ConfirmUpdateAdmin(context, admin,
-                        messages.adminDeposit(context, depositInput), "deposit",
-                        admin.getEmail(), admin.getObjectId(context))
+                LogEntry logEntry = new LogEntry();
+                logEntry.setType("deposit");
+                logEntry.setAmount(admin.getBalance());
+                logEntry.setSource(admin.getEmail());
+                logEntry.setActiveUser(admin.getObjectId(context));
+
+                new Dialogs.ConfirmUpdateAdmin(context, logEntry,
+                            admin, messages.adminDeposit(context, depositInput))
                         .show(getSupportFragmentManager(),"CONFIRM");
             }else {
                 // Avisa al usuario si hay un campo con valores invalidos
@@ -72,9 +78,7 @@ public class AdminDepositActivity extends AppCompatActivity {
             }
         });
 
-        backArrow.setOnClickListener( goBack ->{
-            finish();
-        });
+        backArrow.setOnClickListener( goBack -> finish());
     }
 
     private void blurBackground(){

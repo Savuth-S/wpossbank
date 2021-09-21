@@ -16,16 +16,15 @@ public class User {
     public void setId(String id) { this.id = id; }
 
     public String getPin() { return pin; }
-
     public void setPin(String pin) { this.pin = pin; }
+
     public String getCc() { return cc; }
-
     public void setCc(String cc) { this.cc = cc; }
+
     public int getBalance() { return balance; }
-
     public void setBalance(int balance) { this.balance = balance; }
-    public String getName() { return name; }
 
+    public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
     // Obtiene el valor unico del ID del objeto registrado en la base de datos
@@ -83,7 +82,11 @@ public class User {
 
     // llama a la funcion para actualizar los datos del usuario en la base de datos
     public void update(Context context){
-        Database db = new Database(context);
-        db.updateUser(this);
+        new Database(context).updateUser(this);
+    }
+
+    // a;ade el usuario a la base de datos
+    public void add(Context context){
+            new Database(context).addUser(this);
     }
 }

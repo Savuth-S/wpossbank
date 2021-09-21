@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
@@ -26,7 +27,6 @@ import eightbitlab.com.blurview.RenderScriptBlur;
 public class NewUserActivity extends AppCompatActivity {
     Context context;
     SharedPreference sp;
-    Database db;
     Validate validate;
 
     Admin admin;
@@ -64,7 +64,6 @@ public class NewUserActivity extends AppCompatActivity {
         backArrow = findViewById(R.id.backArrow);
 
         enterButton.setOnClickListener( addNewUser -> {
-            db = new Database(context);
             boolean ccValidate = validate.isNotInDatabase(ccInput, "user","cc")
                         && validate.isNumber(ccInput) && validate.isInRange(ccInput,10,13),
                     nameValidate = validate.name(nameInput),
@@ -87,9 +86,13 @@ public class NewUserActivity extends AppCompatActivity {
                 admin.setBalance(admin.getCost()*5);
                 admin.update(context);
 
-                db.addUser(user);
+                user.add(context);
                 sp.setActiveUser(user.getObjectId(context));
-                db.newLogEntry("new user", "0", user.getCc());
+
+                LogEntry logEntry = new LogEntry();
+                logEntry.setType("new user");
+                logEntry.setSource(user.getCc());
+                logEntry.addLogEntry(context);
 
                 finish();
             }else {

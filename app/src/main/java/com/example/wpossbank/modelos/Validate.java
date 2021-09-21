@@ -198,6 +198,7 @@ public class Validate {
         }
     }
 
+/*
     // valida si el saldo inicial del input es valido
     public boolean initialBalance(@NonNull EditText balanceInput) {
         String balance = balanceInput.getText().toString();
@@ -213,6 +214,7 @@ public class Validate {
             return false;
         }
     }
+*/
 
     // valida si el n�mero de tarjeta ingresado en el input es valido
     public boolean cardNumber(@NonNull EditText cardNumberInput){
@@ -271,8 +273,10 @@ public class Validate {
     // valuda si el pago a realizar es valido
     public boolean payment(@NonNull EditText paymentInput){
         if (!isEmpty(paymentInput) && isInRange(paymentInput,3,7) && isNumber(paymentInput)) {
+            int minPayment = 10_000, maxPayment = 9_999_999;
+
             int payment = Integer.parseInt(paymentInput.getText().toString());
-            if (payment >= 10000 && payment <= 1000000) {
+            if (payment >= minPayment && payment <= maxPayment) {
                 return true;
             } else {
                 paymentInput.setError(context.getString(R.string.error_invalid));

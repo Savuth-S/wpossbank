@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
 import com.example.wpossbank.modelos.CreditCard;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.SharedPreference;
 import com.example.wpossbank.modelos.Validate;
@@ -133,9 +134,13 @@ public class CardPaymentActivity extends AppCompatActivity {
                     && lastnameValidate && paymentValidate && duesValidate){
                 admin.setBalance(Integer.parseInt(card.getPaymentAmmount()));
 
-                new Dialogs.ConfirmUpdateAdmin(context, admin,
-                        messages.cardPayment(context, card), "card",
-                        cardNumberInput.getText().toString(), sp.getActiveUser())
+                LogEntry logEntry = new LogEntry();
+                logEntry.setType("card");
+                logEntry.setAmount(admin.getBalance());
+                logEntry.setSource(cardNumberInput.getText().toString());
+
+                new Dialogs.ConfirmUpdateAdmin(context, logEntry, admin,
+                        messages.cardPayment(context, card))
                         .show(getSupportFragmentManager(),"Confirm");
             }else {
                 // Avisa al usuario si hay un campo con valores invalidos

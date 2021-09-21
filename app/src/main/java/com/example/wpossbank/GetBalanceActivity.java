@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.User;
 import com.example.wpossbank.modelos.Validate;
@@ -71,10 +72,15 @@ public class GetBalanceActivity extends AppCompatActivity {
                         "pin=" + pinInput.getText().toString() + " confirm=" + pinConfirmInput.getText().toString());
                 pinConfirmInput.setError(getResources().getString(R.string.error_wrong));
             } else if (!validate.isEmpty(pinConfirmInput) && ccValidate && pinValidate && balanceValidate) {
-
                 admin.setBalance(admin.getCost() / 2);
-                new Dialogs.ConfirmUserGetBalance(context, admin,
-                        messages.getBalance(context), "show balance", user.getCc())
+
+                LogEntry logEntry = new LogEntry();
+                logEntry.setType("show balance");
+                logEntry.setAmount(admin.getBalance()-(admin.getBalance()*2));
+                logEntry.setSource(user.getCc());
+
+                new Dialogs.ConfirmUserGetBalance(context, logEntry,
+                            admin, messages.getBalance(context))
                         .show(getSupportFragmentManager(), "CONFIRM");
             }else {
                 // Avisa al usuario si hay un campo con valores invalidos

@@ -82,7 +82,6 @@ public class WithdrawalsActivity extends AppCompatActivity {
                 logEntry.setType("withdraw");
                 logEntry.setSource(user.getCc());
                 logEntry.setAmount(withdrawValue-(withdrawValue*2+admin.getCost()));
-                logEntry.setActiveUser(new SharedPreference(context).getActiveUser());
 
                 new Dialogs.ConfirmUserUpdateBalance(context, logEntry, admin,
                         messages.withdraw(context,withdrawalInput))

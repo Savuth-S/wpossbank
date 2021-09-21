@@ -84,11 +84,12 @@ public class Dialogs {
                 transferUser.update(context);
 
                 // agrega la transacci�n al registro de transacciones
+                logEntry.setAmount(logEntry.getAmount()-(logEntry.getAmount()*2+admin.getBalance()));
                 logEntry.addLogEntry(context);
 
+                logEntry.setAmount((logEntry.getAmount()*-1)-admin.getBalance());
                 logEntry.setActiveUser(transferUser.getObjectId(context));
-                db.newLogEntry(type, Integer.toString(addAmount-(addAmount*2)), source);
-                db.newLogEntry(type, Integer.toString(addAmount), source, transferUser.getObjectId(context));
+                logEntry.addLogEntry(context);
 
                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                 dismiss();
@@ -108,29 +109,21 @@ public class Dialogs {
     // Dialogo para confirmar el cobro de comision por ver el saldo actual del usuario
     public static class ConfirmUserGetBalance extends DialogFragment {
         Context context;
-        Database db;
-        SharedPreference sp;
 
+        LogEntry logEntry;
         Admin admin;
         User user;
 
         String message;
-        String type;
-        String source;
 
-        public ConfirmUserGetBalance(Context context, Admin admin, String message,
-                                     String type, String source) {
+        public ConfirmUserGetBalance(Context context, LogEntry logEntry, Admin admin, String message) {
             this.context = context;
+            this.logEntry = logEntry;
             this.admin = admin;
 
             this.message = message;
-            this.type = type;
-            this.source = source;
 
-            db = new Database(context);
-            sp = new SharedPreference(context);
             user = new User();
-
             // carga la informaci�n dek usuario activo desde la base de datos al nuevo objeto local de usuario
             user.loadData(context);
         }
@@ -157,11 +150,11 @@ public class Dialogs {
                 admin.update(context);
 
                 // elimina el cobro de comision del saldo del usuario
-                user.setBalance(admin.getBalance()-(admin.getBalance()*2));
+                user.setBalance(logEntry.getAmount());
                 user.update(context);
 
                 // añade la transacci�n en el registro de transacciones
-                db.newLogEntry(type, Integer.toString(admin.getBalance()-(admin.getBalance()*2)), source);
+                logEntry.addLogEntry(context);
 
                 requireActivity().finish();
                 startActivity(new Intent(context, UserProfileActivity.class));
@@ -250,21 +243,17 @@ public class Dialogs {
     // Dialogo para confirmar la actualizacion de informacio�n de la cuenta del corresponsal
     public static class ConfirmUpdateAdmin extends DialogFragment {
         Context context;
-        Database db;
+        LogEntry logEntry;
         Admin admin;
 
-        String message, type, source, active;
+        String message;
 
-        public ConfirmUpdateAdmin(Context context, Admin admin, String message, String type, String source, String active) {
+        public ConfirmUpdateAdmin(Context context, LogEntry logEntry, Admin admin, String message) {
             this.context = context;
+            this.logEntry = logEntry;
             this.admin = admin;
 
             this.message = message;
-            this.type = type;
-            this.source = source;
-            this.active = active; // usuario activo con el que asociar esta transacci�n
-
-            db = new Database(context);
         }
 
         @NonNull
@@ -288,7 +277,7 @@ public class Dialogs {
                 /* actualiza la informaci�n del objeto local del admin a la base de datos
                    y añade una entrada a la tabla de transacciones */
                 admin.update(context);
-                db.newLogEntry(type, Integer.toString(admin.getBalance()), source, active);
+                logEntry.addLogEntry(context);
 
                 new Dialogs.TransactionSuccess().showNow(requireActivity().getSupportFragmentManager(), "SUCCESS");
                 dismiss();

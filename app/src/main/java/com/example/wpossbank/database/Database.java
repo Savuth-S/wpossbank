@@ -260,7 +260,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     // añade una entrada al registro de transacciones de la base de datos
-    public void addLogEntry(LogEntry logEntry){
+    public void addLogEntry(@NonNull LogEntry logEntry){
         try(SQLiteDatabase db = getWritableDatabase()) {
             ContentValues cv = new ContentValues();
             Calendar calendar = Calendar.getInstance();

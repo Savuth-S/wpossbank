@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.wpossbank.database.Database;
 import com.example.wpossbank.fragments.Dialogs;
 import com.example.wpossbank.modelos.Admin;
+import com.example.wpossbank.modelos.LogEntry;
 import com.example.wpossbank.modelos.MakeMessages;
 import com.example.wpossbank.modelos.Validate;
 
@@ -82,9 +83,13 @@ public class AdminPanelActivity extends AppCompatActivity {
                 admin.setEmail(emailInput.getText().toString());
                 admin.setPassword(passwordInput.getText().toString());
 
-                String message = context.getString(R.string.dialog_confirm_update_admin);
+                LogEntry logEntry = new LogEntry();
+                logEntry.setType("update");
+                logEntry.setSource(admin.getEmail());
+                logEntry.setActiveUser(admin.getObjectId(context));
 
-                new Dialogs.ConfirmUpdateAdmin(context, admin, message, "update", admin.getEmail(), admin.getObjectId(context))
+                String message = context.getString(R.string.dialog_confirm_update_admin);
+                new Dialogs.ConfirmUpdateAdmin(context, logEntry, admin, message)
                         .show(getSupportFragmentManager(),"Confirm");
             }else {
                 // Avisa al usuario si hay un campo con valores invalidos

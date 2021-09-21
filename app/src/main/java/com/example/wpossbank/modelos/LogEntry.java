@@ -2,13 +2,14 @@ package com.example.wpossbank.modelos;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
 
 import com.example.wpossbank.R;
 import com.example.wpossbank.database.Database;
 
 public class LogEntry {
-    String type, source, activeUser;
+    String type = "";
+    String source = "";
+    String activeUser = "";
     int amount = 0;
 
     public String getType() { return type; }
@@ -24,13 +25,17 @@ public class LogEntry {
     public void setActiveUser(String activeUser) { this.activeUser = activeUser; }
 
     public void addLogEntry(Context context){
-        Database db = new Database(context);
         getLogEntryType(context, this);
-        db.addLogEntry(this);
+
+        if (getActiveUser().isEmpty()){
+            setActiveUser(new SharedPreference(context).getActiveUser());
+        }
+
+        new Database(context).addLogEntry(this);
     }
 
     // tabla de tipo de acciones al registrar una entrada en el historial de transacciones
-    public void getLogEntryType(Context context, LogEntry logEntry){
+    private void getLogEntryType(Context context, LogEntry logEntry){
         switch(type){
             case "card":
                 logEntry.setType(context.getString(R.string.credit_card_sell));
