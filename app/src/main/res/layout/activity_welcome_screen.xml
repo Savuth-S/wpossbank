@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".WelcomeScreenActivity">
+    tools:context=".activities.WelcomeScreenActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/alef"
         android:text="@string/app_name"
@@ -23,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.39" />
 
         <TextView
             android:id="@+id/textView3"
@@ -60,7 +59,7 @@
         android:id="@+id/adminButton"
         android:layout_width="200dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/light_purple_button"
         android:fontFamily="@font/alegreya_sans_bold"
         android:foregroundTintMode="src_atop"
@@ -70,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.77" />
 
     <ImageView
         android:id="@+id/imageView5"

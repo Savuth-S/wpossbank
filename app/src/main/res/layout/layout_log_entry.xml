@@ -20,15 +20,16 @@
 
             <TextView
                 android:id="@+id/entryDateTxt"
-                android:layout_width="80dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/alegreya_sans_bold"
                 android:text="Sep 13 2021 20:59"
                 android:textColor="@color/purple_text_dark"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/entrySourceTxt"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/entryTypeTxt"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/entryTypeTxt"

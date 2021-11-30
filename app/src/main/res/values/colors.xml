@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="value_remove_money">#A03686</color>
-    <color name="value_add_money">#5236A0</color>
+    <color name="value_remove_money">#3669A0</color>
+    <color name="value_add_money">#36A0A0</color>
 
-    <color name="purple_text_dark">#FF7E36A0</color>
-    <color name="purple">#FF974EB0</color>
-    <color name="purple_dark">#FF864A9B</color>
-    <color name="purple_light">#FFAB63D8</color>
+    <color name="purple_text_dark">#3694A0</color>
+    <color name="purple">#4EA8B0</color>
+    <color name="purple_dark">#4A819B</color>
+    <color name="purple_light">#63D8D8</color>
 
-    <color name="purple_button">#FF974EB0</color>
-    <color name="purple_dark_button">#FF864A9B</color>
-    <color name="purple_light_button">#FFAB63D8</color>
+    <color name="purple_button">#4EA8B0</color>
+    <color name="purple_dark_button">#4A819B</color>
+    <color name="purple_light_button">#63CAD8</color>
 
-    <color name="teal_200">#FFB139BA</color>
-    <color name="teal_700">#FF8D26A5</color>
+    <color name="teal_200">#39BAB6</color>
+    <color name="teal_700">#2681A5</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#595959</color>

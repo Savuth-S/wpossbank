@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".AdminPanelActivity">
+    tools:context=".activities.AdminPanelActivity">
 
     <ImageView
         android:id="@+id/imageView11"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/alegreya_sans"
             android:text="@string/hello_admin"
             android:textColor="@color/purple_text_dark"
@@ -118,15 +118,16 @@
 
         <TextView
             android:id="@+id/textView17"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/alegreya_sans"
             android:text="@string/admin_balance_is"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addMoneyButton"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView16"
@@ -137,12 +138,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/alef"
             android:text="$9.000.000"
             android:textColor="@color/white"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/addMoneyButton"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView16"
             app:layout_constraintTop_toBottomOf="@+id/textView17"
